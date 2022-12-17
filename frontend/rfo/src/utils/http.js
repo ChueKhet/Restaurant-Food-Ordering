@@ -46,11 +46,31 @@ async function putMedia(path, file, fileType, filePath) {
   return resp;
 }
 
-async function get(path, body) {
-  const resp = await fetch(constant.localDomain + path, {
-    method: "GET",
-  });
-  return resp;
+// async function get(path) {
+//   const resp = await fetch(constant.localDomain + path, {
+//     method: "GET",
+//   });
+//   return resp;
+// }
+
+async function get(path){
+  try {
+      const resp = await fetch(
+        constant.localDomain + path,
+        {
+            method: "GET",
+            headers: {
+              accept: 'application/json',
+            },
+        }
+      );
+  
+      return resp;
+  } catch (error) {
+      console.log(error);
+  }
+  
+  return null;
 }
 
 async function put(path, body) {

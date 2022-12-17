@@ -7,7 +7,7 @@
       <router-view/>
 
       <footing></footing>
-
+      
     </v-main>  
   </v-app>
 </template>

@@ -2,18 +2,21 @@
     <v-app-bar color="deep-purple lighten-1" dark>
     <!-- style="background-color: #5d6e22;"  -->
         <!-- <v-btn class="text-h1" text @click="goToScreen('/')">Home</v-btn> -->
-        <div class="logoApp" @click="goToScreen('/')"></div>
+        <div class="logoApp" @click = "utl.goToScreen('/')"></div>
         <!-- <label class="logoFontApp" @click="goToScreen('/')">Ternion</label> -->
         
         <v-spacer></v-spacer>
         <!-- <v-btn text v-show = "!isRegister" @click = "goToScreen('/register')" >Register</v-btn>
-        <v-btn text v-show = "isRegister" @click = "goToScreen('/profile')" >Profile</v-btn>
         <v-btn text @click = "goToScreen('/about')" >About</v-btn>  -->
+
+        <v-btn text @click = "utl.goToScreen('/register')">Register</v-btn>
         <v-btn text @click = "onClickLogInAndOut">{{isLogIn ? "LogOut" : "LogIn"}}</v-btn> 
     </v-app-bar>
 </template>
 
 <script>
+
+import utils from "../utils/utils";
 
 export default {
   name: 'Heading',
@@ -21,6 +24,7 @@ export default {
   data: () => ({
     isLogIn: false,
     screenPath: "",
+    utl: utils
   }),
 
   created(){
@@ -46,15 +50,11 @@ export default {
         this.$store.commit("setUserInfo",{}); 
         if(this.$router.currentRoute.path !="/"){
           this.isLogIn = false;
-          this.goToScreen("/");
+          utils.goToScreen("/");
         }
       } else{
-        this.goToScreen("/login");
+        utils.goToScreen("/login");
       }
-    },
-
-    goToScreen(screenPath){
-      this.$router.push({ path: screenPath})
     }
   }
 
@@ -65,12 +65,12 @@ export default {
 <style>
 
 .logoApp{
-  margin: 5px;
-  max-height: 67px;
-  max-width: 72px;
-  height: 65px;
-  width: 70px;
-  background-image:url("../assets/logo/Ternion Logo.png");
+  margin-top: 13px;
+  max-height: 80px;
+  max-width: 100px;
+  height: 80px;
+  width: 100px;
+  background-image:url("../assets/logo/Ternion Logo 2.png");
   background-size: 100%;
 }
 

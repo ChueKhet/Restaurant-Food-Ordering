@@ -1,7 +1,7 @@
 <template>
-    <v-footer color="deep-purple lighten-1" padless>
-        <v-col class="text-center text-white" cols="12">
-        <strong>Copy @ 2022 Movie Theater</strong>
+    <v-footer style="background-color: white;">
+        <v-col class="text-center" cols="12">
+        <strong>Copy @ 2022 Restaurant Food Ordering</strong>
         </v-col>
     </v-footer>
 </template>
@@ -17,9 +17,6 @@ export default {
 </script>
 
 <style scoped>
-.text-white {
-    color: white !important;
-}
 
 </style>
   

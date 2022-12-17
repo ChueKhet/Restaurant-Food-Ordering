@@ -17,13 +17,13 @@
           <v-text-field 
             label="Name" 
             placeholder="Enter Name" 
-            v-model="name" 
+            v-model="username" 
             :rules = "[(v) => !!v || 'Required',]" required 
           ></v-text-field>
 
           <v-text-field
             v-model="password"
-            :counter="10"
+            type="password"
             :rules="[
               (v) => !!v || 'Required',
               (v) =>
@@ -32,7 +32,7 @@
             ]"
             label="Password" required
           ></v-text-field>
-          <v-btn @click = "onClickLogIn">Login</v-btn>
+          <v-btn @click="onClickLogIn">Login</v-btn>
         </v-form>
       </v-card-title>
       <v-card-title><a>Forgot Password?</a></v-card-title>
@@ -44,22 +44,34 @@
 import utils from '@/utils/utils';
 
 export default {
+  name: "Login",
   data() {
     return {
         loading: false,
-    }
+        username: "",
+        password: "",
+    };
 
   },
-  method: {
+  
+  methods: {
     async onClickLogIn() {
       if(this.$refs.loginForm.validate()){
         this.loading = true;
-        const resp = await utils.http.post("/user/login",{
-          name: this.name,
+        const resp = await utils.http.post("/account/login",{
+          username: this.username,
           password: this.password,
         });
-        if(resp.status === 200){
-          
+
+       
+
+        if (resp.status === 200){
+            const data = await resp.json();
+            this.loading = false;
+            if (data) {
+                this.$store.commit("setRegister", data);
+                utils.goToScreen("/");                     
+            }
         }
       }
     }
@@ -71,7 +83,7 @@ export default {
 
 <style>
 .fullSize {
-  height: 90%;
+  height: 77.3%;
   width: 90%;
 }
 
@@ -85,6 +97,6 @@ export default {
 .logoFontLogIn{
   font-family: 'Hanalei Fill', cursive;
   font-size: 40pt;
-  color: #efbe47;
+  color: rgb(126, 87, 194, 0.7);
 }
 </style>

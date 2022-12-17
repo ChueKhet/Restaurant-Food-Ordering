@@ -1,58 +1,137 @@
 <template>
-    <div>
-        <h2 style="margin-left: 20px;">Register</h2>
+    <div style="height: 82.8%;">
+        <h2 style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">Register</h2>
 
         <div class="d-flex flex-column align-center fullScreenReg" style="margin-top: 5px;">
             <v-card elevation="8" style="width: 98%;">
-                <v-form ref="registerForm" v-model="registerForm">
+                <v-form ref="registerForm" v-model="registerForm">            
                     
                         <v-row>
-                            <v-col>
-                                <img src="" alt="">
-                                <v-text-field v-model="name"
-                                    :rules="[
-                                        (v) => !!v || 'Required'
-                                    ]"
-                                    label="Name" required>
-                                </v-text-field>
+                            <v-col style="padding-left: 50px; padding-right: 50px; padding-top: 25px; padding-bottom: 25px;" cols="12" sm="8">
+                                <v-title><h3>Staff Info</h3></v-title>
+                                
+                                <v-row>
+                                    <v-col cols="12" sm="5">
 
-                                <!-- <v-calendar v-model="DOB"          
-                                    :rules="[
-                                        (v) => !!v || 'Required'
-                                    ]"
-                                    label="DOB" required>
-                                </v-calendar> -->
-                                <v-menu v-model="menu2" transition="scale-transition" min-width="auto"
-                                    :close-on-content-click="false"
-                                    :nudge-right="40"
-                                    offset-y>
+                                        <v-img
+                                            v-if="imagePreviewPath != null"
+                                            :src="imagePreviewPath"
+                                            width="250"
+                                            height="280"
+                                            contain
+                                        >
+                                        </v-img>
 
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-text-field v-model="date" label="DOB"
-                                            prepend-icon="mdi-calendar" v-bind="attrs" v-on="on"
-                                            readonly>
-                                        </v-text-field>
-                                    </template>
+                                        <v-img
+                                            v-if="imagePreviewPath == null || imagePreviewPath == ''"
+                                            src="../assets/plus_sign for upload.png"
+                                            width="250"
+                                            height="280"
+                                            contain
+                                        >
+                                        </v-img>
 
-                                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
-                                </v-menu>
+                                        <v-file-input
+                                            v-model="image"
+                                            label="Add Photo"
+                                            show-size
+                                            prepend-icon="mdi-camera"
+                                            placeholder="Choose Photo"
+                                            accept="image/png, image/jpeg"
+                                            :rules="[
+                                            (v) =>
+                                                !v ||
+                                                v.size < 10000000 ||
+                                                'Image size should be less than 10 MB!',
+                                            ]"
+                                            @change="onChangeImage"
+                                        ></v-file-input>
 
-                                <v-text-field v-model="name" 
-                                    :counter="15" 
-                                    :rules="[
-                                        (v) => !!v || 'Required'
-                                    ]"
-                                    label="Name" required>
-                                </v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="12" sm="7">
+
+                                        <v-text-field v-model="name" label="Name"></v-text-field>
+
+                                        <v-menu v-model="menu2" transition="scale-transition" min-width="auto"
+                                            :close-on-content-click="false"
+                                            :nudge-right="40"
+                                            offset-y>
+
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-text-field v-model="dob" label="DOB"
+                                                    prepend-icon="mdi-calendar" v-bind="attrs" v-on="on"
+                                                    readonly>
+                                                </v-text-field>
+                                            </template>
+
+                                            <v-date-picker v-model="dob" @input="menu2 = false"></v-date-picker>
+                                        </v-menu>
+
+                                        <v-text-field v-model="phone" label="Phone No"></v-text-field>
+
+                                        <v-row align="center">
+                                            <v-col  class="d-flex"
+                                                cols="12"
+                                                sm="1">
+                                                <label>NRC</label>
+                                            </v-col>
+                                            <v-col
+                                                class="d-flex"
+                                                cols="12"
+                                                sm="2"
+                                                >
+                                                <v-select
+                                                :items="divisions"
+                                                v-model="division"
+                                                label="Standard"
+                                                @change="getNrcTownship"
+                                                dense
+                                                ></v-select>
+                                            </v-col>
+                                            <v-col
+                                                class="d-flex"
+                                                cols="12"
+                                                sm="3"
+                                                >
+                                                <v-select
+                                                :items="townships"
+                                                v-model="township"
+                                                label="Standard"
+                                                dense
+                                                ></v-select>
+                                            </v-col>
+                                            <v-col
+                                                class="d-flex"
+                                                cols="12"
+                                                sm="2"
+                                                >
+                                                <v-select
+                                                :items="nations"
+                                                v-model="nation"
+                                                label="Standard"
+                                                dense
+                                                ></v-select>
+                                            </v-col>
+                                            <v-col
+                                                class="d-flex"
+                                                cols="12"
+                                                sm="4"
+                                                >
+                                                <v-text-field v-model="nrc_num"></v-text-field>
+                                            </v-col>
+                                        </v-row>
+
+                                        <v-text-field v-model="address" label="Address"></v-text-field>
+
+                                    </v-col>
+                                </v-row>
+                                
                             </v-col>
-                            <v-col>
-                                <img src="" alt="">
-                                <v-text-field v-model="name"
-                                    :rules="[
-                                        (v) => !!v || 'Required'
-                                    ]"
-                                    label="Name" required>
-                                </v-text-field>
+                            <v-col style="padding-left: 50px; padding-right: 50px; padding-top: 25px; padding-bottom: 25px;" cols="12" sm="4">
+                                <v-title><h3>User Info</h3></v-title>
+                               
+                                <v-text-field v-model="username" label="User Name"></v-text-field>
 
                                 <!-- <v-calendar v-model="DOB"          
                                     :rules="[
@@ -60,31 +139,61 @@
                                     ]"
                                     label="DOB" required>
                                 </v-calendar> -->
-                                <v-menu v-model="menu2" transition="scale-transition" min-width="auto"
-                                    :close-on-content-click="false"
-                                    :nudge-right="40"
-                                    offset-y>
+                                
+                                <v-text-field type="password" v-model="password" label="Password"></v-text-field>
 
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-text-field v-model="date" label="DOB"
-                                            prepend-icon="mdi-calendar" v-bind="attrs" v-on="on"
-                                            readonly>
-                                        </v-text-field>
-                                    </template>
-
-                                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
-                                </v-menu>
-
-                                <v-text-field v-model="name" 
-                                    :counter="15" 
+                                <v-text-field
+                                    type="password"
+                                    v-model="confirmpwd"
                                     :rules="[
-                                        (v) => !!v || 'Required'
+                                        (v) => (confirmPassword(v)) || 'Password not match!!!',
                                     ]"
-                                    label="Name" required>
-                                </v-text-field>
+                                    label="Confirm Password"
+                                ></v-text-field>
+
+                                <v-row style="margin-top: 20px; margin-left: 0px;">
+                                    <v-btn
+                                        :disabled="!registerForm"
+                                        color="success"
+                                        class="mr-4"
+                                        @click="register"
+                                        style="width: 91px;"
+                                    >
+                                        <span v-if="!loading">Register</span>
+                                        <v-progress-circular
+                                        v-else
+                                        indeterminate
+                                        color="primary"
+                                        ></v-progress-circular>
+                                    </v-btn>
+
+                                    <v-btn
+                                        color="success"
+                                        class="mr-4"
+                                        @click="clear"
+                                        style="width: 91px;"
+                                    >
+                                        <span v-if="!loading">Clear</span>
+                                        <v-progress-circular
+                                        v-else
+                                        indeterminate
+                                        color="primary"
+                                        ></v-progress-circular>
+                                    </v-btn>
+                                </v-row>
                             </v-col>
                         </v-row>
-                    
+
+                        <span class="alertboxReg">
+                            <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
+                                :type="message_type">
+                                    {{alert_message}}
+                            </v-alert>
+                        </span>
+                        <!-- <v-alert class="mt-3 alertboxReg" v-show="errorAlert" transition="scroll-y-transition" dense 
+                            :type="message_type">
+                                {{alert_message}}
+                        </v-alert> -->
                     
                 </v-form>
             </v-card>
@@ -95,20 +204,219 @@
 </template>
 
 <script>
+import utils from "../utils/utils";
+
 export default {
+    name: "Register",
+
+    components: {},
+
     data(){
         return {
             menu2: false,
+            image: null,
+            name: "",
+            dob: "",
+            nrc: "",
+            phone: "",
+            address: "",
+            username: "",
+            password: "",
+            confirmpwd: "",
+            township: "",
+            division: "",
+            nation: "",
+            nrc_num: "",
+            fromProfile: false,
+            imagePreviewPath: null,
+            loading: false,
+            registerForm: false,
+            divisions: [],
+            townships: [],
+            nations: [],
+            errorAlert: false,
+            alert_message: "",
+            message_type: ""
         };
+    },
+
+    async created() {
+        await this.getNrcCode();
+        this.nations = ["(N)"];
+    },
+
+    methods: {
+        async getNrcCode(){
+            const resp = await utils.http.get("/nrc/getNrcCode");
+
+            if (resp.status === 200){
+                const data = await resp.json();
+
+                if (data) {
+                    this.divisions = data;
+                }
+            }
+        },
+
+        async getNrcTownship(){
+            if(this.division == ""){
+                this.townships = [];
+                return;
+            }
+
+            const resp = await utils.http.get("/nrc/getNrcTownship/" + this.division);
+
+            if (resp.status === 200){
+                const data = await resp.json();
+
+                if (data) {
+                    this.townships = data;
+                }
+            }
+        },
+
+        async register () {
+            this.nrc = this.makeNRC();
+
+            if (this.validate()){    //  this.$refs.registerForm.validate()
+                this.loading = true;
+                
+                let param = {
+                    name: this.name,
+                    dob: this.dob,
+                    nrc: this.nrc,
+                    phone: this.phone,
+                    address: this.address,
+                    username: this.username,
+                    password: this.password
+                };
+
+                const resp = await utils.http.post("/register/addUser", param);
+                this.loading = false;
+
+                if (resp.status === 200){
+                    const data = await resp.json();
+
+                    if (data) {
+                        this.$store.commit("setRegister", data);
+                        
+                        if(this.fromProfile){
+                            utils.goToScreen("/profile");
+                        } else {
+                            this.alertbox("success", "Registered Successful!", 3000);
+                            this.clear();
+                        }
+                    }
+                }
+            }
+        },
+
+        validate(){
+            // if(this.image == null || this.image == ""){
+            //     //  Please add image
+            //     return false;
+            // }
+
+            if(this.name == ""){
+                this.alertbox("error", "Please add Name!!!", 3000);
+
+                return false;
+            }
+
+            if(this.dob == ""){
+                this.alertbox("error", "Please add DOB!!!", 3000);
+
+                return false;
+            }
+
+            if(this.nrc == ""){
+                this.alertbox("error", "Please add NRC!!!", 3000);
+
+                return false;
+            }
+
+            if(this.phone == ""){
+                this.alertbox("error", "Please add Phone!!!", 3000);
+
+                return false;
+            }
+
+            if(this.address == ""){
+                this.alertbox("error", "Please add Address!!!", 3000);
+
+                return false;
+            }
+
+            if(this.username == ""){
+                this.alertbox("error", "Please add Username!!!", 3000);
+
+                return false;
+            }
+
+            if(this.password == ""){
+                this.alertbox("error", "Please add Password!!!", 3000);
+
+                return false;
+            }
+
+            return true;
+        },
+
+        makeNRC(){
+            return this.division + "/" + this.township + this.nation + this.nrc_num;
+        },
+
+        confirmPassword(confirm){
+            return this.password == confirm;
+        },
+        
+        clear(){
+            this.image = null;
+            this.name = "";
+            this.dob = "";
+            this.nrc = "";
+            this.phone = "";
+            this.address = "";
+            this.username = "";
+            this.password = "";
+            this.confirmpwd = "";
+            this.township = "";
+            this.division = "";
+            this.nation = "";
+            this.nrc_num = "";
+            this.imagePreviewPath = null;
+        },
+
+        onChangeImage(image) {
+            this.imagePreviewPath = URL.createObjectURL(image);
+        },
+
+        alertbox(type, message, timer){
+            this.message_type = type;
+            this.alert_message = message;
+            this.errorAlert = true;
+
+            setTimeout(() => {
+                this.errorAlert = false;
+            }, 3000);
+        }
     }
 
-}
+};
 </script>
 
 <style>
 .fullScreenReg {
     width: 100%;
-    height: 91%;
+    height: 100%;
     margin: 0;
+}
+
+.alertboxReg {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
 }
 </style>

@@ -1,3 +1,3 @@
-const localDomain = "http://localhost:8080";
+const localDomain = "http://localhost:8085";
 
 export default { localDomain };
