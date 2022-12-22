@@ -6,7 +6,9 @@
       
       <router-view/>
 
-      <footing></footing>
+      <div style="position: relative;">
+        <footing class="appFooter"></footing>
+      </div>
       
     </v-main>  
   </v-app>
@@ -31,5 +33,9 @@ export default {
 </script>
 
 <style>
-
+.appFooter{
+  position: absolute;
+  bottom: 0;
+  padding: 0;
+}
 </style>

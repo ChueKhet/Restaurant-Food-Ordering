@@ -1,7 +1,8 @@
 package com.ternion.RFO.service;
 
-import com.ternion.RFO.entity.UserData;
+import com.ternion.RFO.entity.AccountData;
 
 public interface AccountService {
-	public UserData checkLoginUser(String username, String password);
+	public AccountData checkLoginUser(String username, String password);
+	
 }

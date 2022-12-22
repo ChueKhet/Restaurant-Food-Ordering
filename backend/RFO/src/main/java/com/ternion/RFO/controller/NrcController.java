@@ -13,7 +13,7 @@ import com.ternion.RFO.entity.NrcData;
 import com.ternion.RFO.service.NrcService;
 
 @RestController
-@RequestMapping("/nrc")
+@RequestMapping("/api/nrc")
 public class NrcController {
 
 	@Autowired

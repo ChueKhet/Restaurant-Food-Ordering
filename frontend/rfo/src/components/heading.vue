@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar color="deep-purple lighten-1" dark>
+    <v-app-bar class="headMenuBar" color="deep-purple lighten-1" dark>
     <!-- style="background-color: #5d6e22;"  -->
         <!-- <v-btn class="text-h1" text @click="goToScreen('/')">Home</v-btn> -->
         <div class="logoApp" @click = "utl.goToScreen('/')"></div>
@@ -9,6 +9,8 @@
         <!-- <v-btn text v-show = "!isRegister" @click = "goToScreen('/register')" >Register</v-btn>
         <v-btn text @click = "goToScreen('/about')" >About</v-btn>  -->
 
+        <v-btn text @click = "utl.goToScreen('/')">Menu</v-btn>
+        <v-btn text @click = "utl.goToScreen('/admin_user_list')">UserList</v-btn>
         <v-btn text @click = "utl.goToScreen('/register')">Register</v-btn>
         <v-btn text @click = "onClickLogInAndOut">{{isLogIn ? "LogOut" : "LogIn"}}</v-btn> 
     </v-app-bar>
@@ -84,4 +86,9 @@ export default {
   color: #efbe47;
 }
 
+.headMenuBar{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
 </style>

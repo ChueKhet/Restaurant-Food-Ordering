@@ -1,9 +1,10 @@
 <template>
-    <div style="height: 82.8%;">
+    <div style="height: 81.5%;">
         <h2 style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">Register</h2>
 
         <div class="d-flex flex-column align-center fullScreenReg" style="margin-top: 5px;">
-            <v-card elevation="8" style="width: 98%;">
+            <v-card class="mx-3" elevation="8">
+            <!-- style="width: 98%;" -->
                 <v-form ref="registerForm" v-model="registerForm">            
                     
                         <v-row>
@@ -13,23 +14,25 @@
                                 <v-row>
                                     <v-col cols="12" sm="5">
 
-                                        <v-img
-                                            v-if="imagePreviewPath != null"
-                                            :src="imagePreviewPath"
-                                            width="250"
-                                            height="280"
-                                            contain
-                                        >
-                                        </v-img>
+                                        <div class="d-flex justify-center mt-5">
+                                            <v-img
+                                                v-if="imagePreviewPath != null"
+                                                :src="imagePreviewPath"
+                                                width="200"
+                                                height="215"
+                                                contain
+                                            >
+                                            </v-img>
 
-                                        <v-img
-                                            v-if="imagePreviewPath == null || imagePreviewPath == ''"
-                                            src="../assets/plus_sign for upload.png"
-                                            width="250"
-                                            height="280"
-                                            contain
-                                        >
-                                        </v-img>
+                                            <v-img
+                                                v-if="imagePreviewPath == null || imagePreviewPath == ''"
+                                                src="../assets/plus_sign for upload.png"
+                                                width="200"
+                                                height="215"
+                                                contain
+                                            >
+                                            </v-img>
+                                        </div>
 
                                         <v-file-input
                                             v-model="image"
@@ -51,27 +54,46 @@
 
                                     <v-col cols="12" sm="7">
 
-                                        <v-text-field v-model="name" label="Name"></v-text-field>
+                                        <v-row>
+                                            <v-col>
+                                                <v-text-field v-model="name" label="Name"></v-text-field>
+                                            </v-col>
+                                            <v-col>
+                                                <v-menu v-model="menu2" transition="scale-transition" min-width="auto"
+                                                    :close-on-content-click="false"
+                                                    :nudge-right="40"
+                                                    offset-y>
 
-                                        <v-menu v-model="menu2" transition="scale-transition" min-width="auto"
-                                            :close-on-content-click="false"
-                                            :nudge-right="40"
-                                            offset-y>
+                                                    <template v-slot:activator="{ on, attrs }" >
+                                                        <v-text-field v-model="dob" label="DOB"
+                                                            prepend-icon="mdi-calendar" v-bind="attrs" v-on="on"
+                                                            readonly>
+                                                        </v-text-field>
+                                                    </template>
 
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-text-field v-model="dob" label="DOB"
-                                                    prepend-icon="mdi-calendar" v-bind="attrs" v-on="on"
-                                                    readonly>
+                                                    <v-date-picker v-model="dob" @input="menu2 = false">
+                                                    </v-date-picker>
+                                                </v-menu>
+                                            </v-col>
+                                        </v-row>
+
+                                        <v-row>
+                                            <v-col>
+                                                <v-select
+                                                    :items="['Male','Female','Other']"
+                                                    v-model="gender"
+                                                    label="Gender"
+                                                    dense>
+                                                </v-select>
+                                            </v-col>
+                                            <v-col>
+                                                <v-text-field class="m_p_top_0" v-model="phone" label="Phone No">
                                                 </v-text-field>
-                                            </template>
+                                            </v-col>
+                                        </v-row>
 
-                                            <v-date-picker v-model="dob" @input="menu2 = false"></v-date-picker>
-                                        </v-menu>
-
-                                        <v-text-field v-model="phone" label="Phone No"></v-text-field>
-
-                                        <v-row align="center">
-                                            <v-col  class="d-flex"
+                                        <v-row>
+                                            <v-col  class="d-flex pt-5"
                                                 cols="12"
                                                 sm="1">
                                                 <label>NRC</label>
@@ -84,7 +106,7 @@
                                                 <v-select
                                                 :items="divisions"
                                                 v-model="division"
-                                                label="Standard"
+                                                label="-"
                                                 @change="getNrcTownship"
                                                 dense
                                                 ></v-select>
@@ -97,7 +119,7 @@
                                                 <v-select
                                                 :items="townships"
                                                 v-model="township"
-                                                label="Standard"
+                                                label="-"
                                                 dense
                                                 ></v-select>
                                             </v-col>
@@ -109,7 +131,7 @@
                                                 <v-select
                                                 :items="nations"
                                                 v-model="nation"
-                                                label="Standard"
+                                                label="-"
                                                 dense
                                                 ></v-select>
                                             </v-col>
@@ -118,11 +140,15 @@
                                                 cols="12"
                                                 sm="4"
                                                 >
-                                                <v-text-field v-model="nrc_num"></v-text-field>
+                                                <v-text-field class="m_p_top_0" v-model="nrc_num"></v-text-field>
                                             </v-col>
                                         </v-row>
 
-                                        <v-text-field v-model="address" label="Address"></v-text-field>
+                                        <v-row>
+                                            <v-col>
+                                                <v-text-field class="m_p_top_0" v-model="address" label="Address"></v-text-field>
+                                            </v-col>
+                                        </v-row>
 
                                     </v-col>
                                 </v-row>
@@ -217,6 +243,7 @@ export default {
             image: null,
             name: "",
             dob: "",
+            gender: "",
             nrc: "",
             phone: "",
             address: "",
@@ -284,6 +311,7 @@ export default {
                 let param = {
                     name: this.name,
                     dob: this.dob,
+                    gender: this.gender,
                     nrc: this.nrc,
                     phone: this.phone,
                     address: this.address,
@@ -325,6 +353,12 @@ export default {
 
             if(this.dob == ""){
                 this.alertbox("error", "Please add DOB!!!", 3000);
+
+                return false;
+            }
+
+            if(this.gender == ""){
+                this.alertbox("error", "Please add gender!!!", 3000);
 
                 return false;
             }
@@ -374,6 +408,7 @@ export default {
             this.image = null;
             this.name = "";
             this.dob = "";
+            this.gender = "";
             this.nrc = "";
             this.phone = "";
             this.address = "";
@@ -418,5 +453,10 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   margin: 0 auto;
+}
+
+.m_p_top_0{
+    margin-top: 0px !important;
+    padding-top: 0px !important;
 }
 </style>

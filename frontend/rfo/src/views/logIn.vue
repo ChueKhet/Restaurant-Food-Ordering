@@ -1,14 +1,6 @@
 <template>
   <v-container class="my-5 fullSize d-flex flex-column justify-center align-center">
     <v-card class="pt-5 d-flex flex-column justify-center align-center" elevation="8" width="350">
-      <!-- <v-img class="imgSize" src="../assets/logo/Ternion Logo.png"
-        :aspect-ratio="1/1"
-        :width="250">
-      </v-img> -->
-
-      <!-- <div class="logoLogIn"></div> -->
-
-      <!-- <hr style="width: 100%;"> -->
 
       <v-card-title><h1 class="logoFontLogIn">Ternion</h1></v-card-title>
 
@@ -82,10 +74,10 @@ export default {
 </script>
 
 <style>
-.fullSize {
+/* .fullSize {
   height: 77.3%;
   width: 90%;
-}
+} */
 
 .logoLogIn{
   height: 150px;

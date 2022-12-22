@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ternion.RFO.entity.UserData;
 
-public interface RegisterRepo extends JpaRepository<UserData, Integer> {
+public interface UserRepo extends JpaRepository<UserData, Integer> {
 
 	
 

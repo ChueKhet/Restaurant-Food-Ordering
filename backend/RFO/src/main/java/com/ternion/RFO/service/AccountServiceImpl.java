@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.ternion.RFO.entity.UserData;
+import com.ternion.RFO.entity.AccountData;
 import com.ternion.RFO.repository.AccountRepo;
 
 @Service
@@ -16,10 +16,10 @@ public class AccountServiceImpl implements AccountService {
 	PasswordEncoder pwEncoder;
 	
 	@Override
-	public UserData checkLoginUser(String username, String password) {
-		UserData user = accRepo.findByUserName(username);
+	public AccountData checkLoginUser(String username, String password) {
+		AccountData acc = accRepo.findByUserName(username);
 		
-		if (user == null) {
+		if (acc == null) {
 			return null;
 		}
 		
@@ -29,10 +29,11 @@ public class AccountServiceImpl implements AccountService {
 		}
 		*/
 
-		if (!password.equals(user.getPassword())) {
+		if (!password.equals(acc.getPassword())) {
 			return null;
 		}
 		
-		return user;
+		return acc;
 	}
+
 }

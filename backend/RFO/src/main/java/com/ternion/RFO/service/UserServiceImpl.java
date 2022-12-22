@@ -1,23 +1,42 @@
 package com.ternion.RFO.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ternion.RFO.entity.UserData;
-import com.ternion.RFO.repository.RegisterRepo;
+import com.ternion.RFO.repository.UserRepo;
 
 @Service
-public class RegisterServiceImpl implements RegisterService {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
-	RegisterRepo regRepo;
+	UserRepo userRepo;
 
 	@Autowired
 	PasswordEncoder pwEncoder;
 
 	public UserData createUser(UserData user)  {
-		return regRepo.save(user);
+		return userRepo.save(user);
+	}
+
+	@Override
+	public List<UserData> getAll() {	
+		return userRepo.findAll();
+	}
+
+	@Override
+	public boolean delete(int id) {
+		
+		UserData userdata = userRepo.findById(id).orElse(null);
+		if(userdata == null) {
+			return false;
+		}
+		
+		userRepo.deleteById(id);
+		return true;
 	}
 
 	

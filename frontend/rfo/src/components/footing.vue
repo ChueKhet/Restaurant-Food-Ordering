@@ -1,7 +1,7 @@
 <template>
-    <v-footer style="background-color: white;">
-        <v-col class="text-center" cols="12">
-        <strong>Copy @ 2022 Restaurant Food Ordering</strong>
+    <v-footer class="d-flex justify-center footer">
+        <v-col class="text-center" cols="12" style="padding: 0;">
+            <strong>Copy @ 2022 Restaurant Food Ordering</strong>
         </v-col>
     </v-footer>
 </template>
@@ -17,6 +17,10 @@ export default {
 </script>
 
 <style scoped>
-
+.footer{
+    background-color: transparent;
+    width: 100%;
+    padding: 0;
+}
 </style>
   

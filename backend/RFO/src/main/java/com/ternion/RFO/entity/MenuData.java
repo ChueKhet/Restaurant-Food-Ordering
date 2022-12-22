@@ -7,39 +7,34 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
-
 @Entity
-public class UserData implements java.io.Serializable {
+public class MenuData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
-	@Column(length = 30,nullable = false)
-	@NotBlank(message = "Required")
-	private String name;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String dob;
+	private int categoryId;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String nrc;
+	private String code;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String phone;
+	private String description;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String address;
-
+	private int userId;
+	
 	@Column(nullable = true)
 	private String createdAt;
-
+	
 	@Column(nullable = true)
 	private String modifiedAt;
 	
@@ -51,65 +46,57 @@ public class UserData implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	public String getName() {
-		return name;
+	public int getCategoryId() {
+		return categoryId;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 	
-	public String getDob() {
-		return dob;
+	public String getCode() {
+		return code;
 	}
 	
-	public void setDob(String dob) {
-		this.dob = dob;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
-	public String getNrc() {
-		return nrc;
-	}
-	
-	public void setNrc(String nrc) {
-		this.nrc = nrc;
-	}
-	
-	public String getPhone() {
-		return phone;
-	}
-	
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	
-	public String getAddress() {
-		return address;
-	}
-	
-	public void setAddress(String address) {
-		this.address = address;
+	public String getDescription() {
+		return description;
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
 	public String getCreatedAt() {
 		return createdAt;
 	}
-
+	
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
-
+	
 	public String getModifiedAt() {
 		return modifiedAt;
 	}
-
+	
 	public void setModifiedAt(String modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
 
 	@Override
 	public String toString() {
-		return "UserData [id=" + id + ", name=" + name + ", dob=" + dob + ", nrc=" + nrc + ", phone=" + phone
-				+ ", address=" + address + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
+		return "MenuData [id=" + id + ", categoryId=" + categoryId + ", code=" + code + ", description=" + description
+				+ ", userId=" + userId + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
 	}
 }
