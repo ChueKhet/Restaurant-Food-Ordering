@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -16,9 +18,13 @@ public class MenuData implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+//	@ManyToOne
+//	@JoinColumn(name = "categoryId", referencedColumnName = "id", nullable = false)
+//	private Category category;
+//	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private int categoryId;
+	private int category_id;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
@@ -26,17 +32,21 @@ public class MenuData implements java.io.Serializable {
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
+	private String price;
+	
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String description;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private int userId;
+	private int user_id;
 	
 	@Column(nullable = true)
-	private String createdAt;
+	private String created_at;
 	
 	@Column(nullable = true)
-	private String modifiedAt;
+	private String modified_at;
 	
 	public int getId() {
 		return id;
@@ -46,20 +56,44 @@ public class MenuData implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	public int getCategoryId() {
-		return categoryId;
+	public int getUser_id() {
+		return user_id;
 	}
-	
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
-	
+
+	public String getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
+	}
+
+	public String getModified_at() {
+		return modified_at;
+	}
+
+	public void setModified_at(String modified_at) {
+		this.modified_at = modified_at;
+	}
+
 	public String getCode() {
 		return code;
 	}
 	
 	public void setCode(String code) {
 		this.code = code;
+	}
+	
+	public String getPrice() {
+		return price;
+	}
+	
+	public void setPrice(String price) {
+		this.price = price;
 	}
 	
 	public String getDescription() {
@@ -70,33 +104,20 @@ public class MenuData implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getCategory_id() {
+		return category_id;
 	}
-	
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	
-	public String getCreatedAt() {
-		return createdAt;
-	}
-	
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
-	
-	public String getModifiedAt() {
-		return modifiedAt;
-	}
-	
-	public void setModifiedAt(String modifiedAt) {
-		this.modifiedAt = modifiedAt;
+
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
 	}
 
 	@Override
 	public String toString() {
-		return "MenuData [id=" + id + ", categoryId=" + categoryId + ", code=" + code + ", description=" + description
-				+ ", userId=" + userId + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
+		return "MenuData [id=" + id + ", category_id=" + category_id + ", code=" + code + ", price=" + price
+				+ ", description=" + description + ", user_id=" + user_id + ", created_at=" + created_at
+				+ ", modified_at=" + modified_at + "]";
 	}
+
+	
 }
