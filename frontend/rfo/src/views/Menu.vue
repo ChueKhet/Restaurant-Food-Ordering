@@ -213,7 +213,6 @@
 </template>
 
 <script>
-import { createLogger } from "vuex";
 import http from "../utils/http";
 export default {
   data() {
@@ -272,7 +271,8 @@ export default {
       this.id = "";
       this.description = "";
       this.code = Math.floor(1000 + Math.random() * 9000);
-      (this.category_id = ""), (this.price = "");
+      this.category_id = "";
+      this.price = "";
       this.user_id = "";
     },
 

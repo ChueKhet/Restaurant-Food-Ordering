@@ -6,7 +6,7 @@ import register from '../views/register.vue'
 import admin_user_list from '../views/admin_user_list.vue'
 import Menu from '../views/Menu.vue'
 import Ingredients from '../views/Ingredients.vue'
-import Chef from '../views/Chef.vue'
+//import Chef from '../views/Chef.vue'
 
 
 Vue.use(VueRouter)
@@ -42,11 +42,11 @@ const routes = [
     name: 'ingredients',
     component: Ingredients
   },
-  {
-    path: '/chef',
-    name: 'chef',
-    component: Chef
-  },
+  // {
+  //   path: '/chef',
+  //   name: 'chef',
+  //   component: Chef
+  // },
 ]
 
 const router = new VueRouter({
