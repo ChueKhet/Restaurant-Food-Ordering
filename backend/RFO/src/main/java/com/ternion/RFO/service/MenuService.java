@@ -5,7 +5,10 @@ import java.util.List;
 import com.ternion.RFO.entity.MenuData;
 
 public interface MenuService {
-	public List<MenuData>getAll();
+
+	public List<MenuData> allMenuWithIngredient();
+
+	public List<MenuData> getAll();
 
 	public MenuData create(MenuData menu);
 
@@ -13,4 +16,3 @@ public interface MenuService {
 
 	public boolean delete(int id);
 }
-

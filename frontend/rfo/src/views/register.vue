@@ -230,6 +230,7 @@
 </template>
 
 <script>
+
 import utils from "../utils/utils";
 
 export default {
@@ -274,7 +275,7 @@ export default {
 
     methods: {
         async getNrcCode(){
-            const resp = await utils.http.get("/nrc/getNrcCode");
+            const resp = await utils.http.get("/nrc/code");
 
             if (resp.status === 200){
                 const data = await resp.json();
@@ -291,7 +292,7 @@ export default {
                 return;
             }
 
-            const resp = await utils.http.get("/nrc/getNrcTownship/" + this.division);
+            const resp = await utils.http.get("/nrc/all/township/" + this.division);
 
             if (resp.status === 200){
                 const data = await resp.json();
@@ -319,7 +320,7 @@ export default {
                     password: this.password
                 };
 
-                const resp = await utils.http.post("/register/addUser", param);
+                const resp = await utils.http.post("/user/add", param);
                 this.loading = false;
 
                 if (resp.status === 200){
@@ -433,14 +434,15 @@ export default {
 
             setTimeout(() => {
                 this.errorAlert = false;
-            }, 3000);
+            }, timer);
         }
     }
-
 };
+
 </script>
 
 <style>
+
 .fullScreenReg {
     width: 100%;
     height: 100%;
@@ -453,10 +455,12 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   margin: 0 auto;
+  z-index: 1;
 }
 
 .m_p_top_0{
     margin-top: 0px !important;
     padding-top: 0px !important;
 }
+
 </style>

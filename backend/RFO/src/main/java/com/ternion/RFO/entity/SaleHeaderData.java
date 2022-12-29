@@ -7,56 +7,51 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-//import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-public class IngredientData implements java.io.Serializable {
+public class SaleHeaderData implements java.io.Serializable  {
 
 	private static final long serialVersionUID = 1L;
-	
-	@ManyToMany(mappedBy = "ingredientList")
-	List<MenuData> menuDataList;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String code;
+	private String tableNo;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String description;
+	private int totalAmount;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private int userid;
+	private int slipNo;
+	
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
+	private int userId;
+	
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
+	private int orderStatus;
 	
 	@Column(nullable = true)
+//	@NotBlank(message = "Required")
 	private String createdAt;
 	
 	@Column(nullable = true)
+//	@NotBlank(message = "Required")
 	private String modifiedAt;
 	
 	@Column(nullable = false)
 	private int deleteStatus;
 	
-	private int status = 0;
-
-//	@JsonIgnore
-	@JsonBackReference
-	public List<MenuData> getMenuDataList() {
-		return menuDataList;
-	}
-
-	public void setMenuDataList(List<MenuData> menuDataList) {
-		this.menuDataList = menuDataList;
-	}
+	@OneToMany(mappedBy = "headerData")
+	private List<SaleDetailData> detailList;
 
 	public int getId() {
 		return id;
@@ -66,28 +61,44 @@ public class IngredientData implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public String getCode() {
-		return code;
+	public String getTableNo() {
+		return tableNo;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setTableNo(String tableNo) {
+		this.tableNo = tableNo;
 	}
 
-	public String getDescription() {
-		return description;
+	public int getTotalAmount() {
+		return totalAmount;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
-	public int getUserid() {
-		return userid;
+	public int getSlipNo() {
+		return slipNo;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setSlipNo(int slipNo) {
+		this.slipNo = slipNo;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(int orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	public String getCreatedAt() {
@@ -114,13 +125,11 @@ public class IngredientData implements java.io.Serializable {
 		this.deleteStatus = deleteStatus;
 	}
 
-	public int getStatus() {
-		return status;
+	public List<SaleDetailData> getDetailList() {
+		return detailList;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setDetailList(List<SaleDetailData> detailList) {
+		this.detailList = detailList;
 	}
-	
-	
 }

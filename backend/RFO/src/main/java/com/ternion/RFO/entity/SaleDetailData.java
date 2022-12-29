@@ -5,93 +5,112 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
-
 @Entity
-public class UserData implements java.io.Serializable {
+public class SaleDetailData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
-	@Column(length = 30,nullable = false)
-	@NotBlank(message = "Required")
-	private String name;
+	
+//	@Column(nullable = false)
+//	@NotBlank(message = "Required")
+//	private int headerId;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String dob;
+	private int menuId;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String nrc;
+	private int qty;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String phone;
+	private int price;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String address;
-
+	private int totalPrice;
+	
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
+	private String remark;
+	
 	@Column(nullable = true)
+//	@NotBlank(message = "Required")
 	private String createdAt;
-
+	
 	@Column(nullable = true)
+//	@NotBlank(message = "Required")
 	private String modifiedAt;
 	
 	@Column(nullable = false)
 	private int deleteStatus;
 	
+	@ManyToOne
+    @JoinColumn(name="headerId", nullable = true)
+	private SaleHeaderData headerData;
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getName() {
-		return name;
+
+//	public int getHeaderId() {
+//		return headerId;
+//	}
+//
+//	public void setHeaderId(int headerId) {
+//		this.headerId = headerId;
+//	}
+
+	public int getMenuId() {
+		return menuId;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setMenuId(int menuId) {
+		this.menuId = menuId;
 	}
-	
-	public String getDob() {
-		return dob;
+
+	public int getQty() {
+		return qty;
 	}
-	
-	public void setDob(String dob) {
-		this.dob = dob;
+
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
-	
-	public String getNrc() {
-		return nrc;
+
+	public int getPrice() {
+		return price;
 	}
-	
-	public void setNrc(String nrc) {
-		this.nrc = nrc;
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
-	
-	public String getPhone() {
-		return phone;
+
+	public int getTotalPrice() {
+		return totalPrice;
 	}
-	
-	public void setPhone(String phone) {
-		this.phone = phone;
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
-	
-	public String getAddress() {
-		return address;
+
+	public String getRemark() {
+		return remark;
 	}
-	
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getCreatedAt() {
@@ -118,9 +137,11 @@ public class UserData implements java.io.Serializable {
 		this.deleteStatus = deleteStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "UserData [id=" + id + ", name=" + name + ", dob=" + dob + ", nrc=" + nrc + ", phone=" + phone
-				+ ", address=" + address + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
+	public SaleHeaderData getHeaderData() {
+		return headerData;
+	}
+
+	public void setHeaderData(SaleHeaderData headerData) {
+		this.headerData = headerData;
 	}
 }

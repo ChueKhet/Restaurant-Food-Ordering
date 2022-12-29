@@ -7,19 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-//import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-public class IngredientData implements java.io.Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class CategoryData implements java.io.Serializable {
 	
-	@ManyToMany(mappedBy = "ingredientList")
-	List<MenuData> menuDataList;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,28 +29,19 @@ public class IngredientData implements java.io.Serializable {
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private int userid;
+	private int user_id;
 	
 	@Column(nullable = true)
-	private String createdAt;
+	private String created_at;
 	
 	@Column(nullable = true)
-	private String modifiedAt;
+	private String modified_at;
 	
 	@Column(nullable = false)
 	private int deleteStatus;
 	
-	private int status = 0;
-
-//	@JsonIgnore
-	@JsonBackReference
-	public List<MenuData> getMenuDataList() {
-		return menuDataList;
-	}
-
-	public void setMenuDataList(List<MenuData> menuDataList) {
-		this.menuDataList = menuDataList;
-	}
+	@OneToMany(mappedBy = "category")
+	private List<MenuData> menuList;
 
 	public int getId() {
 		return id;
@@ -82,28 +67,28 @@ public class IngredientData implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public int getUserid() {
-		return userid;
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
-	public String getCreatedAt() {
-		return createdAt;
+	public String getCreated_at() {
+		return created_at;
 	}
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
 	}
 
-	public String getModifiedAt() {
-		return modifiedAt;
+	public String getModified_at() {
+		return modified_at;
 	}
 
-	public void setModifiedAt(String modifiedAt) {
-		this.modifiedAt = modifiedAt;
+	public void setModified_at(String modified_at) {
+		this.modified_at = modified_at;
 	}
 
 	public int getDeleteStatus() {
@@ -114,13 +99,11 @@ public class IngredientData implements java.io.Serializable {
 		this.deleteStatus = deleteStatus;
 	}
 
-	public int getStatus() {
-		return status;
+	public List<MenuData> getMenuList() {
+		return menuList;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setMenuList(List<MenuData> menuList) {
+		this.menuList = menuList;
 	}
-	
-	
 }

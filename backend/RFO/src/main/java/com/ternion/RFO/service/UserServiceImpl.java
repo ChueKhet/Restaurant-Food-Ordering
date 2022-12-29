@@ -39,5 +39,26 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Override
+	public UserData update(int id, UserData user) {
+		UserData userdata = this.findById(id);
+		if(userdata == null) {
+			return null;
+		}
+		userdata.setName(user.getName()); 
+		userdata.setDob(user.getDob());
+		userdata.setNrc(user.getNrc()); 
+		userdata.setPhone(user.getPhone());
+		userdata.setAddress(user.getAddress()); 
+		userdata.setModifiedAt(user.getModifiedAt());
+		userRepo.save(userdata);
+		
+		return null;
+	}
 	
+	@Override
+	public UserData findById(int id) {
+		return userRepo.findById(id).orElse(null); 
+
+	}	
 }

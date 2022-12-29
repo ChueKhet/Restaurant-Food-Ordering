@@ -1,38 +1,45 @@
 package com.ternion.RFO.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class MenuData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@ManyToMany
+	@JoinTable(
+		name = "menu_ingredient",
+		joinColumns = @JoinColumn(name = "menu_id"),
+		inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+	)
+	private List<IngredientData> ingredientList;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "categoryId", referencedColumnName = "id", nullable = false)
-//	private Category category;
-//	
-	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int category_id;
+	@ManyToOne
+	@JoinColumn(name = "category_Id", referencedColumnName = "id", nullable = false)
+	private CategoryData category;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
 	private String code;
-	
-	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private String price;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
@@ -48,14 +55,54 @@ public class MenuData implements java.io.Serializable {
 	@Column(nullable = true)
 	private String modified_at;
 	
+	@Column(nullable = false)
+	private int deleteStatus;
+	
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
+	private double price;
+
+	@JsonManagedReference
+	public List<IngredientData> getIngredientList() {
+		return ingredientList;
+	}
+
+	public void setIngredientList(List<IngredientData> ingredientList) {
+		this.ingredientList = ingredientList;
+	}
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
+	public CategoryData getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryData category) {
+		this.category = category;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public int getUser_id() {
 		return user_id;
 	}
@@ -80,44 +127,19 @@ public class MenuData implements java.io.Serializable {
 		this.modified_at = modified_at;
 	}
 
-	public String getCode() {
-		return code;
+	public int getDeleteStatus() {
+		return deleteStatus;
 	}
-	
-	public void setCode(String code) {
-		this.code = code;
+
+	public void setDeleteStatus(int deleteStatus) {
+		this.deleteStatus = deleteStatus;
 	}
-	
-	public String getPrice() {
+
+	public double getPrice() {
 		return price;
 	}
-	
-	public void setPrice(String price) {
+
+	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getCategory_id() {
-		return category_id;
-	}
-
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
-	}
-
-	@Override
-	public String toString() {
-		return "MenuData [id=" + id + ", category_id=" + category_id + ", code=" + code + ", price=" + price
-				+ ", description=" + description + ", user_id=" + user_id + ", created_at=" + created_at
-				+ ", modified_at=" + modified_at + "]";
-	}
-
-	
 }

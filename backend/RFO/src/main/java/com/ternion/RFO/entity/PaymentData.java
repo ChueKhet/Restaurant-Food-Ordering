@@ -7,91 +7,84 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
-
 @Entity
-public class UserData implements java.io.Serializable {
-
+public class PaymentData implements java.io.Serializable  {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
-	@Column(length = 30,nullable = false)
-	@NotBlank(message = "Required")
-	private String name;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String dob;
+	private int headerId;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String nrc;
+	private int totalAmout;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String phone;
+	private int paidAmount;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String address;
-
+	private int changeAmount;
+	
 	@Column(nullable = true)
+	@NotBlank(message = "Required")
 	private String createdAt;
-
+	
 	@Column(nullable = true)
+	@NotBlank(message = "Required")
 	private String modifiedAt;
 	
 	@Column(nullable = false)
-	private int deleteStatus;
+	@NotBlank(message = "Required")
+	private int userId;
 	
+	@Column(nullable = false)
+	private int deleteStatus;
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getName() {
-		return name;
+
+	public int getHeaderId() {
+		return headerId;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setHeaderId(int headerId) {
+		this.headerId = headerId;
 	}
-	
-	public String getDob() {
-		return dob;
+
+	public int getTotalAmout() {
+		return totalAmout;
 	}
-	
-	public void setDob(String dob) {
-		this.dob = dob;
+
+	public void setTotalAmout(int totalAmout) {
+		this.totalAmout = totalAmout;
 	}
-	
-	public String getNrc() {
-		return nrc;
+
+	public int getPaidAmount() {
+		return paidAmount;
 	}
-	
-	public void setNrc(String nrc) {
-		this.nrc = nrc;
+
+	public void setPaidAmount(int paidAmount) {
+		this.paidAmount = paidAmount;
 	}
-	
-	public String getPhone() {
-		return phone;
+
+	public int getChangeAmount() {
+		return changeAmount;
 	}
-	
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	
-	public String getAddress() {
-		return address;
-	}
-	
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setChangeAmount(int changeAmount) {
+		this.changeAmount = changeAmount;
 	}
 
 	public String getCreatedAt() {
@@ -110,6 +103,14 @@ public class UserData implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	public int getDeleteStatus() {
 		return deleteStatus;
 	}
@@ -117,10 +118,10 @@ public class UserData implements java.io.Serializable {
 	public void setDeleteStatus(int deleteStatus) {
 		this.deleteStatus = deleteStatus;
 	}
+	
+	
+	
+	
+		
 
-	@Override
-	public String toString() {
-		return "UserData [id=" + id + ", name=" + name + ", dob=" + dob + ", nrc=" + nrc + ", phone=" + phone
-				+ ", address=" + address + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
-	}
 }
