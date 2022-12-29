@@ -82,12 +82,4 @@ public class AccountData implements java.io.Serializable {
 	public void setModifiedAt(LocalDateTime modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
-
-	
-
-
-
-	
-	
-	
 }

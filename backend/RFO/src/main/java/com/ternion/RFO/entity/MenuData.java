@@ -2,6 +2,7 @@ package com.ternion.RFO.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,31 +12,36 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class MenuData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.MERGE})
 	@JoinTable(
 		name = "menu_ingredient",
 		joinColumns = @JoinColumn(name = "menu_id"),
-		inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+		inverseJoinColumns = @JoinColumn(name = "ingredient_id"),
+		uniqueConstraints={@UniqueConstraint(columnNames={"menu_id", "ingredient_id"})}
 	)
+	@JsonIgnoreProperties("menuDataList")
 	private List<IngredientData> ingredientList;
+	
+	@ManyToOne
+	@JoinColumn(name="category_id", nullable=false)
+	private CategoryData category;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@ManyToOne
-	@JoinColumn(name = "category_Id", referencedColumnName = "id", nullable = false)
-	private CategoryData category;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
@@ -61,8 +67,13 @@ public class MenuData implements java.io.Serializable {
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
 	private double price;
-
-	@JsonManagedReference
+	
+	
+	private int catId;
+	
+	
+	
+	
 	public List<IngredientData> getIngredientList() {
 		return ingredientList;
 	}
@@ -79,6 +90,8 @@ public class MenuData implements java.io.Serializable {
 		this.id = id;
 	}
 
+//	@JsonManagedReference
+	@JsonBackReference
 	public CategoryData getCategory() {
 		return category;
 	}
@@ -141,5 +154,13 @@ public class MenuData implements java.io.Serializable {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public int getCatId() {
+		return catId;
+	}
+
+	public void setCatId(int catId) {
+		this.catId = catId;
 	}
 }

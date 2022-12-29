@@ -1,5 +1,5 @@
 <template>
-  <dvi class="ma-5">
+  <div class="ma-5">
     <v-card>
       <v-card-title>
         <span class="mr-5"
@@ -48,14 +48,14 @@
         <v-card-title>New Menu</v-card-title>
         <v-card-text>
           <v-form ref="createMenuForm" v-model="createMenuForm">
-            <v-text-field
+            <!-- <v-text-field
               v-model="code"
               label="Code"
               disabled
               required
               :rules="[(v) => !!v || 'Required']"
               outlined
-            ></v-text-field>
+            ></v-text-field> -->
 
             <v-text-field
               v-model="description"
@@ -83,7 +83,7 @@
               outlined
             ></v-text-field>
 
-            <v-text-field
+            <!-- <v-text-field
               v-model="created_at"
               label="Created At"
               type="date"
@@ -95,7 +95,7 @@
               v-model="user_id"
               label="Created By"
               outlined
-            ></v-text-field>
+            ></v-text-field> -->
 
             <v-btn class="mt-5 width-100" color="success" @click="createMenu()"
               >Create</v-btn
@@ -152,7 +152,7 @@
               outlined
             ></v-text-field>
 
-            <v-text-field
+            <!-- <v-text-field
               v-model="modified_at"
               label="Modified At"
               type="date"
@@ -164,7 +164,7 @@
               v-model="user_id"
               label="Created By"
               outlined
-            ></v-text-field>
+            ></v-text-field> -->
 
             <v-btn class="mt-5 width-100" color="success" @click="editMenu()"
               >Edit</v-btn
@@ -209,7 +209,7 @@
     <v-snackbar v-model="deleteSuccessSnackBar">
       {{ deleteSuccessMsg }}
     </v-snackbar>
-  </dvi>
+  </div>
 </template>
 
 <script>
@@ -233,9 +233,9 @@ export default {
 
       headers: [
         { text: "No", align: "start", value: "id" },
-        { text: "Menu", value: "description" },
         { text: "Code", value: "code" },
-        { text: "Category", value: "category_id" },
+        { text: "Menu", value: "description" },
+        { text: "Category", value: "catId" },
         { text: "Price", value: "price" },
         { text: "Created At", value: "created_at" },
         { text: "Modified At", value: "modified_at" },
@@ -277,11 +277,13 @@ export default {
     },
 
     async fetchMenuLists() {
-      const resp = await http.get("/menu/list");
+      const resp = await http.get("/menu/all");
       if (resp && resp.status === 200) {
         const data = await resp.json();
+
         if (data) {
           this.menuRecords = data;
+
           console.log(data);
         }
       }
@@ -294,14 +296,19 @@ export default {
 
     async createMenu() {
       if (this.$refs.createMenuForm.validate()) {
-        const resp = await http.post("/menu/add", {
-          description: this.description,
+        let saveData = {
           code: this.code,
-          category_id: this.category_id,
+          description: this.description,
           price: this.price,
           created_at: this.created_at,
           user_id: this.user_id,
-        });
+          category: {
+            id: this.category_id
+          }
+        };
+
+        const resp = await http.post("/menu/add", saveData);
+
         if (resp && resp.status === 200) {
           await this.fetchMenuLists();
           this.createDialog = false;

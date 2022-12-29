@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class CategoryData implements java.io.Serializable {
 	
@@ -41,7 +45,7 @@ public class CategoryData implements java.io.Serializable {
 	private int deleteStatus;
 	
 	@OneToMany(mappedBy = "category")
-	private List<MenuData> menuList;
+	List<MenuData> menuList;
 
 	public int getId() {
 		return id;
@@ -99,6 +103,8 @@ public class CategoryData implements java.io.Serializable {
 		this.deleteStatus = deleteStatus;
 	}
 
+//	@JsonBackReference
+	@JsonManagedReference
 	public List<MenuData> getMenuList() {
 		return menuList;
 	}

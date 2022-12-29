@@ -2,8 +2,6 @@ package com.ternion.RFO.controller;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +17,6 @@ import com.ternion.RFO.service.MenuService;
 
 @RestController
 @RequestMapping("/api/menu")
-
 public class MenuController {
 	@Autowired
 	MenuService menuService;
@@ -31,16 +28,28 @@ public class MenuController {
 	
 	@GetMapping("/all")
 	public List<MenuData> listMenu() {
-		return menuService.getAll();
+		List<MenuData> retList = menuService.getAll();
+		
+		for(int i = 0; i < retList.size(); i++) {
+			retList.get(i).setCatId(retList.get(i).getCategory().getId());
+		}
+		
+		return retList;
 	}
 
 	@PostMapping("/add")
-	MenuData create(@RequestBody MenuData menu) {
-		return menuService.create(menu);
+	public ResponseEntity<?> create(@RequestBody MenuData data) {
+		MenuData menuData = menuService.create(data);
+		
+		if (menuData == null) {
+			return ResponseEntity.badRequest().body("Menu already exists!");
+		}
+		
+		return ResponseEntity.ok().body(menuData);
 	}
 	
 	@PutMapping("/update")
-	ResponseEntity<?> update(@RequestBody MenuData menu) {
+	public ResponseEntity<?> update(@RequestBody MenuData menu) {
 		MenuData updatedMenu = menuService.update(menu);
 		if (updatedMenu == null) {
 			return ResponseEntity.badRequest().body("Menu cannot be updated");
@@ -50,7 +59,7 @@ public class MenuController {
 	}
 
 	@DeleteMapping("/del")
-	ResponseEntity<?> delete(@RequestBody MenuData menu) {
+	public ResponseEntity<?> delete(@RequestBody MenuData menu) {
 		 boolean isDeleted = menuService.delete(menu.getId());
 		 if (isDeleted == false) {
 			 return ResponseEntity.notFound().build();

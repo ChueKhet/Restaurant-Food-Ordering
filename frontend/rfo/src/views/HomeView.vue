@@ -131,7 +131,7 @@
 
           <v-row>
             <v-col class="d-flex flex-column align-center justify-center">
-              <v-btn color="primary" @click="saveTransition">Save</v-btn>
+              <v-btn color="primary" @click="saveTransition">Order</v-btn>
             </v-col>
           </v-row>
 

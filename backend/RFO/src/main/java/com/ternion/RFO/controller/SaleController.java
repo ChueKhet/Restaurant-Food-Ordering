@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ternion.RFO.entity.SaleDetailData;
 import com.ternion.RFO.entity.SaleHeaderData;
 import com.ternion.RFO.service.SaleService;
+import com.ternion.RFO.utility.ServerUtil;
 
 @RestController
 @RequestMapping("/api/sale")
@@ -21,6 +22,11 @@ public class SaleController {
 	
 	@PostMapping("/order/confirm")
 	public ResponseEntity<?> create(@RequestBody SaleHeaderData header) {
+		
+		String curDate = ServerUtil.getCurrentDate();
+		header.setCreatedAt(curDate);
+		header.setModifiedAt(curDate);
+		
 		header.setSlipNo(saleService.getTodayMaxSlip());
 
 		SaleHeaderData headerData = saleService.createHeader(header);
