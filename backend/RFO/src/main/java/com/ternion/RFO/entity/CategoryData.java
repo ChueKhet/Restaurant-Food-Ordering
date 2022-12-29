@@ -7,35 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
-public class MenuData implements java.io.Serializable {
-
+public class CategoryData implements java.io.Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToMany
-	@JoinTable(
-		name = "menu_ingredient",
-		joinColumns = @JoinColumn(name = "menu_id"),
-		inverseJoinColumns = @JoinColumn(name = "ingredient_id")
-	)
-	private List<IngredientData> ingredientList;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@ManyToOne
-	@JoinColumn(name = "category_Id", referencedColumnName = "id", nullable = false)
-	private CategoryData category;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
@@ -58,18 +40,8 @@ public class MenuData implements java.io.Serializable {
 	@Column(nullable = false)
 	private int deleteStatus;
 	
-	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private double price;
-
-	@JsonManagedReference
-	public List<IngredientData> getIngredientList() {
-		return ingredientList;
-	}
-
-	public void setIngredientList(List<IngredientData> ingredientList) {
-		this.ingredientList = ingredientList;
-	}
+	@OneToMany(mappedBy = "category")
+	private List<MenuData> menuList;
 
 	public int getId() {
 		return id;
@@ -77,14 +49,6 @@ public class MenuData implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public CategoryData getCategory() {
-		return category;
-	}
-
-	public void setCategory(CategoryData category) {
-		this.category = category;
 	}
 
 	public String getCode() {
@@ -135,11 +99,11 @@ public class MenuData implements java.io.Serializable {
 		this.deleteStatus = deleteStatus;
 	}
 
-	public double getPrice() {
-		return price;
+	public List<MenuData> getMenuList() {
+		return menuList;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setMenuList(List<MenuData> menuList) {
+		this.menuList = menuList;
 	}
 }
