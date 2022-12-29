@@ -130,7 +130,7 @@ export default {
 
   methods: {
     async fetchUserList(){
-      const resp = await utils.http.get("/register/list");
+      const resp = await utils.http.get("/user/all");
 
       if(resp && resp.status == 200){
         const data = await resp.json();
@@ -151,7 +151,7 @@ export default {
     },
 
     async deleteUser(userId){
-      const resp = await utils.http.del("/register/delete", {id: userId});
+      const resp = await utils.http.del("/user/delete", {id: userId});
 
       if(resp && resp.status == 200){
         await this.fetchUserList();
