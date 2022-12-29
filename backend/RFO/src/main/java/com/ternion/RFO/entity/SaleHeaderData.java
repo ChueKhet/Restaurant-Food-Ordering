@@ -1,97 +1,104 @@
 package com.ternion.RFO.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-
 @Entity
-public class UserData implements java.io.Serializable {
+public class SaleHeaderData implements java.io.Serializable  {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
-	@Column(length = 30,nullable = false)
-	@NotBlank(message = "Required")
-	private String name;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String dob;
+	private String tableNo;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String nrc;
+	private int totalAmount;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String phone;
+	private int slipNo;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String address;
-
+	private int userId;
+	
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
+	private int orderStatus;
+	
 	@Column(nullable = true)
+//	@NotBlank(message = "Required")
 	private String createdAt;
-
+	
 	@Column(nullable = true)
+//	@NotBlank(message = "Required")
 	private String modifiedAt;
 	
 	@Column(nullable = false)
 	private int deleteStatus;
 	
+	@OneToMany(mappedBy = "headerData")
+	private List<SaleDetailData> detailList;
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getName() {
-		return name;
+
+	public String getTableNo() {
+		return tableNo;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setTableNo(String tableNo) {
+		this.tableNo = tableNo;
 	}
-	
-	public String getDob() {
-		return dob;
+
+	public int getTotalAmount() {
+		return totalAmount;
 	}
-	
-	public void setDob(String dob) {
-		this.dob = dob;
+
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
 	}
-	
-	public String getNrc() {
-		return nrc;
+
+	public int getSlipNo() {
+		return slipNo;
 	}
-	
-	public void setNrc(String nrc) {
-		this.nrc = nrc;
+
+	public void setSlipNo(int slipNo) {
+		this.slipNo = slipNo;
 	}
-	
-	public String getPhone() {
-		return phone;
+
+	public int getUserId() {
+		return userId;
 	}
-	
-	public void setPhone(String phone) {
-		this.phone = phone;
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	
-	public String getAddress() {
-		return address;
+
+	public int getOrderStatus() {
+		return orderStatus;
 	}
-	
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setOrderStatus(int orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	public String getCreatedAt() {
@@ -118,9 +125,11 @@ public class UserData implements java.io.Serializable {
 		this.deleteStatus = deleteStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "UserData [id=" + id + ", name=" + name + ", dob=" + dob + ", nrc=" + nrc + ", phone=" + phone
-				+ ", address=" + address + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
+	public List<SaleDetailData> getDetailList() {
+		return detailList;
+	}
+
+	public void setDetailList(List<SaleDetailData> detailList) {
+		this.detailList = detailList;
 	}
 }

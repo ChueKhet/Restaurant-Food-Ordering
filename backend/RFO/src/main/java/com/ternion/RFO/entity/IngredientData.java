@@ -1,97 +1,93 @@
 package com.ternion.RFO.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class UserData implements java.io.Serializable {
+public class IngredientData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@ManyToMany(mappedBy = "ingredientList")
+	List<MenuData> menuDataList;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
-	@Column(length = 30,nullable = false)
-	@NotBlank(message = "Required")
-	private String name;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String dob;
+	private String code;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String nrc;
+	private String description;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String phone;
+	private int userid;
 	
-	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private String address;
-
 	@Column(nullable = true)
 	private String createdAt;
-
+	
 	@Column(nullable = true)
 	private String modifiedAt;
 	
 	@Column(nullable = false)
 	private int deleteStatus;
 	
+	private int status = 0;
+
+//	@JsonIgnore
+	@JsonBackReference
+	public List<MenuData> getMenuDataList() {
+		return menuDataList;
+	}
+
+	public void setMenuDataList(List<MenuData> menuDataList) {
+		this.menuDataList = menuDataList;
+	}
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getName() {
-		return name;
+
+	public String getCode() {
+		return code;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setCode(String code) {
+		this.code = code;
 	}
-	
-	public String getDob() {
-		return dob;
+
+	public String getDescription() {
+		return description;
 	}
-	
-	public void setDob(String dob) {
-		this.dob = dob;
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	
-	public String getNrc() {
-		return nrc;
+
+	public int getUserid() {
+		return userid;
 	}
-	
-	public void setNrc(String nrc) {
-		this.nrc = nrc;
-	}
-	
-	public String getPhone() {
-		return phone;
-	}
-	
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	
-	public String getAddress() {
-		return address;
-	}
-	
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 	public String getCreatedAt() {
@@ -118,9 +114,13 @@ public class UserData implements java.io.Serializable {
 		this.deleteStatus = deleteStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "UserData [id=" + id + ", name=" + name + ", dob=" + dob + ", nrc=" + nrc + ", phone=" + phone
-				+ ", address=" + address + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
+	public int getStatus() {
+		return status;
 	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	
 }

@@ -7,4 +7,3 @@ import com.ternion.RFO.entity.MenuData;
 public interface MenuRepo extends JpaRepository<MenuData, Integer> {
 	
 }
-

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ import com.ternion.RFO.entity.UserData;
 import com.ternion.RFO.service.UserService;
 
 @RestController
-@RequestMapping("/api/register")
+@RequestMapping("/api/user")
 public class UserController {
 	@Autowired
 	UserService userService;
@@ -25,17 +26,18 @@ public class UserController {
 //	@Autowired
 //	PasswordEncoder pwEncoder;
 	
-	@PostMapping("/addUser")
+	@PostMapping("/add")
 	public ResponseEntity<?> register(@Valid @RequestBody UserData user) {
 		UserData userdata = userService.createUser(user);
-		if (user == null) {
-			return ResponseEntity.badRequest()
-					.body("User already exists!");
+		
+		if (userdata == null) {
+			return ResponseEntity.badRequest().body("User already exists!");
 		}
+		
 		return ResponseEntity.ok().body(userdata);
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/all")
 	public List<UserData> listUser() {
 		return userService.getAll();
 	}
@@ -49,6 +51,18 @@ public class UserController {
 		}
 		
 		return ResponseEntity.ok().build();
+	}
+	
+	@PutMapping("/update")
+	public ResponseEntity<UserData> updateProfile(@Valid @RequestBody UserData user) {
+		if (user.getId() <= 0) {
+			return ResponseEntity.badRequest().build();
+		}
+		UserData updatedUser = userService.update(user.getId(), user);
+		if (updatedUser == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok().body(updatedUser);
 	}
 
 

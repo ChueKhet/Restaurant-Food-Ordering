@@ -17,12 +17,13 @@ public class MenuController {
 	@Autowired
 	MenuService menuService;
 	
-	@GetMapping("/list")
-	public List<MenuData> listMenu() {
-		return menuService.getAll();
-		
+	@GetMapping("/ingredient/all")
+	public List<MenuData> allMenuWithIngredient() {
+		return menuService.allMenuWithIngredient();
 	}
 	
-	
-
+	@GetMapping("/all")
+	public List<MenuData> listMenu() {
+		return menuService.getAll();
+	}
 }
