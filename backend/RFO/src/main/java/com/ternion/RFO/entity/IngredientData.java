@@ -2,23 +2,35 @@ package com.ternion.RFO.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+//import com.fasterxml.jackson.annotation.JsonBackReference;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class IngredientData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToMany(mappedBy = "ingredientList")
+	@ManyToMany(cascade = {CascadeType.MERGE})
+	@JoinTable(
+		name = "menu_ingredient",
+		joinColumns = @JoinColumn(name = "ingredient_id"),
+		inverseJoinColumns = @JoinColumn(name = "menu_id"),
+		uniqueConstraints={@UniqueConstraint(columnNames={"ingredient_id", "menu_id"})}
+	)
+	@JsonIgnoreProperties("ingredientList")
 	List<MenuData> menuDataList;
 	
 	@Id
@@ -49,7 +61,7 @@ public class IngredientData implements java.io.Serializable {
 	private int status = 0;
 
 //	@JsonIgnore
-	@JsonBackReference
+//	@JsonBackReference
 	public List<MenuData> getMenuDataList() {
 		return menuDataList;
 	}

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ternion.RFO.entity.IngredientData;
@@ -53,6 +52,7 @@ public class MenuServiceImpl implements MenuService {
 			return null;
 		}
 
+//		findMenu.setCategory_id(menu.getCategory_id());
 		findMenu.setPrice(menu.getPrice());
 		findMenu.setDescription(menu.getDescription());
 		findMenu.setModified_at(menu.getModified_at());
