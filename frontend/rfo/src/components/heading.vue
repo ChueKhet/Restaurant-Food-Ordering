@@ -10,6 +10,7 @@
         <v-btn text @click = "goToScreen('/about')" >About</v-btn>  -->
 
         <v-btn text @click = "utl.goToScreen('/menu')">Menu</v-btn>
+        <v-btn text @click = "utl.goToScreen('/ingredients')">Ingredient</v-btn>
         <v-btn text @click = "utl.goToScreen('/admin_user_list')">UserList</v-btn>
         <v-btn text @click = "utl.goToScreen('/register')">Register</v-btn>
         <v-btn text @click = "onClickLogInAndOut">{{isLogIn ? "LogOut" : "LogIn"}}</v-btn> 

@@ -1,5 +1,6 @@
 package com.ternion.RFO.entity;
 
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotBlank;
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 public class IngredientData implements java.io.Serializable {
@@ -86,6 +88,7 @@ public class IngredientData implements java.io.Serializable {
 		this.code = code;
 	}
 
+
 	public String getDescription() {
 		return description;
 	}
@@ -133,6 +136,5 @@ public class IngredientData implements java.io.Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
 	
 }

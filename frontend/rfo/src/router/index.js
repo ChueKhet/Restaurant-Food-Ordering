@@ -4,7 +4,9 @@ import homeView from '../views/HomeView.vue'
 import login from '../views/login.vue'
 import register from '../views/register.vue'
 import admin_user_list from '../views/admin_user_list.vue'
+
 import menu from '../views/Menu.vue'
+import Ingredients from '../views/Ingredients.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +36,13 @@ const routes = [
     name: 'menu',
     component: menu
   },
+  {
+    path: '/ingredients',
+    name: 'ingredients',
+    component: Ingredients
+  }
+  
+
 ]
 
 const router = new VueRouter({
