@@ -1,9 +1,12 @@
 package com.ternion.RFO.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,4 +61,15 @@ public class SaleController {
 		
 		return ResponseEntity.ok().body(headerData);
 	}
+	
+	@GetMapping("kitchen/order/all")
+	List<SaleHeaderData> getSlipAndTableNo() {
+		return saleService.findSlipAndTableNo();
+	}
+	
+	@GetMapping("/kitchen/order/detail/{header_id}")
+	public List<String> getNrcTownship(@PathVariable int header_id) {
+		return saleService.getOrderDetailbyHeaderId(header_id);
+	}
+
 }

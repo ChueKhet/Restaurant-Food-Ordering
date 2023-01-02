@@ -1,5 +1,7 @@
 package com.ternion.RFO.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +32,16 @@ public class SaleServiceImpl implements SaleService{
 	public int getTodayMaxSlip() {
 		return saleHeaderRepo.getTodayMaxSlip();
 	}
+
+	@Override
+	public List<SaleHeaderData> findSlipAndTableNo() {
+		return saleHeaderRepo.findSlipAndTableNo();
+	}
+
+	@Override
+	public List<String> getOrderDetailbyHeaderId(int header_id) {
+		return saleDetailRepo.findByHeaderId(header_id);
+	}
+
+	
 }
