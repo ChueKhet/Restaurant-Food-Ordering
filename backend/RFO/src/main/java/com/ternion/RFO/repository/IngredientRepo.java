@@ -1,7 +1,6 @@
 package com.ternion.RFO.repository;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,3 +12,5 @@ public interface IngredientRepo extends JpaRepository<IngredientData, Integer> {
 			+ "where menu_id = ?", nativeQuery = true)
 	public List<IngredientData> getAllByMenuId(int id);
 }
+
+

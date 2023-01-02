@@ -5,6 +5,7 @@ import login from '../views/logIn.vue'
 import register from '../views/register.vue'
 import admin_user_list from '../views/admin_user_list.vue'
 import menu from '../views/Menu.vue'
+import Ingredients from '../views/Ingredients.vue'
 import kitchen from '../views/Kitchen.vue'
 
 Vue.use(VueRouter)
@@ -40,6 +41,13 @@ const routes = [
     name: 'kitchen',
     component: kitchen
   },
+  {
+    path: '/ingredients',
+    name: 'ingredients',
+    component: Ingredients
+  }
+  
+
 ]
 
 const router = new VueRouter({

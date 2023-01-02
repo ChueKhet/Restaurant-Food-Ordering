@@ -134,5 +134,4 @@ public class IngredientData implements java.io.Serializable {
 		this.status = status;
 	}
 	
-	
 }

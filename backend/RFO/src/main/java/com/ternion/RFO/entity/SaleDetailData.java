@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class SaleDetailData implements java.io.Serializable {
 
@@ -137,6 +139,7 @@ public class SaleDetailData implements java.io.Serializable {
 		this.deleteStatus = deleteStatus;
 	}
 
+	@JsonBackReference
 	public SaleHeaderData getHeaderData() {
 		return headerData;
 	}
