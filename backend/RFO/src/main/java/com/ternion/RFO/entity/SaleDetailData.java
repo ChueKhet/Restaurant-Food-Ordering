@@ -1,5 +1,7 @@
 package com.ternion.RFO.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,9 @@ import javax.validation.constraints.NotBlank;
 public class SaleDetailData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	public SaleDetailData() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -52,7 +57,8 @@ public class SaleDetailData implements java.io.Serializable {
 	
 	@Column(nullable = false)
 	private int deleteStatus;
-	
+
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name="headerId", nullable = true)
 	private SaleHeaderData headerData;

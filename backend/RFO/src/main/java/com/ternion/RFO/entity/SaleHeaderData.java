@@ -1,13 +1,10 @@
 package com.ternion.RFO.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -32,7 +29,7 @@ public class SaleHeaderData implements java.io.Serializable  {
 	private int slipNo;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+//	@NotBlank(message = "Required")
 	private int userId;
 	
 	@Column(nullable = false)
@@ -49,9 +46,19 @@ public class SaleHeaderData implements java.io.Serializable  {
 	
 	@Column(nullable = false)
 	private int deleteStatus;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "headerData")
 	private List<SaleDetailData> detailList;
+
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "payment_id", referencedColumnName = "id")
+	private PaymentData payment;
+
+	public SaleHeaderData() {
+	}
+
 
 	public int getId() {
 		return id;
@@ -131,5 +138,13 @@ public class SaleHeaderData implements java.io.Serializable  {
 
 	public void setDetailList(List<SaleDetailData> detailList) {
 		this.detailList = detailList;
+	}
+
+	public PaymentData getPayment() {
+		return payment;
+	}
+
+	public void setPayment(PaymentData payment) {
+		this.payment = payment;
 	}
 }

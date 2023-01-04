@@ -23,7 +23,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public AccountData checkLoginUser(String username, String password) {
-		AccountData acc = accRepo.findByUserName(username);
+		AccountData acc = accRepo.findByUsername(username);
 		
 		if (acc == null) {
 			return null;

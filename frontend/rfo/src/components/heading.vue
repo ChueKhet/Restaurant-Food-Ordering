@@ -8,10 +8,12 @@
         <v-spacer></v-spacer>
         <!-- <v-btn text v-show = "!isRegister" @click = "goToScreen('/register')" >Register</v-btn>
         <v-btn text @click = "goToScreen('/about')" >About</v-btn>  -->
-
+       
         <v-btn text @click = "utl.goToScreen('/menu')">Menu</v-btn>
         <v-btn text @click = "utl.goToScreen('/admin_user_list')">UserList</v-btn>
+        <v-btn text @click = "utl.goToScreen('/sale_headers')">Sales</v-btn>
         <v-btn text @click = "utl.goToScreen('/register')">Register</v-btn>
+        <v-btn text @click = "utl.goToScreen('/profile')">Profile</v-btn>
         <v-btn text @click = "onClickLogInAndOut">{{isLogIn ? "LogOut" : "LogIn"}}</v-btn> 
     </v-app-bar>
 </template>
@@ -25,6 +27,7 @@ export default {
 
   data: () => ({
     isLogIn: false,
+    loginUser:{},
     screenPath: "",
     utl: utils
   }),
@@ -42,6 +45,18 @@ export default {
         deep: true,
       }
     );
+    this.loginUser = this.$store.state.loginUser;
+      this.$store.watch(
+        () => {
+          return this.$store.state.loginUser;
+        },
+        (newVal, oldVal) => {
+          this.loginUser = newVal;
+        },
+        {
+          deep: true,
+        }
+      );
   
   },
 

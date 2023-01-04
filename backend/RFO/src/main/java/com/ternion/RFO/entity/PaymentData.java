@@ -1,16 +1,17 @@
 package com.ternion.RFO.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 public class PaymentData implements java.io.Serializable  {
 	
 	private static final long serialVersionUID = 1L;
+
+	public PaymentData() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +32,10 @@ public class PaymentData implements java.io.Serializable  {
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
 	private int changeAmount;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "payment")
+	private SaleHeaderData saleHeaders;
 	
 	@Column(nullable = true)
 	@NotBlank(message = "Required")

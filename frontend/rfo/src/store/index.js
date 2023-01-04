@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogIn: false,
+    loginUser:{},
     userInfo: {},
     orderData: {}
   },
@@ -13,6 +14,9 @@ export default new Vuex.Store({
   getters: {
     isLogIn: (state) => {
       return isLogIn;
+    },
+    loginUser:(state)=>{
+      return loginUser
     },
 
     userInfo: (state) => {
@@ -27,6 +31,9 @@ export default new Vuex.Store({
   mutations: {
     setIsLogIn(state, isLogIn){
       state.isLogIn = isLogIn;
+    },
+    setloginUser(state,loginUser){
+      state.loginUser=loginUser;
     },
 
     setUserInfo(state, userInfo){

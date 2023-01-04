@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import homeView from '../views/HomeView.vue'
-import login from '../views/login.vue'
+import login from '../views/logIn.vue'
 import register from '../views/register.vue'
 import admin_user_list from '../views/admin_user_list.vue'
 import menu from '../views/Menu.vue'
+import Profile from '../views/Profile.vue'
+import ChangePwd from '../views/ChangePwd.vue'
+import SaleHeaders from '../views/SaleHeaders.vue';
+import SaleDetail from '../views/SaleDetail.vue';
 
 Vue.use(VueRouter)
 
@@ -34,6 +38,26 @@ const routes = [
     name: 'menu',
     component: menu
   },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile
+  },
+  {
+    path: '/changepwd',
+    name: 'changepwd',
+    component: ChangePwd
+  },
+  {
+    path:"/sale_headers",
+    name:'sale_headers',
+    component:SaleHeaders
+  },
+  {
+    path:"/sale_detail/:headerId",
+    name:'sale_detail',
+    component:SaleDetail
+  }
 ]
 
 const router = new VueRouter({

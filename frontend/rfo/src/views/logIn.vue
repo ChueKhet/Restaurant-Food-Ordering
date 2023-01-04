@@ -61,7 +61,8 @@ export default {
             const data = await resp.json();
             this.loading = false;
             if (data) {
-                this.$store.commit("setRegister", data);
+                this.$store.commit("setIsLogIn", true);
+                this.$store.commit("setUserInfo", data);
                 utils.goToScreen("/");                     
             }
         }

@@ -7,6 +7,5 @@ import com.ternion.RFO.entity.AccountData;
 import com.ternion.RFO.entity.UserData;
 
 public interface AccountRepo extends JpaRepository<AccountData, Integer> {
-	@Query(value = "select * from user_data where username = ?", nativeQuery = true)
-	public AccountData findByUserName(String name);
+	public AccountData findByUsername(String username);
 }

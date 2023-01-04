@@ -344,14 +344,15 @@ export default {
         );
 
         this.saveHeaderData.totalAmount = totalAmount;
-
+        this.saveHeaderData.userId=+this.$store.state.userInfo?.id;
+        console.log('data',this.saveHeaderData);
         const resp = await utils.http.post("/sale/order/confirm", this.saveHeaderData);
         this.loading = false;
 
         if(resp.status == 200){
-          // utils.goToScreen("/sales");
           this.clear();
           console.log("SUCCESS!!!");
+          // utils.goToScreen("/sales");
         } else {
           console.log("FAIL!!!");
         }
