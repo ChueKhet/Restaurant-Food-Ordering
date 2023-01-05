@@ -7,12 +7,28 @@ export default new Vuex.Store({
   state: {
     isLogIn: false,
     userInfo: {},
-    orderData: {}
+    orderData: {},
+    loginUser: null,
   },
 
   getters: {
+    loginUser: (state) => {
+      let loginUser = sessionStorage.getItem("loginUser");
+      if (loginUser != null) {
+        state.loginUser = JSON.parse(loginUser);
+        return JSON.parse(loginUser);
+      } else {
+        return state.loginUser;
+      }
+    },
     isLogIn: (state) => {
-      return isLogIn;
+      let isLogIn = sessionStorage.getItem("isLogin");
+      if (isLogIn != null) {
+        state.isLogIn = isLogIn;
+        return isLogIn;
+      } else {
+        return state.isLogIn;
+      }
     },
 
     userInfo: (state) => {
@@ -25,8 +41,18 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    setIsLogIn(state, isLogIn){
-      state.isLogIn = isLogIn;
+    setLoginUser(state, user) {
+      sessionStorage.setItem("loginUser", JSON.stringify(user));
+      sessionStorage.setItem("isLogin", true);
+      state.loginUser = user;
+      state.isLogIn = true;
+    },
+
+    logout(state) {
+      sessionStorage.removeItem("loginUser");
+      sessionStorage.removeItem("isLogin");
+      state.loginUser = null;
+      state.isLogIn = false;
     },
 
     setUserInfo(state, userInfo){
@@ -35,6 +61,10 @@ export default new Vuex.Store({
 
     setOrderInfo(state, orderData){
       state.orderData = orderData;
+    },
+
+    setRegister(state, data){
+      state.loginUser = data;
     },
   },
 

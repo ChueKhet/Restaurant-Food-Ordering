@@ -44,20 +44,21 @@ public class SaleDetailData implements java.io.Serializable {
 	@NotBlank(message = "Required")
 	private String remark;
 	
-	@Column(nullable = true)
-//	@NotBlank(message = "Required")
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String createdAt;
 	
-	@Column(nullable = true)
-//	@NotBlank(message = "Required")
-	private String modifiedAt;
-	
 	@Column(nullable = false)
-	private int deleteStatus;
+	@NotBlank(message = "Required")
+	private String modifiedAt;
 	
 	@ManyToOne
     @JoinColumn(name="headerId", nullable = true)
 	private SaleHeaderData headerData;
+	
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
+	private String orderStatus;
 
 	public int getId() {
 		return id;
@@ -131,12 +132,12 @@ public class SaleDetailData implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public int getDeleteStatus() {
-		return deleteStatus;
+	public String getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	@JsonBackReference

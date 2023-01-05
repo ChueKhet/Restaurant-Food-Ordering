@@ -9,10 +9,10 @@
         <!-- <v-btn text v-show = "!isRegister" @click = "goToScreen('/register')" >Register</v-btn>
         <v-btn text @click = "goToScreen('/about')" >About</v-btn>  -->
 
-        <v-btn text @click = "utl.goToScreen('/menu')">Menu</v-btn>
-        <v-btn text @click = "utl.goToScreen('/ingredients')">Ingredient</v-btn>
-        <v-btn text @click = "utl.goToScreen('/admin_user_list')">UserList</v-btn>
-        <v-btn text @click = "utl.goToScreen('/register')">Register</v-btn>
+        <v-btn text @click = "utl.goToScreen('/menu')" v-show="loginUser && loginUser.role == 1">Menu</v-btn>
+        <v-btn text @click = "utl.goToScreen('/ingredients')" v-show="loginUser && loginUser.role == 1">Ingredient</v-btn>
+        <v-btn text @click = "utl.goToScreen('/admin_user_list')" v-show="loginUser && loginUser.role == 1">UserList</v-btn>
+        <v-btn text @click = "utl.goToScreen('/register')" v-show="loginUser && loginUser.role == 1">Register</v-btn>
         <v-btn text @click = "onClickLogInAndOut">{{isLogIn ? "LogOut" : "LogIn"}}</v-btn> 
     </v-app-bar>
 </template>
@@ -27,16 +27,30 @@ export default {
   data: () => ({
     isLogIn: false,
     screenPath: "",
+    loginUser: {},
     utl: utils
   }),
 
   created(){
+    this.loginUser = this.$store.state.loginUser;
+    this.$store.watch(
+      () => {
+        return this.$store.state.loginUser;
+      },
+      (newVal, oldVal) => {
+        this.loginUser = newVal;
+      },
+      {
+        deep: true,
+      }
+    );
+
     this.isLogIn = this.$store.state.isLogIn;
     this.$store.watch(
       () => {
         return this.$store.state.isLogIn;
       },
-      (newVal, oldVal) =>{
+      (newVal, oldVal) => {
         this.isLogIn = newVal;
       },
       {
@@ -49,13 +63,15 @@ export default {
   methods: {
     onClickLogInAndOut(){
       if(this.isLogIn){
-        this.$store.commit("setIsLogIn",false);
-        this.$store.commit("setUserInfo",{}); 
+        this.$store.commit("logout");
+
         if(this.$router.currentRoute.path !="/"){
-          this.isLogIn = false;
+          // this.isLogIn = false;
           utils.goToScreen("/");
         }
       } else{
+        // this.$store.commit("setRegister", data);
+
         utils.goToScreen("/login");
       }
     }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ternion.RFO.entity.AccountData;
 import com.ternion.RFO.repository.AccountRepo;
 import com.ternion.RFO.repository.MenuRepo;
+import com.ternion.RFO.utility.ServerUtil;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -23,7 +24,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public AccountData checkLoginUser(String username, String password) {
-		AccountData acc = accRepo.findByUserName(username);
+		AccountData acc = accRepo.findByUsername(username);
 		
 		if (acc == null) {
 			return null;
@@ -44,13 +45,18 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public AccountData update(int id, AccountData acc) {
+		String curDate = ServerUtil.getCurrentDate();
+		
 		AccountData toUpdateAcc = this.findById(id);
+		
 		if (toUpdateAcc == null) {
 			return null;
 		}
+		
 		toUpdateAcc.setUsername(acc.getUsername());
 		toUpdateAcc.setPassword(acc.getPassword());
-		toUpdateAcc.setModifiedAt(LocalDateTime.now());
+		toUpdateAcc.setModifiedAt(curDate);
+		
 		return accRepo.save(toUpdateAcc);
 	}
 
@@ -58,6 +64,11 @@ public class AccountServiceImpl implements AccountService {
 	public AccountData findById(int id) {
 		return accRepo.findById(id).orElse(null); 
 
+	}
+
+	@Override
+	public AccountData createAcc(AccountData acc) {
+		return accRepo.save(acc);
 	}
 
 }

@@ -39,10 +39,7 @@ public class CategoryData implements java.io.Serializable {
 	private String created_at;
 	
 	@Column(nullable = true)
-	private String modified_at;
-	
-	@Column(nullable = false)
-	private int deleteStatus;
+	private String modified_at;	
 	
 	@OneToMany(mappedBy = "category")
 	List<MenuData> menuList;
@@ -93,14 +90,6 @@ public class CategoryData implements java.io.Serializable {
 
 	public void setModified_at(String modified_at) {
 		this.modified_at = modified_at;
-	}
-
-	public int getDeleteStatus() {
-		return deleteStatus;
-	}
-
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
 	}
 
 //	@JsonBackReference

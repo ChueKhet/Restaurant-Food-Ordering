@@ -43,9 +43,6 @@ public class PaymentData implements java.io.Serializable  {
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
 	private int userId;
-	
-	@Column(nullable = false)
-	private int deleteStatus;
 
 	public int getId() {
 		return id;
@@ -109,19 +106,6 @@ public class PaymentData implements java.io.Serializable  {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-
-	public int getDeleteStatus() {
-		return deleteStatus;
-	}
-
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
-	}
-	
-	
-	
-	
-		
+	}		
 
 }

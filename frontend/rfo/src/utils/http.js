@@ -23,10 +23,11 @@ async function postFormData(path, body) {
   return resp;
 }
 
-async function postMedia(path, file, fileType) {
+async function postMedia(path, file, fileType, folderName) {
   let formData = new FormData();
   formData.append("file", file);
   formData.append("fileType", fileType);
+  formData.append("folderName", folderName);
   const resp = await fetch(constant.localDomain + path, {
     method: "POST",
     body: formData,

@@ -41,16 +41,13 @@ public class SaleHeaderData implements java.io.Serializable  {
 	@NotBlank(message = "Required")
 	private int orderStatus;
 	
-	@Column(nullable = true)
-//	@NotBlank(message = "Required")
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String createdAt;
 	
-	@Column(nullable = true)
-//	@NotBlank(message = "Required")
-	private String modifiedAt;
-	
 	@Column(nullable = false)
-	private int deleteStatus;
+	@NotBlank(message = "Required")
+	private String modifiedAt;
 	
 	@OneToMany(mappedBy = "headerData")
 	private List<SaleDetailData> detailList;
@@ -117,14 +114,6 @@ public class SaleHeaderData implements java.io.Serializable  {
 
 	public void setModifiedAt(String modifiedAt) {
 		this.modifiedAt = modifiedAt;
-	}
-
-	public int getDeleteStatus() {
-		return deleteStatus;
-	}
-
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
 	}
 
 	@JsonManagedReference

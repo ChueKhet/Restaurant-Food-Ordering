@@ -1,19 +1,21 @@
 <template>
   <div class="ma-5">
     <v-card>
-      <v-card-title>
-        <span class="mr-5"
-          >Create Menu
-          <v-icon @click="onClickCreateBtn()">mdi-plus-box</v-icon></span
-        >
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-        ></v-text-field>
+      <v-card-title class="d-flex justify-space-between">
+        <span class="mr-5">
+          Create Menu
+          <v-icon @click="onClickCreateBtn()">mdi-plus-box</v-icon>
+        </span>
+
+        <span style="width: 250px;">
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </span>
       </v-card-title>
 
       <!--  Table -->
@@ -48,22 +50,41 @@
         <v-card-title>New Menu</v-card-title>
         <v-card-text>
           <v-form ref="createMenuForm" v-model="createMenuForm">
-            <!-- <v-text-field
-              v-model="code"
-              label="Code"
-              disabled
-              required
-              :rules="[(v) => !!v || 'Required']"
-              outlined
-            ></v-text-field> -->
 
-            <v-text-field
-              v-model="description"
-              label="Menu"
-              required
-              :rules="[(v) => !!v || 'Required']"
-              outlined
-            ></v-text-field>
+            <div class="d-flex justify-center mt-5">
+              <v-img
+                v-if="imagePreviewPath != null && imagePreviewPath != ''"
+                :src="imagePreviewPath"
+                width="200"
+                height="215"
+                contain
+              >
+              </v-img>
+              <v-img
+                v-if="imagePreviewPath == null || imagePreviewPath == ''"
+                src="../assets/plus_sign for upload.png"
+                width="200"
+                height="215"
+                contain
+              >
+              </v-img>
+            </div>
+
+            <v-file-input
+              v-model="toUpdateMenu.image"
+              label="Add Photo"
+              show-size
+              prepend-icon="mdi-camera"
+              placeholder="Choose Photo"
+              accept="image/png, image/jpeg"
+              :rules="[
+              (v) =>
+                  !v ||
+                  v.size < 10000000 ||
+                  'Image size should be less than 10 MB!',
+              ]"
+              @change="onChangeImage"
+            ></v-file-input>
 
             <v-select
               v-model="category_id"
@@ -73,6 +94,22 @@
               required
               :rules="[(v) => !!v || 'Required']"
             ></v-select>
+     
+            <v-text-field
+              v-model="code"
+              label="Code"
+              required
+              :rules="[(v) => !!v || 'Required']"
+              outlined
+            ></v-text-field>
+
+            <v-text-field
+              v-model="description"
+              label="Menu"
+              required
+              :rules="[(v) => !!v || 'Required']"
+              outlined
+            ></v-text-field>
 
             <v-text-field
               v-model="price"
@@ -118,14 +155,59 @@
         <v-card-title>Edit Menu</v-card-title>
         <v-card-text>
           <v-form ref="editMenuForm" v-model="editMenuForm">
-            <!-- <v-text-field
+
+            <div class="d-flex justify-center mt-5">
+              <v-img
+                v-if="imagePreviewPath != null && imagePreviewPath != ''"
+                :src="imagePreviewPath"
+                width="200"
+                height="215"
+                contain
+              >
+              </v-img>
+              <v-img
+                v-if="imagePreviewPath == null || imagePreviewPath == ''"
+                src="../assets/plus_sign for upload.png"
+                width="200"
+                height="215"
+                contain
+              >
+              </v-img>
+            </div>
+
+            <v-file-input
+              v-model="toUpdateMenu.image"
+              label="Add Photo"
+              show-size
+              prepend-icon="mdi-camera"
+              placeholder="Choose Photo"
+              accept="image/png, image/jpeg"
+              :rules="[
+              (v) =>
+                  !v ||
+                  v.size < 10000000 ||
+                  'Image size should be less than 10 MB!',
+              ]"
+              @change="onChangeImage"
+            ></v-file-input>
+
+            <v-select
+              :items="categoryLists"
+              v-model="category_id"
+              label="Choose Category"
+              outlined
+              required
+              :rules="[(v) => !!v || 'Required']"
+            ></v-select>
+
+            <v-text-field
               v-model="code"
               label="Code"
-              disabled
+              :readonly="true"
               required
               :rules="[(v) => !!v || 'Required']"
               outlined
-            ></v-text-field> -->
+            ></v-text-field>
 
             <v-text-field
               v-model="description"
@@ -133,15 +215,7 @@
               required
               :rules="[(v) => !!v || 'Required']"
               outlined
-            ></v-text-field>
-
-            <v-select
-              :items="categoryLists"
-              label="Choose Category"
-              outlined
-              required
-              :rules="[(v) => !!v || 'Required']"
-            ></v-select>
+            ></v-text-field>      
 
             <v-text-field
               v-model="price"
@@ -214,19 +288,20 @@
 
 <script>
 import http from "../utils/http";
+import utils from "../utils/utils.js";
+
 export default {
   data() {
     return {
       id: "",
       description: "",
-      code: Math.floor(1000 + Math.random() * 9000),
+      code: "",//Math.floor(1000 + Math.random() * 9000)
       category_id: "",
       price: "",
       created_at: new Date().toISOString().substr(0, 10),
       modified_at: new Date().toISOString().substr(0, 10),
-      user_id: "",
+      user_id: this.$store.state.loginUser.name,
       search: "",
-
       createMenuForm: "",
       editMenuForm: "",
 
@@ -243,6 +318,12 @@ export default {
       ],
       menuRecords: [],
       categoryLists: [1, 2],
+
+      toUpdateMenu: {
+        image: null,
+        imagePath: "",
+      },
+      imagePreviewPath: null,
 
       createDialog: false,
       createMenuForm: false,
@@ -262,7 +343,7 @@ export default {
   },
 
   // Run once when screen is loaded
-  async created() {
+  async created(){
     await this.fetchMenuLists();
   },
 
@@ -270,10 +351,13 @@ export default {
     initialState() {
       this.id = "";
       this.description = "";
-      this.code = Math.floor(1000 + Math.random() * 9000);
+      this.code = "";//Math.floor(1000 + Math.random() * 9000)
       this.category_id = "";
       this.price = "";
       this.user_id = "";
+      this.toUpdateMenu.image = null;
+      this.toUpdateMenu.imagePath = "";
+      this.imagePreviewPath = null;
     },
 
     async fetchMenuLists() {
@@ -291,12 +375,28 @@ export default {
 
     onClickCreateBtn() {
       this.createDialog = true;
-      console.log(this.created_at);
+      this.initialState();
+      // console.log(this.created_at);
     },
 
     async createMenu() {
       if (this.$refs.createMenuForm.validate()) {
+        let respImageData = null;
+        const respImage = await http.postMedia(
+          "/media/file/create",
+          this.toUpdateMenu.image,
+          this.toUpdateMenu.image.type,
+          "Menu"
+        );
+
+        if (respImage && respImage.status === 200) {
+          respImageData = await respImage.text();
+        } else {
+          this.errorAlert = true;
+        }
+
         let saveData = {
+          imagePath: respImageData,
           code: this.code,
           description: this.description,
           price: this.price,
@@ -320,9 +420,16 @@ export default {
     },
 
     onClickEditBtn(item) {
-      console.log(item.category_id);
+      this.toUpdateMenu = Object.assign({}, item);
+      this.imagePreviewPath = utils.constant.imagePath + item.imagePath;
+      
+      this.toUpdateMenu.image = this.fileCreate(item);
+
       this.id = item.id;
-      this.category_id = item.category_id;
+      // this.toUpdateMenu.image = item.imagePath;
+      // this.imagePreviewPath = this.toUpdateMenu.imagePath + item.imagePath;
+      this.code = item.code;
+      this.category_id = item.catId;
       this.price = item.price;
       this.description = item.description;
       this.modified_at;
@@ -330,17 +437,46 @@ export default {
       this.editDialog = true;
     },
 
+    fileCreate(item){
+      const myArray1 = item.imagePath.split("/");
+      const myArray2 = myArray1[myArray1.length - 1].split(".");
+
+      return new File(
+        [myArray2[0].toString()], 
+        myArray1[myArray1.length - 1].toString(), 
+        {type: "image/" + myArray2[1].toString()}
+      );
+    },
+
     async editMenu() {
       if (this.$refs.editMenuForm.validate()) {
-        console.log(this.category_id);
+        let respImageData = null;
+        const respImage = await http.postMedia(
+          "/media/file/create",
+          this.toUpdateMenu.image,
+          this.toUpdateMenu.image.type,
+          "Menu"
+        );
+
+        if (respImage && respImage.status === 200) {
+          respImageData = await respImage.text();
+        } else {
+          this.errorAlert = true;
+        }
+
         const resp = await http.put("/menu/update", {
           id: this.id,
-          category_id: this.category_id,
+          imagePath: respImageData,
+          code: this.code,
+          description: this.description,
           price: this.price,
-          description: this.description ? this.description : null,
-          modified_at: this.modified_at,
+          created_at: this.created_at,
           user_id: this.user_id,
+          category: {
+            id: this.category_id
+          }
         });
+
         if (resp && resp.status === 200) {
           this.editSuccessSnackBar = true;
           await this.fetchMenuLists();
@@ -363,6 +499,10 @@ export default {
         await this.fetchMenuLists();
         this.deleteDialog = false;
       }
+    },
+
+    onChangeImage(image) {
+      this.imagePreviewPath = URL.createObjectURL(image);
     },
   },
 };

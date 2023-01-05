@@ -62,17 +62,14 @@ public class MenuData implements java.io.Serializable {
 	private String modified_at;
 	
 	@Column(nullable = false)
-	private int deleteStatus;
-	
-	@Column(nullable = false)
 	@NotBlank(message = "Required")
 	private double price;
-	
-	
+		
 	private int catId;
 	
-	
-	
+	@Column(length = 200)
+	@NotBlank(message = "Required")
+	private String imagePath;
 	
 	public List<IngredientData> getIngredientList() {
 		return ingredientList;
@@ -140,14 +137,6 @@ public class MenuData implements java.io.Serializable {
 		this.modified_at = modified_at;
 	}
 
-	public int getDeleteStatus() {
-		return deleteStatus;
-	}
-
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
-	}
-
 	public double getPrice() {
 		return price;
 	}
@@ -163,4 +152,14 @@ public class MenuData implements java.io.Serializable {
 	public void setCatId(int catId) {
 		this.catId = catId;
 	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+	
+	
 }
