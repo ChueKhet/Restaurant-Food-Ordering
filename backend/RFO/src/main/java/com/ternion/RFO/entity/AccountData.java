@@ -1,13 +1,12 @@
 package com.ternion.RFO.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class AccountData implements java.io.Serializable {
@@ -24,16 +23,19 @@ public class AccountData implements java.io.Serializable {
 	
 	@Column(length = 100, nullable = false)
 	@NotBlank(message = "Required")
-	private String password;
+	private String password;	
 	
 	@Column(nullable = false)
-	private int deleteStatus;
+	@NotBlank(message = "Required")
+	private String createdAt;
 	
-	@Column(nullable = true)
-	private LocalDateTime createdAt;
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
+	private String modifiedAt;
 	
-	@Column(nullable = true)
-	private LocalDateTime modifiedAt;
+	@Column(nullable = false)
+	@NotNull(message = "Required")
+	private int role;
 	
 	public int getId() {
 		return id;
@@ -59,27 +61,29 @@ public class AccountData implements java.io.Serializable {
 		this.password = password;
 	}
 	
-	public int getDeleteStatus() {
-		return deleteStatus;
-	}
-	
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
-	}
-
-	public LocalDateTime getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getModifiedAt() {
+	public String getModifiedAt() {
 		return modifiedAt;
 	}
 
-	public void setModifiedAt(LocalDateTime modifiedAt) {
+	public void setModifiedAt(String modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+	
+	
 }

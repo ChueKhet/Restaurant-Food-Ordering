@@ -9,4 +9,5 @@ public interface AccountService {
 	
 	public AccountData findById(int id);
 	
+	public AccountData createAcc(AccountData acc);
 }

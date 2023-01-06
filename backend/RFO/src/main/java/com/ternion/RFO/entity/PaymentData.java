@@ -1,36 +1,48 @@
 package com.ternion.RFO.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+//import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class PaymentData implements java.io.Serializable  {
 	
 	private static final long serialVersionUID = 1L;
 
+	public PaymentData() {
+	}
+	
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "header_id", referencedColumnName = "id")
+	private SaleHeaderData saleHeaders;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int headerId;
+//	@Column(nullable = false)
+//	@NotBlank(message = "Required")
+//	private int headerId;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int totalAmout;
+	@NotNull(message = "Required")
+	private double totalAmount;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int paidAmount;
+	@NotNull(message = "Required")
+	private double paidAmount;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int changeAmount;
+	@NotNull(message = "Required")
+	private double changeAmount;
+
+//	@JsonIgnore
+//	@OneToOne(mappedBy = "payment")
+//	private SaleHeaderData saleHeaders;
 	
 	@Column(nullable = true)
 	@NotBlank(message = "Required")
@@ -41,11 +53,8 @@ public class PaymentData implements java.io.Serializable  {
 	private String modifiedAt;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int userId;
-	
-	@Column(nullable = false)
-	private int deleteStatus;
 
 	public int getId() {
 		return id;
@@ -55,35 +64,35 @@ public class PaymentData implements java.io.Serializable  {
 		this.id = id;
 	}
 
-	public int getHeaderId() {
-		return headerId;
+//	public int getHeaderId() {
+//		return headerId;
+//	}
+//
+//	public void setHeaderId(int headerId) {
+//		this.headerId = headerId;
+//	}
+
+	public double getTotalAmount() {
+		return totalAmount;
 	}
 
-	public void setHeaderId(int headerId) {
-		this.headerId = headerId;
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
-	public int getTotalAmout() {
-		return totalAmout;
-	}
-
-	public void setTotalAmout(int totalAmout) {
-		this.totalAmout = totalAmout;
-	}
-
-	public int getPaidAmount() {
+	public double getPaidAmount() {
 		return paidAmount;
 	}
 
-	public void setPaidAmount(int paidAmount) {
+	public void setPaidAmount(double paidAmount) {
 		this.paidAmount = paidAmount;
 	}
 
-	public int getChangeAmount() {
+	public double getChangeAmount() {
 		return changeAmount;
 	}
 
-	public void setChangeAmount(int changeAmount) {
+	public void setChangeAmount(double changeAmount) {
 		this.changeAmount = changeAmount;
 	}
 
@@ -111,17 +120,12 @@ public class PaymentData implements java.io.Serializable  {
 		this.userId = userId;
 	}
 
-	public int getDeleteStatus() {
-		return deleteStatus;
+//	@JsonBackReference
+	public SaleHeaderData getSaleHeaders() {
+		return saleHeaders;
 	}
 
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
+	public void setSaleHeaders(SaleHeaderData saleHeaders) {
+		this.saleHeaders = saleHeaders;
 	}
-	
-	
-	
-	
-		
-
 }

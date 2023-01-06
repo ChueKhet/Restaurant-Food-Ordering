@@ -1,9 +1,13 @@
 <template>
   <v-row style="height: 100%;">
 
-    <v-col cols="12" sm="6">
+    <v-col cols="12" :sm="(loginUser && loginUser.role == 0) ? 6 : 12">
       <v-row>
-        <v-col cols="12" sm="12" md="6" lg="4" v-for="menu in menuList" :key="menu.id">
+        <v-col cols="12" 
+        :sm="(loginUser && loginUser.role == 0) ? 12 : 6" 
+        :md="(loginUser && loginUser.role == 0) ? 6 : 3" 
+        :lg="(loginUser && loginUser.role == 0) ? 4 : 2" 
+        v-for="menu in menuList" :key="menu.id">
 
           <!-- <v-card class="ma-2" elevation="8" width="220">
 
@@ -30,7 +34,8 @@
 
                   <div class="card__header d-flex flex-column align-center justify-center">
                     <v-icon color="deep-purple lighten-1" dark @click="addToCart(menu)"
-                      style="position: absolute; top: 3px; left: 10px;">
+                      style="position: absolute; top: 3px; left: 10px;"
+                      v-show="loginUser && loginUser.role == 0">
                         shopping_cart
                     </v-icon>
 
@@ -39,7 +44,7 @@
                         mdi-cached
                     </v-icon>
 
-                    <img src="../assets/saved Images/menu/logo.png" alt="" class="pp" style="position: absolute;"/>
+                    <img :src="imagePath + menu.imagePath" alt="" class="pp" style="position: absolute;"/>
                   </div>
                   
                   <div class="card__body d-flex flex-column align-center justify-center">
@@ -53,7 +58,8 @@
 
               <div class="card__face card__face--back">
                 <v-icon color="deep-purple lighten-1" dark @click="addToCart(menu)"
-                  style="position: absolute; top: 3px; left: 10px;">
+                  style="position: absolute; top: 3px; left: 10px;"
+                  v-show="loginUser && loginUser.role == 0">
                     shopping_cart
                 </v-icon>
 
@@ -65,16 +71,22 @@
                 <ul class="ml-3 mr-3" style="width: 100%; padding: 0px;">
                   <li v-for="ingredient in menu.ingredientList" :key="ingredient.id"
                     style="list-style-type: none;">
-                      <div class="d-flex">
-                        <label style="font-size: 18px;">{{ingredient.description}}</label>
-                        <v-select v-model="ingredient.status"
-                          :items="remarkList"
-                          item-text="desc"
-                          item-value="code"
-                          style="margin-left: 5px; width: 100px;"
-                          dense>
-                        </v-select>
-                      </div>
+                      <v-row class="d-flex">
+                        <v-col class="d-flex align-center">
+                          <label style="font-size: 18px;">{{ingredient.description}}</label>
+                        </v-col>
+                        <v-col>
+                          <v-select 
+                            class="ver-center"
+                            v-model="ingredient.status"
+                            :items="remarkList"
+                            item-text="desc"
+                            item-value="code"
+                            style="padding-left: 0px;"
+                            dense>
+                          </v-select>
+                        </v-col>
+                      </v-row>
                   </li>
                 </ul>
               </div>
@@ -86,7 +98,7 @@
       </v-row>
     </v-col>
 
-    <v-col cols="12" sm="6" style="position: sticky;">
+    <v-col cols="12" sm="6" style="position: sticky;" v-show="loginUser && loginUser.role == 0">
       <v-card class="ma-3 pa-3" style="height: 630px; position: sticky; right: 0; top: 80px;">
 
         <v-card-title>
@@ -141,8 +153,8 @@
     </v-col>
     <span class="alertboxReg">
       <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
-          :type="message_type">
-              {{alert_message}}
+        :type="message_type">
+          {{alert_message}}
       </v-alert>
     </span>
   </v-row>
@@ -159,6 +171,8 @@ export default {
 
   data() {
     return {
+      imagePath: utils.constant.imagePath,
+      loginUser: {},
       menuList: [],
       saveHeaderData: this.getHeaderData(),
       saveDetailList: [],
@@ -204,10 +218,23 @@ export default {
       alert_message: "",
       message_type: ""
     };
-
   },
 
   async created() {
+    this.loginUser = this.$store.state.loginUser;
+
+    this.$store.watch(
+      () => {
+        return this.$store.state.loginUser;
+      },
+      (newVal, oldVal) => {
+        this.loginUser = newVal;
+      },
+      {
+        deep: true,
+      }
+    );
+
     this.saveHeaderData = this.getHeaderData();
     await this.fetchMenuList();
   },
@@ -241,7 +268,7 @@ export default {
         price: item.price,
         totalPrice: item.price,
         remark: this.allRemark(item.ingredientList),
-        deleteStatus: 1
+        orderStatus: 0    //    0 = Ordered, 1 = Served
       };
 
       let isExist = this.saveDetailList.some(
@@ -344,14 +371,15 @@ export default {
         );
 
         this.saveHeaderData.totalAmount = totalAmount;
-
+        this.saveHeaderData.userId=+this.$store.state.userInfo?.id;
+        console.log('data',this.saveHeaderData);
         const resp = await utils.http.post("/sale/order/confirm", this.saveHeaderData);
         this.loading = false;
 
         if(resp.status == 200){
-          // utils.goToScreen("/sales");
           this.clear();
           console.log("SUCCESS!!!");
+          // utils.goToScreen("/sales");
         } else {
           console.log("FAIL!!!");
         }
@@ -371,7 +399,6 @@ export default {
         tableNo: "",
         orderStatus: 0,     //    0 = Order Confirmed, 1 = Sales Confirmed, 2 = Served
         totalAmount: "",
-        deleteStatus: 1,
         detailList: [],
       };
     },
@@ -391,6 +418,11 @@ export default {
 </script>
 
 <style>
+
+/* .ver-center, .ver-center .v-input, .ver-center .v-input .v-input__control {
+  display: flex;
+  align-items: center;
+} */
 
 /******** card flip ********/
 
@@ -479,8 +511,10 @@ export default {
 
 .pp {
   display: block;
-  width: 200;
-  height: 215;
+  width: 200px;
+  height: 200px;
+  max-width: 200px;
+  max-height: 200px;
   margin: 0;
   border-radius: 50%;
   background-color: #FFF;

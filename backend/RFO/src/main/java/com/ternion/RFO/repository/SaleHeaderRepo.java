@@ -14,4 +14,5 @@ public interface SaleHeaderRepo extends JpaRepository<SaleHeaderData, Integer>{
 
 	@Query(value="select * from sale_header_data s where s.created_at=CURDATE() and s.order_status=1",nativeQuery=true)
 	List<SaleHeaderData> findSlipAndTableNo();
+    List<SaleHeaderData> findByUserId(int userId);
 }

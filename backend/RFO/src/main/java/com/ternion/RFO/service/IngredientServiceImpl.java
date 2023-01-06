@@ -3,7 +3,6 @@ package com.ternion.RFO.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ternion.RFO.entity.IngredientData;
@@ -19,10 +18,10 @@ public class IngredientServiceImpl implements IngredientService {
 	public List<IngredientData> getAll() {
 		return ingredientRepo.findAll();
 	}
-	String curDate = ServerUtil.getCurrentDate();
+	
 	@Override
 	public IngredientData create(IngredientData ingredient) {
-		
+		String curDate = ServerUtil.getCurrentDate();
 		ingredient.setCreatedAt(curDate);
 		ingredient.setModifiedAt(curDate);
 		return ingredientRepo.save(ingredient);
@@ -30,6 +29,8 @@ public class IngredientServiceImpl implements IngredientService {
 
 	@Override
 	public IngredientData update(IngredientData ingredient) {
+		String curDate = ServerUtil.getCurrentDate();
+		
 		ingredientRepo.deleteById(ingredient.getId());
 		ingredient.setId(0);
 		ingredient.setModifiedAt(curDate);

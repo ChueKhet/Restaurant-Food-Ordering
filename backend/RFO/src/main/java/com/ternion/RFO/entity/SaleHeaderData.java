@@ -2,14 +2,11 @@ package com.ternion.RFO.entity;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -26,34 +23,38 @@ public class SaleHeaderData implements java.io.Serializable  {
 	private String tableNo;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int totalAmount;
+	@NotNull(message = "Required")
+	private double totalAmount;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int slipNo;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int userId;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
 	private String orderStatus;
 	
-	@Column(nullable = true)
-//	@NotBlank(message = "Required")
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String createdAt;
 	
-	@Column(nullable = true)
-//	@NotBlank(message = "Required")
-	private String modifiedAt;
-	
 	@Column(nullable = false)
-	private int deleteStatus;
+	@NotBlank(message = "Required")
+	private String modifiedAt;
 	
 	@OneToMany(mappedBy = "headerData")
 	private List<SaleDetailData> detailList;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "saleHeaders")
+	private PaymentData payment;
+
+	public SaleHeaderData() {
+	}
 
 	public int getId() {
 		return id;
@@ -71,11 +72,11 @@ public class SaleHeaderData implements java.io.Serializable  {
 		this.tableNo = tableNo;
 	}
 
-	public int getTotalAmount() {
+	public double getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(int totalAmount) {
+	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
@@ -119,14 +120,6 @@ public class SaleHeaderData implements java.io.Serializable  {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public int getDeleteStatus() {
-		return deleteStatus;
-	}
-
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
-	}
-
 	@JsonManagedReference
 	public List<SaleDetailData> getDetailList() {
 		return detailList;
@@ -134,5 +127,14 @@ public class SaleHeaderData implements java.io.Serializable  {
 
 	public void setDetailList(List<SaleDetailData> detailList) {
 		this.detailList = detailList;
+	}
+
+//	@JsonManagedReference
+	public PaymentData getPayment() {
+		return payment;
+	}
+
+	public void setPayment(PaymentData payment) {
+		this.payment = payment;
 	}
 }

@@ -16,7 +16,7 @@
 
                                         <div class="d-flex justify-center mt-5">
                                             <v-img
-                                                v-if="imagePreviewPath != null"
+                                                v-if="imagePreviewPath != null && imagePreviewPath != ''"
                                                 :src="imagePreviewPath"
                                                 width="200"
                                                 height="215"
@@ -277,7 +277,7 @@ export default {
         async getNrcCode(){
             const resp = await utils.http.get("/nrc/code");
 
-            if (resp.status === 200){
+            if (resp && resp.status === 200){
                 const data = await resp.json();
 
                 if (data) {
@@ -307,44 +307,69 @@ export default {
             this.nrc = this.makeNRC();
 
             if (this.validate()){    //  this.$refs.registerForm.validate()
+                let respImageData = null;
+                const respImage = await utils.http.postMedia(
+                    "/user/file/create",
+                    this.image,
+                    this.image.type,
+                    "User"
+                );
+
+                if (respImage && respImage.status === 200) {
+                    respImageData = await respImage.text();
+                } else {
+                    this.errorAlert = true;
+                }
+
                 this.loading = true;
-                
-                let param = {
-                    name: this.name,
-                    dob: this.dob,
-                    gender: this.gender,
-                    nrc: this.nrc,
-                    phone: this.phone,
-                    address: this.address,
-                    username: this.username,
-                    password: this.password
-                };
 
-                const resp = await utils.http.post("/user/add", param);
-                this.loading = false;
+                if (respImageData) {
+                    let param = {
+                        userData: {
+                            name: this.name,
+                            dob: this.dob,
+                            gender: this.gender,
+                            nrc: this.nrc,
+                            phone: this.phone,
+                            address: this.address,
+                            imagePath: respImageData,
+                        },
+                        accountData: {
+                            username: this.username,
+                            password: this.password
+                        }
+                    };
 
-                if (resp.status === 200){
-                    const data = await resp.json();
+                    const resp = await utils.http.post("/user/add", param);
+                    this.loading = false;
 
-                    if (data) {
-                        this.$store.commit("setRegister", data);
-                        
-                        if(this.fromProfile){
-                            utils.goToScreen("/profile");
-                        } else {
-                            this.alertbox("success", "Registered Successful!", 3000);
-                            this.clear();
+                    if (resp.status === 200){
+                        const data = await resp.json();
+
+                        if (data) {
+                            this.$store.commit("setRegister", data);
+                            
+                            if(this.fromProfile){
+                                utils.goToScreen("/profile");
+                            } else {
+                                this.alertbox("success", "Registered Successful!", 3000);
+                                this.clear();
+                            }
                         }
                     }
+
                 }
+                
+                
             }
         },
 
         validate(){
-            // if(this.image == null || this.image == ""){
-            //     //  Please add image
-            //     return false;
-            // }
+            if(this.image == null || this.image == ""){
+                this.alertbox("error", "Please add Image!!!", 3000);
+                //  Please add image
+                return false;
+            }
 
             if(this.name == ""){
                 this.alertbox("error", "Please add Name!!!", 3000);

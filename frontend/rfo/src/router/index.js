@@ -7,6 +7,10 @@ import admin_user_list from '../views/admin_user_list.vue'
 import menu from '../views/Menu.vue'
 import Ingredients from '../views/Ingredients.vue'
 import kitchen from '../views/Kitchen.vue'
+import Profile from '../views/Profile.vue'
+import ChangePwd from '../views/ChangePwd.vue'
+import SaleHeaders from '../views/SaleHeaders.vue';
+import SaleDetail from '../views/SaleDetail.vue';
 
 Vue.use(VueRouter)
 
@@ -45,9 +49,27 @@ const routes = [
     path: '/ingredients',
     name: 'ingredients',
     component: Ingredients
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile
+  },
+  {
+    path: '/changepwd',
+    name: 'changepwd',
+    component: ChangePwd
+  },
+  {
+    path:"/sale_headers",
+    name:'sale_headers',
+    component:SaleHeaders
+  },
+  {
+    path:"/sale_detail/:headerId",
+    name:'sale_detail',
+    component:SaleDetail
   }
-  
-
 ]
 
 const router = new VueRouter({

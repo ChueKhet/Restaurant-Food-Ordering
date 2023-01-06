@@ -14,10 +14,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -52,7 +53,7 @@ public class MenuData implements java.io.Serializable {
 	private String description;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int user_id;
 	
 	@Column(nullable = true)
@@ -62,17 +63,14 @@ public class MenuData implements java.io.Serializable {
 	private String modified_at;
 	
 	@Column(nullable = false)
-	private int deleteStatus;
-	
-	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private double price;
-	
-	
+		
 	private int catId;
 	
-	
-	
+	@Column(length = 200)
+	@NotBlank(message = "Required")
+	private String imagePath;
 	
 	public List<IngredientData> getIngredientList() {
 		return ingredientList;
@@ -140,14 +138,6 @@ public class MenuData implements java.io.Serializable {
 		this.modified_at = modified_at;
 	}
 
-	public int getDeleteStatus() {
-		return deleteStatus;
-	}
-
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
-	}
-
 	public double getPrice() {
 		return price;
 	}
@@ -162,5 +152,13 @@ public class MenuData implements java.io.Serializable {
 
 	public void setCatId(int catId) {
 		this.catId = catId;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 }

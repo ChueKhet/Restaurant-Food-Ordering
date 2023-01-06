@@ -13,4 +13,5 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addMapping("/**").allowedMethods(CorsConfiguration.ALL).allowedOrigins("http://localhost:8081");
 	}
 	
+	
 }

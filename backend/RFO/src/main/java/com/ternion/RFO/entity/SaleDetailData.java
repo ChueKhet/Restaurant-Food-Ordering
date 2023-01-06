@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -15,6 +16,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class SaleDetailData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	public SaleDetailData() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,35 +29,32 @@ public class SaleDetailData implements java.io.Serializable {
 //	private int headerId;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int menuId;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int qty;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int price;
+	@NotNull(message = "Required")
+	private double price;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int totalPrice;
+	@NotNull(message = "Required")
+	private double totalPrice;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
 	private String remark;
 	
-	@Column(nullable = true)
-//	@NotBlank(message = "Required")
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String createdAt;
 	
-	@Column(nullable = true)
-//	@NotBlank(message = "Required")
-	private String modifiedAt;
-	
 	@Column(nullable = false)
-	private int deleteStatus;
+	@NotBlank(message = "Required")
+	private String modifiedAt;
 	
 	@ManyToOne
     @JoinColumn(name="headerId", nullable = true)
@@ -61,7 +62,7 @@ public class SaleDetailData implements java.io.Serializable {
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private int orderStatus;
+	private String orderStatus;
 
 	public int getId() {
 		return id;
@@ -95,19 +96,19 @@ public class SaleDetailData implements java.io.Serializable {
 		this.qty = qty;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	public int getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(int totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
@@ -135,12 +136,12 @@ public class SaleDetailData implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public int getDeleteStatus() {
-		return deleteStatus;
+	public String getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	@JsonBackReference

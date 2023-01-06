@@ -1,31 +1,42 @@
 <template>
-  <div class="ma-3">
-  <!-- style="height: 79.5%;" -->
-    <v-row style="margin-left: 5px; margin-top: 0px !important; margin-bottom: 20px;">
-        <v-title><h2>Staff List</h2></v-title>
-        <v-spacer></v-spacer>
-        <v-btn icon @click="register()">
-        <v-icon size="30">mdi-plus-box</v-icon>
-      </v-btn>
-    </v-row>
-    <v-data-table class="elevation-4"
-      :headers="tableHeaders"
-      :items="userList"
-      :items-per-page="5">
+  <div class="ma-5">
+    <v-card>
+      <v-card-title class="d-flex justify-space-between">
+        <span class="mr-5">
+          Staff List
+          <v-icon @click="register()">mdi-plus-box</v-icon>
+        </span>
 
-        <template v-slot:item.btn="{item}">
+        <span style="width: 250px;">
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </span>
+      </v-card-title>
+      
+      <v-data-table
+        :headers="tableHeaders"
+        :items="userList"
+        :items-per-page="5">
 
-          <v-btn class="mr-3" color="primary" fab x-small @click="onClickEditBtn(item)">
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
+          <template v-slot:item.btn="{item}">
 
-          <v-btn color="red" fab x-small dark @click="onClickDeleteBtn(item)">
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
+            <v-btn class="mr-3" color="primary" fab x-small @click="onClickEditBtn(item)">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
 
-        </template>
+            <v-btn color="red" fab x-small dark @click="onClickDeleteBtn(item)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
 
-    </v-data-table>
+          </template>
+
+      </v-data-table>
+    </v-card>
 
     <v-dialog v-model="deleteDialog" width="350">
       <v-card>
@@ -121,6 +132,7 @@ export default {
       deleteDialog: false,
       toDeleteUser: {},
       createDialog: false,
+      search: "",
     };
   },
 

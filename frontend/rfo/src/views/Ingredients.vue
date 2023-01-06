@@ -1,19 +1,21 @@
 <template>
   <div class="ma-5">
     <v-card>
-      <v-card-title>
-        <span class="mr-5"
-          >Create Ingredients
-          <v-icon @click="onClickCreateBtn()">mdi-plus-box</v-icon></span
-        >
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-        ></v-text-field>
+      <v-card-title class="d-flex justify-space-between">
+        <span class="mr-5">
+          Create Ingredients
+          <v-icon @click="onClickCreateBtn()">mdi-plus-box</v-icon>
+        </span>
+        
+        <span style="width: 250px;">
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </span>
       </v-card-title>
 
       <!--  Table -->
@@ -194,8 +196,6 @@ export default {
         { text: "Actions", value: "actions", sortable: false },
       ],
 
-      
-
       createDialog: false,
       addIngredientForm: false,
       createSuccessSnackBar: false,
@@ -256,8 +256,6 @@ export default {
         }
       }
     },
-
- 
 
     async createIngredient() {
       if (this.$refs.addIngredientForm.validate()) {

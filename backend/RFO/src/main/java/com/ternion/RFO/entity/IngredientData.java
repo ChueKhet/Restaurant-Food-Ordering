@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,17 +47,14 @@ public class IngredientData implements java.io.Serializable {
 	private String description;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int userid;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private String createdAt;
 	
-	@Column(nullable = true)
-	private String modifiedAt;
-	
 	@Column(nullable = false)
-	private int deleteStatus;
+	private String modifiedAt;
 	
 	private int status = 0;
 
@@ -116,14 +114,6 @@ public class IngredientData implements java.io.Serializable {
 
 	public void setModifiedAt(String modifiedAt) {
 		this.modifiedAt = modifiedAt;
-	}
-
-	public int getDeleteStatus() {
-		return deleteStatus;
-	}
-
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
 	}
 
 	public int getStatus() {

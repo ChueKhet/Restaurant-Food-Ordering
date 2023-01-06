@@ -39,11 +39,11 @@ export default {
   name: "Login",
   data() {
     return {
-        loading: false,
-        username: "",
-        password: "",
+      loading: false,
+      username: "",
+      password: "",
+      loginForm: false
     };
-
   },
   
   methods: {
@@ -55,15 +55,15 @@ export default {
           password: this.password,
         });
 
-       
-
         if (resp.status === 200){
-            const data = await resp.json();
-            this.loading = false;
-            if (data) {
-                this.$store.commit("setRegister", data);
-                utils.goToScreen("/");                     
-            }
+          const data = await resp.json();
+          this.loading = false;
+
+          if (data) {
+            this.$store.commit("setLoginUser", data);
+
+            utils.goToScreen("/");                     
+          }
         }
       }
     }

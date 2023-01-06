@@ -52,8 +52,9 @@ public class MenuServiceImpl implements MenuService {
 		if (findMenu == null) {
 			return null;
 		}
-
-//		findMenu.setCategory_id(menu.getCategory_id());
+		
+		findMenu.setImagePath(menu.getImagePath());
+		findMenu.getCategory().setId(menu.getCategory().getId());
 		findMenu.setPrice(menu.getPrice());
 		findMenu.setDescription(menu.getDescription());
 		findMenu.setModified_at(menu.getModified_at());

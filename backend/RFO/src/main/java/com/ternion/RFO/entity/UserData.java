@@ -43,8 +43,14 @@ public class UserData implements java.io.Serializable {
 	@Column(nullable = true)
 	private String modifiedAt;
 	
+	@Column(length = 200)
+	@NotBlank(message = "Required")
+	private String imagePath;
+	
 	@Column(nullable = false)
-	private int deleteStatus;
+	@NotBlank(message = "Required")
+	private String gender;
+	
 	
 	public int getId() {
 		return id;
@@ -110,12 +116,21 @@ public class UserData implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public int getDeleteStatus() {
-		return deleteStatus;
+	public String getImagePath() {
+		return imagePath;
 	}
 
-	public void setDeleteStatus(int deleteStatus) {
-		this.deleteStatus = deleteStatus;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	@Override

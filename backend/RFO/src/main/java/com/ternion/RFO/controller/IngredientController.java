@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ternion.RFO.entity.IngredientData;
-import com.ternion.RFO.entity.MenuData;
 import com.ternion.RFO.service.IngredientService;
+import com.ternion.RFO.utility.ServerUtil;
 
 @RestController
 @RequestMapping("/api/ingredient/")
@@ -24,6 +24,10 @@ public class IngredientController {
 	
 	@PostMapping("/add")
 	public ResponseEntity<?> create(@RequestBody IngredientData data) {
+		String curDate = ServerUtil.getCurrentDate();
+		data.setCreatedAt(curDate);
+		data.setModifiedAt(curDate);
+		
 		IngredientData ingreData = ingredientService.create(data);
 		
 		if (ingreData == null) {
@@ -36,19 +40,22 @@ public class IngredientController {
 	@PutMapping("/update")
 	public ResponseEntity<?> update(@RequestBody IngredientData data) {
 		IngredientData updatedIng = ingredientService.update(data);
+		
 		if (updatedIng == null) {
 			return ResponseEntity.badRequest().body("Ingredient cannot be updated");
 		}
-		//receipt.setDate(LocalDateTime.now());
+		
 		return ResponseEntity.ok(updatedIng);
 	}
 
 	@DeleteMapping("/del")
 	public ResponseEntity<?> delete(@RequestBody IngredientData data) {
 		 boolean isDeleted = ingredientService.delete(data.getId());
+		 
 		 if (isDeleted == false) {
 			 return ResponseEntity.notFound().build();
 		 }
+		 
 		 return ResponseEntity.ok(isDeleted);	 
 	}
 
