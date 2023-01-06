@@ -158,7 +158,12 @@
 
 <script>
 import utils from "../utils/utils.js";
+<<<<<<< HEAD
 //import payment from "./Payment.vue"
+=======
+import payment from "./Payment.vue"
+
+>>>>>>> 028491b404920f338c32d9627f7815e6be24a054
 export default {
   name: 'Home',
   components: {},
@@ -337,11 +342,19 @@ export default {
         
         const resp = await utils.http.post("/sale/order/confirm", this.saveHeaderData);
         this.loading = false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 028491b404920f338c32d9627f7815e6be24a054
         if(resp && resp.status == 200){
           this.clear();
           let exportData = {
             headerData: {}
           };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 028491b404920f338c32d9627f7815e6be24a054
           exportData.headerData = await resp.json();
           
           utils.goToScreenWithData("/payment", "payment", exportData);
@@ -381,6 +394,10 @@ export default {
   display: flex;
   align-items: center;
 } */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 028491b404920f338c32d9627f7815e6be24a054
 .alertboxReg {
   position: fixed;
   top: 30px;
@@ -389,6 +406,10 @@ export default {
   margin: 0 auto;
   z-index: 1;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 028491b404920f338c32d9627f7815e6be24a054
 /******** card flip ********/
 :root {
   --primary: #FFCE00;

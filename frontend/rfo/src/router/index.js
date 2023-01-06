@@ -11,6 +11,7 @@ import Profile from '../views/Profile.vue'
 import ChangePwd from '../views/ChangePwd.vue'
 import SaleHeaders from '../views/SaleHeaders.vue';
 import SaleDetail from '../views/SaleDetail.vue';
+import Payment from '../views/Payment.vue';
 
 Vue.use(VueRouter)
 
@@ -18,7 +19,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: homeView
+    component: homeView,
+    props: true
   },
   {
     path: '/login',
@@ -61,21 +63,27 @@ const routes = [
     component: ChangePwd
   },
   {
-    path:"/sale_headers",
-    name:'sale_headers',
-    component:SaleHeaders
+    path: "/sale_headers",
+    name: 'sale_headers',
+    component: SaleHeaders
   },
   {
-    path:"/sale_detail/:headerId",
-    name:'sale_detail',
-    component:SaleDetail
+    path: "/sale_detail/:headerId",
+    name: 'sale_detail',
+    component: SaleDetail
+  },
+  {
+    path: "/payment/:headerData",
+    name: "payment",
+    component: Payment,
+    props: true
   }
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes: routes
+});
 
-export default router
+export default router;

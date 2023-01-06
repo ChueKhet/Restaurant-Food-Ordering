@@ -23,4 +23,10 @@ public class PaymentServiceImpl implements PaymentService{
         Optional<PaymentData> optional= paymentRepo.findById(id);
         return optional.isPresent()?optional.get():null;
     }
+
+	@Override
+	public PaymentData create(PaymentData data) {
+		
+		return paymentRepo.save(data);
+	}
 }

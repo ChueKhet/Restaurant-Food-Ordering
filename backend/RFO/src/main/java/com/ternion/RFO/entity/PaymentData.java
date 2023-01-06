@@ -24,9 +24,7 @@ public class PaymentData implements java.io.Serializable  {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-//	@Column(nullable = false)
-//	@NotBlank(message = "Required")
-//	private int headerId;
+	private int hId;
 	
 	@Column(nullable = false)
 	@NotNull(message = "Required")
@@ -64,13 +62,13 @@ public class PaymentData implements java.io.Serializable  {
 		this.id = id;
 	}
 
-//	public int getHeaderId() {
-//		return headerId;
-//	}
-//
-//	public void setHeaderId(int headerId) {
-//		this.headerId = headerId;
-//	}
+	public int gethId() {
+		return hId;
+	}
+
+	public void sethId(int hId) {
+		this.hId = hId;
+	}
 
 	public double getTotalAmount() {
 		return totalAmount;
