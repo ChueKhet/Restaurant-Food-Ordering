@@ -1,10 +1,14 @@
 <template>
   <v-row style="height: 100%">
     <v-col cols="12" sm="6">
-      <!--  Table -->
+      <div class="ml-5 mt-10 mb-2 font-weight-bold item-center;">
+        <span class="align-center">Today's Order </span>
+      </div>
+    
       <v-data-table
+      class="ml-10"
         :headers="headers"
-        :items="kitchenOrderRecords"
+        :items="headerRecords"
         :item-key="slipNo"
         :items-per-page="10"
         @click:row="(item) => fetchOrderDetail(item)"
@@ -16,11 +20,72 @@
       <v-card
         class="ma-3 pa-3"
         style="height: 630px; position: sticky; right: 0; top: 80px"
+        v-if="detailDialog"
       >
+      <v-icon class="align-left"  @click="detailDialog = false">mdi-close</v-icon>
         <v-card-title>
-          <h1>hi</h1>
+          
+          <v-row>
+            <v-col>
+              <div class="d-flex">
+                <h6 style="margin-left: 5px">Table No:</h6>
+                <v-text-field
+                  v-model="tableNo"
+                  class="pa0_ma0 px-2"
+                  min="1"
+                ></v-text-field>
+
+                <h6 style="margin-right: 5px">Slip No:</h6>
+                <v-text-field
+                  v-model="slipNo"
+                  class="pa0_ma0 px-2"
+                  min="1"
+                ></v-text-field>
+              </div>
+              <v-data-table
+                :headers="detailHeaders"
+                :items="headerDetailRecords"
+                :item-key="slipNo"
+                :hide-default-footer="true"
+              >
+                <template v-slot:item.updateStatus="{ item }">
+                  <v-btn
+                    text
+                    x-small
+                    class="width-100"
+                    color="success"
+                    :disabled="(served && tempId.includes(item.id)) || item.orderStatus=='2'"
+                    @click="tempData(item)"
+                  >
+                    {{
+                      (served && tempId.includes(item.id)) ||
+                      item.orderStatus == "2"
+                        ? "Served"
+                        : "Sale"
+                    }}</v-btn
+                  >
+                </template>
+              </v-data-table>
+            </v-col>
+          </v-row>
+
+          <v-btn class="mt-5 width-100" color="success" @click="allServed()"
+            >Complete
+          </v-btn>
+
+          <!-- <v-btn
+            class="mt-5 width-100 ml-5"
+            color="success"
+            :disabled="cancelDisabled"
+            @click="detailDialog = false"
+            >Cancel
+            </v-btn> -->
         </v-card-title>
       </v-card>
+    
+      <v-snackbar color="red" v-model="MenuLeftToServeSnackBar">
+        {{ menuLeftToServeMsg }}
+      </v-snackbar>
     </v-col>
   </v-row>
 </template>
@@ -33,75 +98,143 @@ export default {
       slipNo: "",
       tableNo: "",
       totalAmount: "",
+      menuId: [],
+      qty: "",
+      remark: "",
+      orderStatus: "",
+      header_id: "",
+      cancelDisabled: false,
+      menuRecords: [],
+      menu: [],
 
       headers: [
         { text: "Sip No", align: "start", value: "slipNo", sortable: false },
         { text: "Table No", value: "tableNo", sortable: false },
         { text: "Total Amount", value: "totalAmount", sortable: false },
       ],
-      kitchenOrderRecords: [],
-      kitchenOrderDetail: [],
 
-      createMenuForm: "",
-      editMenuForm: "",
-      categoryLists: [1, 2],
-
-      createDialog: false,
-      createMenuForm: false,
-      createSuccessSnackBar: false,
-      createSuccessMsg: "Successfully created menu",
-
-      editDialog: false,
-      editMenuForm: false,
-      editSuccessSnackBar: false,
-      editSuccessMsg: "Successfully edited menu",
-
-      deleteDialog: false,
-      toDeleteMenu: {},
-      deleteSuccessSnackBar: false,
-      deleteSuccessMsg: "Successfully deleted menu",
+      detailHeaders: [
+        { text: "Menu", align: "start", value: "menuId", sortable: false },
+        { text: "Quantity", value: "qty", sortable: false },
+        { text: "Remark", value: "remark", sortable: false },
+     // { text: "Order Status", value: "orderStatus", sortable: false },
+        { text: "", value: "updateStatus", sortable: false },
+      ],
+      headerRecords: [],
+      headerDetailRecords: [],
+      detailDialog: false,
+      served: false,
+      tempId: [],
+      count: 0,
+      detailCount: 0,
+      menuLeftToServeMsg: "Menu still left to serve",
+      MenuLeftToServeSnackBar: false,
     };
   },
 
   async created() {
     await this.fetchKitchenOrderLists();
+    await this.fetchMenuLists();
+  },
+
+  watch: {
+    updateStatus: function (val) {
+    if(val.orderStatus=='2') {
+      this.count++;
+    }
+    },
+   
   },
 
   methods: {
     async fetchKitchenOrderLists() {
       const resp = await http.get("/sale/kitchen/order/all");
       if (resp && resp.status === 200) {
-        console.log("first");
         const data = await resp.json();
-        console.log("second");
         if (data) {
-          console.log("third");
-          this.kitchenOrderRecords = data;
-
           console.log(data);
+          this.headerRecords = data;
         }
-        console.log("fourth");
       }
-      console.log("fifth");
     },
 
-    async fetchOrderDetail(item) {
-      console.log(item, item.slipNo, item.tableNo);
-      const resp = await utils.http.get(
-        "/sale/kitchen/order/detail" + item.slipNo
-      );
+    async fetchMenuLists() {
+      const resp = await http.get("/menu/all");
       if (resp && resp.status === 200) {
         const data = await resp.json();
 
         if (data) {
-          this.kitchenOrderDetail = data;
-
-          console.log(data);
+          this.menuRecords = data;
         }
+      }
+    },
+
+    async fetchOrderDetail(item) {
+      console.log(item, "uii");
+      this.headerDetailRecords = item.detailList;
+      this.slipNo = item.slipNo;
+      this.tableNo = item.tableNo;
+      this.header_id = item.id;
+      this.detailCount = item.detailList.length;
+      this.menu = await this.menuRecords
+        .filter((menu) =>
+          this.headerDetailRecords.some((f) => f.menuId === menu.id)
+        )
+        .map((v) => {
+          this.menuId.push(v.description);
+        });
+      this.openDetailDialog();
+
+      console.log(this.menuId, ",,,");
+    },
+
+    async openDetailDialog() {
+      this.detailDialog = true;
+    },
+
+    async tempData(item, event) {
+      this.tempId.push(item.id), this.changeStatus(item);
+    },
+
+    async changeStatus(item) {
+      this.served = true;
+      console.log(this.tempId, "hiii");
+      const resp = await http.put("/sale/kitchen/order/status/served", {
+        id: item.id,
+        orderStatus: "2",
+      });
+      if (resp && resp.status === 200) {
+        this.served = true;
+        this.count++;
+        console.log("success update status");
+      }
+    },
+
+    async allServed() {
+      console.log(this.count);
+      console.log(this.detailCount);
+      if (this.count !== this.detailCount) {
+        this.MenuLeftToServeSnackBar = true;
+        return false;
+      } else {
+        this.cancelDisabled = true;
+      }
+
+      const resp = await http.put("/sale/kitchen/order/status/done", {
+        id: this.header_id,
+        orderStatus: "served",
+      });
+      if (resp && resp.status === 200) {
+        this.served = true;
+        console.log("success update status");
       }
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+.v-text-field > .v-input__control > .v-input__slot:before {
+  border-style: none;
+}
+</style>

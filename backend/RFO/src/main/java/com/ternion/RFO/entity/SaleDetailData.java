@@ -58,6 +58,10 @@ public class SaleDetailData implements java.io.Serializable {
 	@ManyToOne
     @JoinColumn(name="headerId", nullable = true)
 	private SaleHeaderData headerData;
+	
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
+	private int orderStatus;
 
 	public int getId() {
 		return id;
@@ -146,5 +150,13 @@ public class SaleDetailData implements java.io.Serializable {
 
 	public void setHeaderData(SaleHeaderData headerData) {
 		this.headerData = headerData;
+	}
+	
+	public int getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(int orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 }

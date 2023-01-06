@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ternion.RFO.entity.MenuData;
 import com.ternion.RFO.entity.SaleDetailData;
 import com.ternion.RFO.entity.SaleHeaderData;
 import com.ternion.RFO.repository.SaleDetailRepo;
@@ -39,9 +40,29 @@ public class SaleServiceImpl implements SaleService{
 	}
 
 	@Override
-	public List<String> getOrderDetailbyHeaderId(int header_id) {
-		return saleDetailRepo.findByHeaderId(header_id);
+	public SaleDetailData updateDetailStatus(SaleDetailData saleData) {
+		SaleDetailData findSaleData = saleDetailRepo.findById(saleData.getId()).orElse(null);	
+		if (findSaleData == null) {
+			return null;
+		}
+
+		findSaleData.setOrderStatus(saleData.getOrderStatus());
+		
+		return saleDetailRepo.save(findSaleData);
 	}
 
+	@Override
+	public SaleHeaderData updateHeaderStatus(SaleHeaderData headerData) {
+		SaleHeaderData findHeaderData = saleHeaderRepo.findById(headerData.getId()).orElse(null);	
+		if (findHeaderData == null) {
+			return null;
+		}
+
+		findHeaderData.setOrderStatus(headerData.getOrderStatus());
+		
+		return saleHeaderRepo.save(findHeaderData);
+	}
+
+	
 	
 }
