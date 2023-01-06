@@ -124,7 +124,6 @@
                 'items-per-page-options':[8],
                 'disable-items-per-page': true,
               }">
-              <!-- :items-per-page="5" -->
 
                 <template v-slot:item.qty="{item}">
                   <v-text-field type="number" class="pa0_ma0" min="1" v-model="item.qty" 
@@ -162,7 +161,8 @@
 </template>
 
 <script>
-import utils from '../utils/utils.js'
+import utils from "../utils/utils.js";
+import payment from "./Payment.vue"
 
 export default {
   name: 'Home',
@@ -245,7 +245,6 @@ export default {
 
       if(resp && resp.status == 200){
         this.menuList = await resp.json();
-        console.log( this.menuList[0].ingredientList[0]);
       }
     },
 
@@ -372,14 +371,19 @@ export default {
 
         this.saveHeaderData.totalAmount = totalAmount;
         this.saveHeaderData.userId=+this.$store.state.userInfo?.id;
-        console.log('data',this.saveHeaderData);
+        
         const resp = await utils.http.post("/sale/order/confirm", this.saveHeaderData);
         this.loading = false;
 
-        if(resp.status == 200){
+        if(resp && resp.status == 200){
           this.clear();
-          console.log("SUCCESS!!!");
-          // utils.goToScreen("/sales");
+          let exportData = {
+            headerData: {}
+          };
+
+          exportData.headerData = await resp.json();
+          
+          utils.goToScreenWithData("/payment", "payment", exportData);
         } else {
           console.log("FAIL!!!");
         }
@@ -423,6 +427,15 @@ export default {
   display: flex;
   align-items: center;
 } */
+
+.alertboxReg {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  z-index: 1;
+}
 
 /******** card flip ********/
 

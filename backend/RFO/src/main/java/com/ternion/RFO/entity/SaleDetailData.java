@@ -34,6 +34,14 @@ public class SaleDetailData implements java.io.Serializable {
 	
 	@Column(nullable = false)
 	@NotNull(message = "Required")
+	private String menuCode;
+	
+	@Column(nullable = false)
+	@NotNull(message = "Required")
+	private String menuDesc;
+	
+	@Column(nullable = false)
+	@NotNull(message = "Required")
 	private int qty;
 	
 	@Column(nullable = false)
@@ -86,6 +94,22 @@ public class SaleDetailData implements java.io.Serializable {
 
 	public void setMenuId(int menuId) {
 		this.menuId = menuId;
+	}
+
+	public String getMenuCode() {
+		return menuCode;
+	}
+
+	public void setMenuCode(String menuCode) {
+		this.menuCode = menuCode;
+	}
+
+	public String getMenuDesc() {
+		return menuDesc;
+	}
+
+	public void setMenuDesc(String menuDesc) {
+		this.menuDesc = menuDesc;
 	}
 
 	public int getQty() {

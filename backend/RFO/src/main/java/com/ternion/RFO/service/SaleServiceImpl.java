@@ -3,6 +3,7 @@ package com.ternion.RFO.service;
 import com.ternion.RFO.dto.SaleHeaderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ternion.RFO.entity.SaleDetailData;
 import com.ternion.RFO.entity.SaleHeaderData;
@@ -59,5 +60,9 @@ public class SaleServiceImpl implements SaleService{
 		return null;
 	}
 
-
+	@Transactional
+	@Override
+	public void updateStatus(String modifieddata, int status, int headerId) {
+		saleHeaderRepo.updateStatus(modifieddata, status, headerId);
+	}
 }

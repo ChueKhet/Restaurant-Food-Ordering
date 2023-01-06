@@ -6,4 +6,14 @@ function goToScreen(screenPath) {
     router.push({ path: screenPath});
 }
 
-export default { constant, http, goToScreen };
+function goToScreenWithData(path, name, data){
+    let temp = {
+        path: path,
+        name: name,
+        params: data
+    };
+
+    router.push(temp);
+}
+
+export default { constant, http, goToScreen, goToScreenWithData };

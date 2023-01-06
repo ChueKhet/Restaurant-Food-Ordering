@@ -8,9 +8,14 @@ import java.util.List;
 
 public interface SaleService {
 	public SaleHeaderData createHeader(SaleHeaderData data);
+	
 	public SaleDetailData createDetail(SaleDetailData data);
+	
 	public List<SaleHeaderDTO> getAllSaleHeaderByUserId(int userId);
+	
 	public int getTodayMaxSlip();
 
-	SaleDetailData getSaleDetailByHeaderId(int headerId);
+	public SaleDetailData getSaleDetailByHeaderId(int headerId);
+	
+	public void updateStatus(String modifieddata, int status, int headerId);
 }
