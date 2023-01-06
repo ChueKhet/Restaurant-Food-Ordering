@@ -36,7 +36,7 @@ public class SaleHeaderData implements java.io.Serializable  {
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String orderStatus;
+	private int orderStatus;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
@@ -96,11 +96,11 @@ public class SaleHeaderData implements java.io.Serializable  {
 		this.userId = userId;
 	}
 
-	public String getOrderStatus() {
+	public int getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(String orderStatus) {
+	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 

@@ -77,6 +77,7 @@ public class SaleController {
 		}
 		
 		return ResponseEntity.ok(updatedHeaderData);
+	}
 
 	@GetMapping("/headers")
 	public ResponseEntity<?> getSaleHeaderList(@RequestParam("userId") int userId){

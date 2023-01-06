@@ -98,7 +98,7 @@ export default {
       slipNo: "",
       tableNo: "",
       totalAmount: "",
-      menuId: [],
+      menuDesc: [],
       qty: "",
       remark: "",
       orderStatus: "",
@@ -114,7 +114,7 @@ export default {
       ],
 
       detailHeaders: [
-        { text: "Menu", align: "start", value: "menuId", sortable: false },
+        { text: "Menu", align: "start", value: "menuDesc", sortable: false },
         { text: "Quantity", value: "qty", sortable: false },
         { text: "Remark", value: "remark", sortable: false },
      // { text: "Order Status", value: "orderStatus", sortable: false },

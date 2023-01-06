@@ -21,7 +21,6 @@ public interface SaleService {
 	public SaleHeaderData updateHeaderStatus(SaleHeaderData headerData);
 
 	public List<SaleHeaderDTO> getAllSaleHeaderByUserId(int userId);
-	public int getTodayMaxSlip();
 
 	SaleDetailData getSaleDetailByHeaderId(int headerId);
 }

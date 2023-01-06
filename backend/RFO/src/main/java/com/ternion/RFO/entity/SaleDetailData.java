@@ -34,6 +34,14 @@ public class SaleDetailData implements java.io.Serializable {
 	
 	@Column(nullable = false)
 	@NotNull(message = "Required")
+	private String menuCode;
+	
+	@Column(nullable = false)
+	@NotNull(message = "Required")
+	private String menuDesc;
+	
+	@Column(nullable = false)
+	@NotNull(message = "Required")
 	private int qty;
 	
 	@Column(nullable = false)
@@ -62,7 +70,7 @@ public class SaleDetailData implements java.io.Serializable {
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String orderStatus;
+	private int orderStatus;
 
 	public int getId() {
 		return id;
@@ -136,13 +144,6 @@ public class SaleDetailData implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public String getOrderStatus() {
-		return orderStatus;
-	}
-
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
-	}
 
 	@JsonBackReference
 	public SaleHeaderData getHeaderData() {
