@@ -39,6 +39,7 @@ public class MenuController {
 
 	@PostMapping("/add")
 	public ResponseEntity<?> create(@RequestBody MenuData data) {
+		System.out.println("price"+data.getPrice());
 		MenuData menuData = menuService.create(data);
 		
 		if (menuData == null) {

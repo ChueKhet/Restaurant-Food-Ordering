@@ -14,10 +14,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -52,7 +53,7 @@ public class MenuData implements java.io.Serializable {
 	private String description;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int user_id;
 	
 	@Column(nullable = true)
@@ -62,7 +63,7 @@ public class MenuData implements java.io.Serializable {
 	private String modified_at;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private double price;
 		
 	private int catId;
@@ -160,6 +161,4 @@ public class MenuData implements java.io.Serializable {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-	
-	
 }

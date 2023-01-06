@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -15,6 +16,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class SaleDetailData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	public SaleDetailData() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,20 +29,20 @@ public class SaleDetailData implements java.io.Serializable {
 //	private int headerId;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int menuId;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int qty;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int price;
+	@NotNull(message = "Required")
+	private double price;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private int totalPrice;
+	@NotNull(message = "Required")
+	private double totalPrice;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
@@ -92,19 +96,19 @@ public class SaleDetailData implements java.io.Serializable {
 		this.qty = qty;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	public int getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(int totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 

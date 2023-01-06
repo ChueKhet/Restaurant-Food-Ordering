@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class AccountData implements java.io.Serializable {
@@ -33,7 +34,7 @@ public class AccountData implements java.io.Serializable {
 	private String modifiedAt;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int role;
 	
 	public int getId() {

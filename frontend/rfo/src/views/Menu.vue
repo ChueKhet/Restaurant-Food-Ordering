@@ -399,13 +399,14 @@ export default {
           imagePath: respImageData,
           code: this.code,
           description: this.description,
-          price: this.price,
+          price: +this.price,
           created_at: this.created_at,
           user_id: this.user_id,
           category: {
             id: this.category_id
           }
         };
+        console.log('saveData',saveData);
 
         const resp = await http.post("/menu/add", saveData);
 

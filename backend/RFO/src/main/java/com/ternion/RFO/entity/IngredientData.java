@@ -1,6 +1,5 @@
 package com.ternion.RFO.entity;
 
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,11 +13,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 @Entity
 public class IngredientData implements java.io.Serializable {
@@ -48,7 +47,7 @@ public class IngredientData implements java.io.Serializable {
 	private String description;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int userid;
 	
 	@Column(nullable = false)

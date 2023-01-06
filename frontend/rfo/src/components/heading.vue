@@ -1,18 +1,15 @@
 <template>
     <v-app-bar class="headMenuBar" color="deep-purple lighten-1" dark>
-    <!-- style="background-color: #5d6e22;"  -->
-        <!-- <v-btn class="text-h1" text @click="goToScreen('/')">Home</v-btn> -->
         <div class="logoApp" @click = "utl.goToScreen('/')"></div>
-        <!-- <label class="logoFontApp" @click="goToScreen('/')">Ternion</label> -->
         
         <v-spacer></v-spacer>
-        <!-- <v-btn text v-show = "!isRegister" @click = "goToScreen('/register')" >Register</v-btn>
-        <v-btn text @click = "goToScreen('/about')" >About</v-btn>  -->
 
         <v-btn text @click = "utl.goToScreen('/menu')" v-show="loginUser && loginUser.role == 1">Menu</v-btn>
         <v-btn text @click = "utl.goToScreen('/ingredients')" v-show="loginUser && loginUser.role == 1">Ingredient</v-btn>
         <v-btn text @click = "utl.goToScreen('/admin_user_list')" v-show="loginUser && loginUser.role == 1">UserList</v-btn>
         <v-btn text @click = "utl.goToScreen('/register')" v-show="loginUser && loginUser.role == 1">Register</v-btn>
+        <v-btn text @click = "utl.goToScreen('/sale_headers')" v-show="loginUser && loginUser.role == 0">Sales</v-btn>
+        <v-btn text @click = "utl.goToScreen('/profile')" v-show="loginUser">Profile</v-btn>
         <v-btn text @click = "onClickLogInAndOut">{{isLogIn ? "LogOut" : "LogIn"}}</v-btn> 
     </v-app-bar>
 </template>
@@ -26,6 +23,7 @@ export default {
 
   data: () => ({
     isLogIn: false,
+    loginUser:{},
     screenPath: "",
     loginUser: {},
     utl: utils
@@ -57,6 +55,18 @@ export default {
         deep: true,
       }
     );
+    this.loginUser = this.$store.state.loginUser;
+      this.$store.watch(
+        () => {
+          return this.$store.state.loginUser;
+        },
+        (newVal, oldVal) => {
+          this.loginUser = newVal;
+        },
+        {
+          deep: true,
+        }
+      );
   
   },
 

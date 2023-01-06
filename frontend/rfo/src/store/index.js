@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogIn: false,
+    loginUser:{},
     userInfo: {},
     orderData: {},
     loginUser: null,
@@ -30,6 +31,9 @@ export default new Vuex.Store({
         return state.isLogIn;
       }
     },
+    loginUser:(state)=>{
+      return loginUser
+    },
 
     userInfo: (state) => {
       return userInfo;
@@ -53,6 +57,9 @@ export default new Vuex.Store({
       sessionStorage.removeItem("isLogin");
       state.loginUser = null;
       state.isLogIn = false;
+    },
+    setloginUser(state,loginUser){
+      state.loginUser=loginUser;
     },
 
     setUserInfo(state, userInfo){

@@ -10,4 +10,6 @@ import com.ternion.RFO.entity.SaleHeaderData;
 public interface SaleHeaderRepo extends JpaRepository<SaleHeaderData, Integer>{
 	@Query(value = "select CASE WHEN MAX(slip_no) IS NULL THEN 1 ELSE (MAX(slip_no) + 1) END from sale_header_data where created_at = CURDATE()", nativeQuery = true)
     int getTodayMaxSlip();
+
+    List<SaleHeaderData> findByUserId(int userId);
 }
