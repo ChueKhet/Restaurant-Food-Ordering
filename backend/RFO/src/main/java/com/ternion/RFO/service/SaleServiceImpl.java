@@ -79,8 +79,6 @@ public class SaleServiceImpl implements SaleService{
 		
 		return saleHeaderRepo.save(findHeaderData);
 	}
-
-	
 	
 	public SaleDetailData getSaleDetailByHeaderId(int headerId) {
 		Optional<SaleHeaderData> saleHeaderOptional= saleHeaderRepo.findById(headerId);

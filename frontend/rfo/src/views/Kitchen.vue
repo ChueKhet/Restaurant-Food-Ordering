@@ -4,14 +4,19 @@
       <div class="ml-5 mt-10 mb-2 font-weight-bold item-center;">
         <span class="align-center">Today's Order </span>
       </div>
-    
+
       <v-data-table
-      class="ml-10"
+        class="ml-10"
         :headers="headers"
         :items="headerRecords"
         :item-key="slipNo"
         :items-per-page="10"
-        @click:row="(item) => fetchOrderDetail(item)"
+        @click:row="
+          (item) =>
+            !detailDialog
+              ? fetchOrderDetail(item)
+              : (this.closeFormSnackBar = true)
+        "
       >
       </v-data-table>
     </v-col>
@@ -22,9 +27,8 @@
         style="height: 630px; position: sticky; right: 0; top: 80px"
         v-if="detailDialog"
       >
-      <v-icon class="align-left"  @click="detailDialog = false">mdi-close</v-icon>
+        <v-icon class="align-left" @click="closeDetailForm()">mdi-close</v-icon>
         <v-card-title>
-          
           <v-row>
             <v-col>
               <div class="d-flex">
@@ -54,7 +58,10 @@
                     x-small
                     class="width-100"
                     color="success"
-                    :disabled="(served && tempId.includes(item.id)) || item.orderStatus=='2'"
+                    :disabled="
+                      (served && tempId.includes(item.id)) ||
+                      item.orderStatus == '2'
+                    "
                     @click="tempData(item)"
                   >
                     {{
@@ -69,22 +76,29 @@
             </v-col>
           </v-row>
 
-          <v-btn class="mt-5 width-100" color="success" @click="allServed()"
+          <span class="text-uppercase mt-5" v-if="allMenuServed"
+            >All Served</span
+          >
+          <v-btn
+            v-else
+            class="mt-5 width-100"
+            color="success"
+            @click="allServed()"
             >Complete
           </v-btn>
-
-          <!-- <v-btn
-            class="mt-5 width-100 ml-5"
-            color="success"
-            :disabled="cancelDisabled"
-            @click="detailDialog = false"
-            >Cancel
-            </v-btn> -->
         </v-card-title>
       </v-card>
-    
+
       <v-snackbar color="red" v-model="MenuLeftToServeSnackBar">
         {{ menuLeftToServeMsg }}
+      </v-snackbar>
+
+      <v-snackbar v-model="allServedSnackBar">
+        {{ allServedMsg }}
+      </v-snackbar>
+
+      <v-snackbar v-model="closeFormSnackBar">
+        {{ closeFormMsg }}
       </v-snackbar>
     </v-col>
   </v-row>
@@ -103,9 +117,8 @@ export default {
       remark: "",
       orderStatus: "",
       header_id: "",
-      cancelDisabled: false,
-      menuRecords: [],
-      menu: [],
+      allMenuServed: false,
+      formId: "",
 
       headers: [
         { text: "Sip No", align: "start", value: "slipNo", sortable: false },
@@ -117,8 +130,7 @@ export default {
         { text: "Menu", align: "start", value: "menuDesc", sortable: false },
         { text: "Quantity", value: "qty", sortable: false },
         { text: "Remark", value: "remark", sortable: false },
-     // { text: "Order Status", value: "orderStatus", sortable: false },
-        { text: "", value: "updateStatus", sortable: false },
+        { text: "Status", value: "updateStatus", sortable: false },
       ],
       headerRecords: [],
       headerDetailRecords: [],
@@ -129,21 +141,15 @@ export default {
       detailCount: 0,
       menuLeftToServeMsg: "Menu still left to serve",
       MenuLeftToServeSnackBar: false,
+      allServedSnackBar: false,
+      allServedMsg: "All Served",
+      closeFormSnackBar: false,
+      closeFormMsg: "Please close the form first",
     };
   },
 
   async created() {
     await this.fetchKitchenOrderLists();
-    await this.fetchMenuLists();
-  },
-
-  watch: {
-    updateStatus: function (val) {
-    if(val.orderStatus=='2') {
-      this.count++;
-    }
-    },
-   
   },
 
   methods: {
@@ -158,38 +164,27 @@ export default {
       }
     },
 
-    async fetchMenuLists() {
-      const resp = await http.get("/menu/all");
-      if (resp && resp.status === 200) {
-        const data = await resp.json();
-
-        if (data) {
-          this.menuRecords = data;
-        }
-      }
-    },
-
     async fetchOrderDetail(item) {
-      console.log(item, "uii");
       this.headerDetailRecords = item.detailList;
+      this.formId = item.id;
       this.slipNo = item.slipNo;
       this.tableNo = item.tableNo;
       this.header_id = item.id;
       this.detailCount = item.detailList.length;
-      this.menu = await this.menuRecords
-        .filter((menu) =>
-          this.headerDetailRecords.some((f) => f.menuId === menu.id)
-        )
-        .map((v) => {
-          this.menuId.push(v.description);
-        });
-      this.openDetailDialog();
-
-      console.log(this.menuId, ",,,");
+      this.detailDialog = true;
+      this.setCount();
     },
 
-    async openDetailDialog() {
-      this.detailDialog = true;
+    async setCount() {
+      this.headerDetailRecords.map((detail) => {
+        if (detail.orderStatus == "2") {
+          this.count++;
+        }
+      });
+
+      if (this.count == this.detailCount) {
+        this.allMenuServed = true;
+      }
     },
 
     async tempData(item, event) {
@@ -197,12 +192,11 @@ export default {
     },
 
     async changeStatus(item) {
-      this.served = true;
-      console.log(this.tempId, "hiii");
       const resp = await http.put("/sale/kitchen/order/status/served", {
         id: item.id,
         orderStatus: "2",
       });
+
       if (resp && resp.status === 200) {
         this.served = true;
         this.count++;
@@ -211,23 +205,27 @@ export default {
     },
 
     async allServed() {
-      console.log(this.count);
-      console.log(this.detailCount);
       if (this.count !== this.detailCount) {
         this.MenuLeftToServeSnackBar = true;
         return false;
-      } else {
-        this.cancelDisabled = true;
       }
-
       const resp = await http.put("/sale/kitchen/order/status/done", {
         id: this.header_id,
-        orderStatus: "served",
+        orderStatus: "2",
       });
       if (resp && resp.status === 200) {
         this.served = true;
-        console.log("success update status");
+        this.allServedSnackBar = true;
+        this.closeDetailForm();
+        console.log("all served");
       }
+    },
+
+    async closeDetailForm() {
+      this.detailDialog = false;
+      this.allMenuServed = false;
+      this.count = 0;
+      this.fetchKitchenOrderLists();
     },
   },
 };
