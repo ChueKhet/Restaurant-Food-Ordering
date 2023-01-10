@@ -7,9 +7,9 @@
       <v-card-title>
         <v-form ref="loginForm" v-model="loginForm" class="d-flex flex-column justify-center align-center">
           <v-text-field 
-            label="Name" 
-            placeholder="Enter Name" 
-            v-model="username" 
+            label="Employee ID" 
+            placeholder="Enter Employee ID" 
+            v-model="userid" 
             :rules = "[(v) => !!v || 'Required',]" required 
           ></v-text-field>
 
@@ -27,7 +27,7 @@
           <v-btn @click="onClickLogIn">Login</v-btn>
         </v-form>
       </v-card-title>
-      <v-card-title><a>Forgot Password?</a></v-card-title>
+      <v-card-title><a @click="utl.goToScreen('/changepwd')">Forgot Password?</a></v-card-title>
     </v-card>
   </v-container>
 </template>
@@ -40,9 +40,10 @@ export default {
   data() {
     return {
       loading: false,
-      username: "",
+      userid: "",
       password: "",
-      loginForm: false
+      loginForm: false,
+      utl: utils
     };
   },
   
@@ -51,7 +52,7 @@ export default {
       if(this.$refs.loginForm.validate()){
         this.loading = true;
         const resp = await utils.http.post("/account/login",{
-          username: this.username,
+          userid: this.userid,
           password: this.password,
         });
 

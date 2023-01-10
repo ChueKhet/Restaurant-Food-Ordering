@@ -31,9 +31,7 @@ public class UserController {
 	@Autowired
 	AccountService accService;
 
-	//	@Autowired
 	@SuppressWarnings("unchecked")
-	//	PasswordEncoder pwEncoder;
 	@PostMapping("/add")
 	public ResponseEntity<?> register(@Valid @RequestBody HashMap<String, Object> data) {
 		HashMap<String, Object> retData = new HashMap<String, Object>();
@@ -53,6 +51,9 @@ public class UserController {
 		user.setCreatedAt(curDate);
 		user.setModifiedAt(curDate);
 		
+		int maxId = accService.getMaxId();
+		
+		acc.setUserid(ServerUtil.generateUserId(maxId));
 		acc.setUsername(((HashMap<String, Object>) data.get("accountData")).get("username").toString());
 		acc.setPassword(((HashMap<String, Object>) data.get("accountData")).get("password").toString());
 		acc.setRole(0);
@@ -65,6 +66,7 @@ public class UserController {
 			return ResponseEntity.badRequest().body("User already exists!");
 		} else {
 			retData.put("userData", userdata);
+			acc.setParentId(userdata.getId());
 			
 			AccountData accdata = accService.createAcc(acc);
 			
@@ -112,4 +114,5 @@ public class UserController {
 		
 		return ResponseEntity.ok().body(updatedUser);
 	}
+	
 }

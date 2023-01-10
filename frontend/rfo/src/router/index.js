@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import homeView from '../views/HomeView.vue'
 import login from '../views/logIn.vue'
-import register from '../views/register.vue'
+import register from '../views/Register.vue'
 import admin_user_list from '../views/admin_user_list.vue'
 
 import menu from '../views/Menu.vue'
@@ -10,14 +10,14 @@ import Ingredients from '../views/Ingredients.vue'
 import Profile from '../views/Profile.vue'
 import ChangePwd from '../views/ChangePwd.vue'
 import SaleHeaders from '../views/SaleHeaders.vue';
-import SaleDetail from '../views/SaleDetail.vue';
+// import SaleDetail fro../components/SaleDetail.vuevue';
 import Payment from '../views/Payment.vue';
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/',    //    :headerData
     name: 'home',
     component: homeView,
     props: true
@@ -62,11 +62,11 @@ const routes = [
     name: 'sale_headers',
     component: SaleHeaders
   },
-  {
-    path: "/sale_detail/:headerId",
-    name: 'sale_detail',
-    component: SaleDetail
-  },
+  // {
+  //   path: "/sale_detail/:headerId",
+  //   name: 'sale_detail',
+  //   component: SaleDetail
+  // },
   {
     path: "/payment/:headerData",
     name: "payment",

@@ -6,24 +6,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogIn: false,
-    loginUser:{},
-    userInfo: {},
-    orderData: {},
+    userInfo: null,
     loginUser: null,
   },
 
   getters: {
-    loginUser: (state) => {
-      let loginUser = sessionStorage.getItem("loginUser");
-      if (loginUser != null) {
-        state.loginUser = JSON.parse(loginUser);
-        return JSON.parse(loginUser);
-      } else {
-        return state.loginUser;
-      }
-    },
     isLogIn: (state) => {
-      let isLogIn = sessionStorage.getItem("isLogin");
+      let isLogIn = sessionStorage.getItem("isLogIn");
       if (isLogIn != null) {
         state.isLogIn = isLogIn;
         return isLogIn;
@@ -31,47 +20,48 @@ export default new Vuex.Store({
         return state.isLogIn;
       }
     },
-    loginUser:(state)=>{
-      return loginUser
+
+    loginUser: (state) => {
+      let loginUser = sessionStorage.getItem("loginUser");
+
+      if (loginUser != null) {
+        state.loginUser = JSON.parse(loginUser);
+        return JSON.parse(loginUser);
+      } else {
+        return state.loginUser;
+      }
     },
 
     userInfo: (state) => {
-      return userInfo;
-    },
+      let userInfo = sessionStorage.getItem("userInfo");
 
-    orderInfo: (state) => {
-      return orderData;
+      if (userInfo != null) {
+        state.userInfo = JSON.parse(userInfo);
+      }
+      
+      return state.userInfo;
     },
   },
 
   mutations: {
-    setLoginUser(state, user) {
-      sessionStorage.setItem("loginUser", JSON.stringify(user));
-      sessionStorage.setItem("isLogin", true);
-      state.loginUser = user;
+    setLoginUser(state, data) {
+      sessionStorage.setItem("isLogIn", true);
+      sessionStorage.setItem("loginUser", JSON.stringify(data.account));
+      sessionStorage.setItem("userInfo", JSON.stringify(data.user));
+      
       state.isLogIn = true;
+      state.loginUser = data.account;
+      state.userInfo = data.user;
     },
 
     logout(state) {
+      sessionStorage.removeItem("isLogIn");
       sessionStorage.removeItem("loginUser");
-      sessionStorage.removeItem("isLogin");
-      state.loginUser = null;
+      sessionStorage.removeItem("userInfo");
+
       state.isLogIn = false;
-    },
-    setloginUser(state,loginUser){
-      state.loginUser=loginUser;
-    },
-
-    setUserInfo(state, userInfo){
-      state.userInfo = userInfo;
-    },
-
-    setOrderInfo(state, orderData){
-      state.orderData = orderData;
-    },
-
-    setRegister(state, data){
-      state.loginUser = data;
+      state.loginUser = null;
+      state.userInfo = null;
     },
   },
 

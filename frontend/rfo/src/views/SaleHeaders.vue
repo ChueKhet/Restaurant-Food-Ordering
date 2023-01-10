@@ -1,52 +1,72 @@
 <template>
-    <div class="ma-3">
-        <v-row
-            style="
-                margin-left: 5px;
-                margin-top: 0px !important;
-                margin-bottom: 20px;
-            "
-        >
-            <v-title><h2>Sale Headers</h2></v-title>
-        </v-row>
-        <v-data-table
-            class="elevation-4"
-            :headers="tableHeaders"
-            :items="saleHeaders"
-            :items-per-page="5"
-        >
-            <template v-slot:item.orderStatus="{ item }">
-                <div class="orderStatus">
-                    {{item.orderStatus}}
-                </div>
-            </template>
-            <template v-slot:item.btn="{ item }">
+  <div class="ma-5">
+    <v-row style="margin-left: 5px; margin-top: 0px !important; margin-bottom: 20px;">
+      <v-title>
+        <h2>
+          Sale Headers
+        </h2>
+      </v-title>
+    </v-row>
 
-                <v-btn
-                    color="red"
-                    fab
-                    x-small
-                    dark
-                    @click="onClickDetail(item.id)"
-                >
-                    <v-icon>mdi-eye</v-icon>
-                </v-btn>
-            </template>
-        </v-data-table>
-    </div>
+    <v-data-table
+      class="elevation-4"
+      :headers="hTableHeaders"
+      :items="saleHeaders"
+      :items-per-page="5">
+        <template v-slot:item.orderStatus="{ item }">
+          <div class="orderStatus">
+            {{item.orderStatus}}
+          </div>
+        </template>
+        <template v-slot:item.btn="{ item }">
+
+          <v-btn
+            color="red"
+            fab
+            x-small
+            dark
+            @click="onClickDetail(item.id)" >
+              <v-icon>mdi-eye</v-icon>
+          </v-btn>
+        </template>
+    </v-data-table>
+
+    <v-dialog v-model="detailDialog" width="1000">
+      <v-data-table
+        class="elevation-4"
+        :headers="dTableHeaders"
+        :items="saleDetails"
+        :items-per-page="5">
+          <template v-slot:item.status="{ item }">
+            <div class="orderStatus">
+              {{item.orderStatus.toString() == "0" ? "Ordered" : "Served"}}
+            </div>
+          </template>
+          
+      </v-data-table>
+    </v-dialog>
+  </div>
 </template>
 
 <script>
 import utils from '@/utils/utils';
+import saleDetail from '../components/SaleDetail.vue';
 
 export default {
   name: 'SaleHeaders',
 
-  components: {},
+  components: {
+    saleDetail
+  },
 
   data(){
     return {
-      tableHeaders: [
+      detailDialog: false,
+      saleHeaderId: "",
+      saleHeaders: [],
+      saleDetails: [],
+
+      hTableHeaders: [
         {
           text: 'ID',
           value: 'id',
@@ -68,10 +88,10 @@ export default {
         },
         {
           text: 'Created Date',
-          value: 'createdDate',
+          value: 'createdAt',
         },
         {
-          text: 'Order Status',
+          text: 'Confirm Status',
           value: 'orderStatus',
         },
         {
@@ -79,7 +99,39 @@ export default {
           value: 'btn',
         },
       ],
-      saleHeaders: [],
+      dTableHeaders: [
+        {
+          text: 'ID',
+          value: 'id',
+          sortable: true,
+        },
+        {
+          text: 'Code',
+          value: 'menuCode',
+          sortable: true,
+        },
+        {
+          text: 'Menu',
+          value: 'menuDesc',
+          sortable: true,
+        },
+        {
+          text: 'Qty',
+          value: 'qty',
+        },
+        {
+          text: 'Price',
+          value: 'price',
+        },
+        {
+          text: 'Total Price',
+          value: 'totalPrice',
+        },
+        {
+          text: 'Status',
+          value: 'status',
+        },
+      ],
     };
   },
 
@@ -107,18 +159,36 @@ export default {
     },
 
     async onClickDetail(headerId){
-        utils.goToScreen("/sale_detail/"+headerId);
-    }
+      // utils.goToScreen("/sale_detail/"+headerId);
+      this.saleHeaderId = headerId;
+      await this.fetchSaleDetail();
+
+      this.detailDialog = true;
+    },
+
+    async fetchSaleDetail() {
+      const resp = await utils.http.get(
+        "/sale/detail?headerId=" + this.saleHeaderId
+      );
+
+      if (resp && resp.status == 200) {
+        const data = await resp.json();
+
+        if (data) {
+          this.saleDetails = data;
+        }
+      }
+    },
   },
 }
 </script>
 
 <style>
-    .orderStatus{
-        width:fit-content;
-        padding:5px 10px;
-        border-radius:20px 20px;
-        background-color:red;
-        color:white;
-    }
+.orderStatus{
+  width:fit-content;
+  padding:5px 10px;
+  border-radius:20px 20px;
+  background-color:red;
+  color:white;
+}
 </style>

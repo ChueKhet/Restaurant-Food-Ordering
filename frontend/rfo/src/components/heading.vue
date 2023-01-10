@@ -1,16 +1,18 @@
 <template>
     <v-app-bar class="headMenuBar" color="deep-purple lighten-1" dark>
-        <div class="logoApp" @click = "utl.goToScreen('/')"></div>
-        
-        <v-spacer></v-spacer>
+      <div class="logoApp" @click = "utl.goToScreen('/')"></div>
+      
+      <v-spacer></v-spacer>
 
-        <v-btn text @click = "utl.goToScreen('/menu')" v-show="loginUser && loginUser.role == 1">Menu</v-btn>
-        <v-btn text @click = "utl.goToScreen('/ingredients')" v-show="loginUser && loginUser.role == 1">Ingredient</v-btn>
-        <v-btn text @click = "utl.goToScreen('/admin_user_list')" v-show="loginUser && loginUser.role == 1">UserList</v-btn>
-        <v-btn text @click = "utl.goToScreen('/register')" v-show="loginUser && loginUser.role == 1">Register</v-btn>
-        <v-btn text @click = "utl.goToScreen('/sale_headers')" v-show="loginUser && loginUser.role == 0">Sales</v-btn>
-        <v-btn text @click = "utl.goToScreen('/profile')" v-show="loginUser">Profile</v-btn>
-        <v-btn text @click = "onClickLogInAndOut">{{isLogIn ? "LogOut" : "LogIn"}}</v-btn> 
+      <v-btn text @click = "utl.goToScreen('/menu')" v-show="loginUser && loginUser.role == 1">Menu</v-btn>
+      <v-btn text @click = "utl.goToScreen('/ingredients')" v-show="loginUser && loginUser.role == 1">Ingredient</v-btn>
+      <v-btn text @click = "utl.goToScreen('/admin_user_list')" v-show="loginUser && loginUser.role == 1">UserList</v-btn>
+      <v-btn text @click = "utl.goToScreen('/register')" v-show="loginUser && loginUser.role == 1">Register</v-btn>
+
+      <v-btn text @click = "utl.goToScreen('/sale_headers')" v-show="loginUser">OrderList</v-btn>
+      <v-btn text @click = "utl.goToScreen('/profile')" v-show="loginUser">Profile</v-btn>
+      
+      <v-btn text @click = "onClickLogInAndOut">{{isLogIn ? "LogOut" : "LogIn"}}</v-btn> 
     </v-app-bar>
 </template>
 
@@ -75,7 +77,7 @@ export default {
       if(this.isLogIn){
         this.$store.commit("logout");
 
-        if(this.$router.currentRoute.path !="/"){
+        if(this.$router.currentRoute.path !="/"){ //  || this.$router.currentRoute.path !="/home"
           // this.isLogIn = false;
           utils.goToScreen("/");
         }

@@ -44,16 +44,29 @@ public class SaleController {
 		
 		return ResponseEntity.ok().body(headerData);
 	}
+	
+	@PostMapping("/order/update")
+	public ResponseEntity<?> update(@RequestBody SaleHeaderData header) {
+		SaleHeaderData updatedSale = saleService.updateOrder(header);
+		
+		if (updatedSale == null) {
+			return ResponseEntity.badRequest().body("Menu cannot be updated");
+		}
+		
+		return ResponseEntity.ok(updatedSale);
+	}
 
 	@GetMapping("/headers")
 	public ResponseEntity<?> getSaleHeaderList(@RequestParam("userId") int userId){
 		List<SaleHeaderDTO> all = saleService.getAllSaleHeaderByUserId(userId);
+		
 		return ResponseEntity.ok().body(all);
 	}
 
 	@GetMapping("/detail")
 	public ResponseEntity<?> getSaleDetail(@RequestParam("headerId") int headerId){
-		SaleDetailData detail = saleService.getSaleDetailByHeaderId(headerId);
+		List<SaleDetailData> detail = saleService.getSaleDetailByHeaderId(headerId);
+		
 		return ResponseEntity.ok().body(detail);
 	}
 }

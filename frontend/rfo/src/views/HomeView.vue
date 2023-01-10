@@ -106,7 +106,7 @@
           <v-row class="pa0_ma0">
             <div class="d-flex">
               <h3 style="margin-right: 5px;">Table No: </h3>
-              <v-text-field type="number" class="pa0_ma0" min="1" v-model="saveHeaderData.tableNo" 
+              <v-text-field type="number" class="right-input pa0_ma0" min="1" v-model="saveHeaderData.tableNo" 
                 style="width: 50px; font-size: 20px;">
               </v-text-field>
             </div>
@@ -165,9 +165,14 @@ import utils from "../utils/utils.js";
 import payment from "./Payment.vue"
 
 export default {
-  name: 'Home',
+  name: 'home',
 
   components: {},
+
+  props: {
+    headData: Object,
+    required: true
+  },
 
   data() {
     return {
@@ -236,6 +241,17 @@ export default {
     );
 
     this.saveHeaderData = this.getHeaderData();
+
+    if(this.headData != undefined && this.headData.id != undefined){
+      this.saveHeaderData = this.headData;
+
+      this.saveHeaderData.detailList.map(
+        data=>{
+          this.saveDetailList.push(data);
+        }
+      );
+    }
+
     await this.fetchMenuList();
   },
 
@@ -361,6 +377,7 @@ export default {
         this.loading = true;
         let totalAmount = 0;
                 
+        this.saveHeaderData.detailList = [];
         this.saveDetailList.map(
           data => {
             totalAmount += data.totalPrice;
@@ -370,9 +387,16 @@ export default {
         );
 
         this.saveHeaderData.totalAmount = totalAmount;
-        this.saveHeaderData.userId=+this.$store.state.userInfo?.id;
+        // this.saveHeaderData.userId=+this.$store.state.userInfo?.id;
+
+        let url = "";
+        if(this.saveHeaderData.id == ""){
+          url = "/sale/order/confirm";
+        } else {
+          url = "/sale/order/update";
+        }
         
-        const resp = await utils.http.post("/sale/order/confirm", this.saveHeaderData);
+        const resp = await utils.http.post(url, this.saveHeaderData);
         this.loading = false;
 
         if(resp && resp.status == 200){
@@ -427,6 +451,10 @@ export default {
   display: flex;
   align-items: center;
 } */
+
+.right-input input {
+  text-align: right;
+}
 
 .alertboxReg {
   position: fixed;

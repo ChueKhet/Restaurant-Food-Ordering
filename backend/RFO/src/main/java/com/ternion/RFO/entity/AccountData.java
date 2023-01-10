@@ -17,6 +17,14 @@ public class AccountData implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+	@Column(nullable = false)
+	@NotNull(message = "Required")
+	private int parentId;
+	
+	@Column(length = 30,nullable = false)
+	@NotBlank(message = "Required")
+	private String userid;
+	
 	@Column(length = 30,nullable = false)
 	@NotBlank(message = "Required")
 	private String username;
@@ -45,6 +53,22 @@ public class AccountData implements java.io.Serializable {
 		this.id = id;
 	}
 	
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
 	public String getUsername() {
 		return username;
 	}

@@ -9,6 +9,7 @@ import com.ternion.RFO.entity.SaleDetailData;
 import com.ternion.RFO.entity.SaleHeaderData;
 import com.ternion.RFO.repository.SaleDetailRepo;
 import com.ternion.RFO.repository.SaleHeaderRepo;
+import com.ternion.RFO.utility.ServerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,14 +50,15 @@ public class SaleServiceImpl implements SaleService{
 	}
 
 	@Override
-	public SaleDetailData getSaleDetailByHeaderId(int headerId) {
+	public List<SaleDetailData> getSaleDetailByHeaderId(int headerId) {
 		Optional<SaleHeaderData> saleHeaderOptional= saleHeaderRepo.findById(headerId);
+		
 		if(saleHeaderOptional.isPresent()){
-			List<SaleDetailData> saleDetailList= saleHeaderOptional.get().getDetailList();
-			if(saleDetailList.size()>0){
-				return saleDetailList.get(saleDetailList.size()-1);
-			}
+			List<SaleDetailData> saleDetailList = saleHeaderOptional.get().getDetailList();
+			
+			return saleDetailList;
 		}
+		
 		return null;
 	}
 
@@ -64,5 +66,39 @@ public class SaleServiceImpl implements SaleService{
 	@Override
 	public void updateStatus(String modifieddata, int status, int headerId) {
 		saleHeaderRepo.updateStatus(modifieddata, status, headerId);
+	}
+
+	@Transactional
+	@Override
+	public SaleHeaderData updateOrder(SaleHeaderData header) {
+		SaleHeaderData findHeader = saleHeaderRepo.findById(header.getId()).orElse(null);
+		String curDate = ServerUtil.getCurrentDate();
+		
+		if (findHeader == null) {
+			return null;
+		}
+		
+		findHeader.setTotalAmount(header.getTotalAmount());
+		findHeader.setTableNo(header.getTableNo());
+		findHeader.setModifiedAt(curDate);
+		
+		SaleHeaderData headerData = saleHeaderRepo.save(findHeader);
+		
+		if (headerData == null) {
+			return null;
+		} else {
+			saleDetailRepo.deleteAllByHeaderId(headerData.getId());
+			
+			for(int i = 0; i < header.getDetailList().size(); i++) {
+				header.getDetailList().get(i).setHeaderData(new SaleHeaderData());
+				header.getDetailList().get(i).getHeaderData().setId(headerData.getId());
+				header.getDetailList().get(i).setCreatedAt(curDate);
+				header.getDetailList().get(i).setModifiedAt(curDate);
+				
+				createDetail(header.getDetailList().get(i));
+			}
+		}
+		
+		return headerData;
 	}
 }

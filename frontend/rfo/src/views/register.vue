@@ -309,7 +309,7 @@ export default {
             if (this.validate()){    //  this.$refs.registerForm.validate()
                 let respImageData = null;
                 const respImage = await utils.http.postMedia(
-                    "/user/file/create",
+                    "/media/file/create",
                     this.image,
                     this.image.type,
                     "User"

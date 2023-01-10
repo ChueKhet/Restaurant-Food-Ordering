@@ -15,7 +15,9 @@ public interface SaleService {
 	
 	public int getTodayMaxSlip();
 
-	public SaleDetailData getSaleDetailByHeaderId(int headerId);
+	public List<SaleDetailData> getSaleDetailByHeaderId(int headerId);
 	
 	public void updateStatus(String modifieddata, int status, int headerId);
+	
+	public SaleHeaderData updateOrder(SaleHeaderData header);
 }

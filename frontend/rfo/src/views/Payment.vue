@@ -29,7 +29,9 @@
                 <div style="width: 100px;">
                   <v-text-field type="number" v-model="paidAmount" 
                     class="right-input"
-                    :min="totalAmount" required>
+                    :min="totalAmount" 
+                    @change="calculateChange"
+                    required>
                   </v-text-field>
                 </div>
               </td>
@@ -151,9 +153,22 @@ export default {
       }
     },
 
+    calculateChange(){
+      this.changeAmount = this.paidAmount - this.totalAmount;
+    },
+
     validate(){
-      //  paidAmount == 0
-      //  (paidAmount - (totalAmount + changeAmount)) == 0
+      if(this.paidAmount == ""){
+        this.alertbox("error", "Please add PaidAmount!!!", 3000);
+
+        return false;
+      }
+      
+      if(this.changeAmount < 0){
+        this.alertbox("error", "Please check changeAmount!!!", 3000);
+
+        return false;
+      }
 
       return true;
     },
@@ -182,6 +197,15 @@ export default {
         }
       }
 
+    },
+
+    backToOrder(){
+      let exportData = {
+        headData: {}
+      };
+
+      exportData.headData = this.saleHeaders;
+      utils.goToScreenWithData("/", "home", exportData);  
     },
 
     alertbox(type, message, timer){

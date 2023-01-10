@@ -1,14 +1,12 @@
 package com.ternion.RFO.service;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ternion.RFO.entity.AccountData;
+import com.ternion.RFO.entity.UserData;
 import com.ternion.RFO.repository.AccountRepo;
-import com.ternion.RFO.repository.MenuRepo;
 import com.ternion.RFO.utility.ServerUtil;
 
 @Service
@@ -23,8 +21,8 @@ public class AccountServiceImpl implements AccountService {
 	UserService userservice;
 	
 	@Override
-	public AccountData checkLoginUser(String username, String password) {
-		AccountData acc = accRepo.findByUsername(username);
+	public AccountData checkLoginUser(String userid, String password, boolean isForgetPwd) {
+		AccountData acc = accRepo.findByUserid(userid);
 		
 		if (acc == null) {
 			return null;
@@ -36,7 +34,8 @@ public class AccountServiceImpl implements AccountService {
 		}
 		*/
 
-		if (!password.equals(acc.getPassword())) {
+		if ((!isForgetPwd) && (!password.equals(acc.getPassword())) ) {
+			//		(login, change password) => isForgetPwd = false / forget password => isForgetPwd = true
 			return null;
 		}
 		
@@ -71,4 +70,24 @@ public class AccountServiceImpl implements AccountService {
 		return accRepo.save(acc);
 	}
 
+	@Override
+	public int getMaxId() {
+		return accRepo.getMaxId();
+	}
+
+	@Override
+	public UserData updatePassword(String userId, String oldPwd, String newPwd, boolean isForgetPwd) {
+		AccountData acc = checkLoginUser(userId, oldPwd, isForgetPwd);
+		
+		if(acc == null) {
+			return null;
+		}
+		
+		acc.setPassword(newPwd);
+		acc.setModifiedAt(ServerUtil.getCurrentDate());
+		
+		accRepo.save(acc);
+		
+		return null;
+	}
 }
