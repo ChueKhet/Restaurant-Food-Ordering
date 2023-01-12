@@ -56,10 +56,12 @@ public class MenuData implements java.io.Serializable {
 	@NotNull(message = "Required")
 	private int user_id;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String created_at;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String modified_at;
 	
 	@Column(nullable = false)

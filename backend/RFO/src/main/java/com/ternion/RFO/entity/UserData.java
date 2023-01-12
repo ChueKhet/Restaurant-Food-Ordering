@@ -37,10 +37,12 @@ public class UserData implements java.io.Serializable {
 	@NotBlank(message = "Required")
 	private String address;
 
-	@Column(nullable = true)
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String createdAt;
 
-	@Column(nullable = true)
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String modifiedAt;
 	
 	@Column(length = 200)

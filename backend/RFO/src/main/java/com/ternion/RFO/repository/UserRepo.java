@@ -6,8 +6,6 @@ import com.ternion.RFO.entity.UserData;
 
 public interface UserRepo extends JpaRepository<UserData, Integer> {
 
-	
-
 	public UserData findByName(String name);
 
 //	@Override

@@ -1,6 +1,9 @@
 package com.ternion.RFO.service;
 
-import com.ternion.RFO.dto.SaleHeaderDTO;
+import java.util.List;
+import java.util.Optional;
+
+//import com.ternion.RFO.dto.SaleHeaderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,10 +13,6 @@ import com.ternion.RFO.entity.SaleHeaderData;
 import com.ternion.RFO.repository.SaleDetailRepo;
 import com.ternion.RFO.repository.SaleHeaderRepo;
 import com.ternion.RFO.utility.ServerUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SaleServiceImpl implements SaleService{
@@ -34,14 +33,20 @@ public class SaleServiceImpl implements SaleService{
 	}
 
 	@Override
-	public List<SaleHeaderDTO> getAllSaleHeaderByUserId(int userId) {
-		List<SaleHeaderData> saleHeaderList=saleHeaderRepo.findByUserId(userId);
-		List<SaleHeaderDTO> saleHeaderDTOs=new ArrayList<>();
-		for(SaleHeaderData saleHeader:saleHeaderList){
-			SaleHeaderDTO saleHeaderDTO=new SaleHeaderDTO(saleHeader);
+	public List<SaleHeaderData> getAllOrderList() {		//		int userId
+		List<SaleHeaderData> saleHeaderList = saleHeaderRepo.getAllOrderList();
+		
+		/*
+		List<SaleHeaderData> saleHeaderList = saleHeaderRepo.findByUserId(userId);
+		List<SaleHeaderDTO> saleHeaderDTOs = new ArrayList<>();
+		
+		for(SaleHeaderData saleHeader : saleHeaderList){
+			SaleHeaderDTO saleHeaderDTO = new SaleHeaderDTO(saleHeader);
 			saleHeaderDTOs.add(saleHeaderDTO);
 		}
-		return saleHeaderDTOs;
+		*/
+		
+		return saleHeaderList;
 	}
 
 	@Override

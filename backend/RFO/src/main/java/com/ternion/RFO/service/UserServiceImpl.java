@@ -42,18 +42,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserData update(int id, UserData user) {
 		UserData userdata = this.findById(id);
+		
 		if(userdata == null) {
 			return null;
 		}
+		
 		userdata.setName(user.getName()); 
 		userdata.setDob(user.getDob());
 		userdata.setNrc(user.getNrc()); 
+		userdata.setGender(user.getGender());
 		userdata.setPhone(user.getPhone());
 		userdata.setAddress(user.getAddress()); 
 		userdata.setModifiedAt(user.getModifiedAt());
-		userRepo.save(userdata);
 		
-		return null;
+		return userRepo.save(userdata);
 	}
 	
 	@Override

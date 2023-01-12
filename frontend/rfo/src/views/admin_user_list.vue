@@ -157,6 +157,15 @@ export default {
       utils.goToScreen("/register");       
     },
 
+    onClickEditBtn(item){
+      let exportData = {
+        userProfile: {}
+      };
+      exportData.userProfile = item;
+
+      utils.goToScreenWithData("/profile", "profile", exportData);
+    },
+
     onClickDeleteBtn(item){
       this.toDeleteUser = item;
       this.deleteDialog = true;

@@ -17,9 +17,6 @@ public class SaleDetailData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public SaleDetailData() {
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -69,8 +66,8 @@ public class SaleDetailData implements java.io.Serializable {
 	private SaleHeaderData headerData;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
-	private String orderStatus;
+	@NotNull(message = "Required")
+	private int orderStatus;
 
 	public int getId() {
 		return id;
@@ -160,13 +157,6 @@ public class SaleDetailData implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public String getOrderStatus() {
-		return orderStatus;
-	}
-
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
-	}
 
 	@JsonBackReference
 	public SaleHeaderData getHeaderData() {
@@ -175,5 +165,13 @@ public class SaleDetailData implements java.io.Serializable {
 
 	public void setHeaderData(SaleHeaderData headerData) {
 		this.headerData = headerData;
+	}
+	
+	public int getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(int orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 }

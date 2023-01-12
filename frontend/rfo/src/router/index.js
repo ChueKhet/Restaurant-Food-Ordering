@@ -4,13 +4,12 @@ import homeView from '../views/HomeView.vue'
 import login from '../views/logIn.vue'
 import register from '../views/Register.vue'
 import admin_user_list from '../views/admin_user_list.vue'
-
 import menu from '../views/Menu.vue'
 import Ingredients from '../views/Ingredients.vue'
+import Kitchen from '../views/Kitchen.vue'
 import Profile from '../views/Profile.vue'
 import ChangePwd from '../views/ChangePwd.vue'
 import SaleHeaders from '../views/SaleHeaders.vue';
-// import SaleDetail fro../components/SaleDetail.vuevue';
 import Payment from '../views/Payment.vue';
 
 Vue.use(VueRouter)
@@ -35,12 +34,18 @@ const routes = [
   {
     path: '/admin_user_list',
     name: 'admin_user_list',
-    component: admin_user_list
+    component: admin_user_list,
+    props: true
   },
   {
     path: '/menu',
     name: 'menu',
     component: menu
+  },
+  {
+    path: '/kitchen',
+    name: 'kitchen',
+    component: Kitchen
   },
   {
     path: '/ingredients',
@@ -50,7 +55,8 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: Profile
+    component: Profile,
+    props: true
   },
   {
     path: '/changepwd',

@@ -1,5 +1,6 @@
 package com.ternion.RFO.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,12 @@ public class MenuController {
 		 return ResponseEntity.ok(isDeleted);
 		 
 	}
-	
-	
+
+	@SuppressWarnings("unchecked")
+	@PostMapping("/category/ingredient")
+	public List<MenuData> getMenuByCategory(@RequestBody HashMap<String, Object> data) {
+		List<String> categories = (List<String>) data.get("categories");
+		
+		return menuService.getMenuByCategory(categories);
+	}
 }

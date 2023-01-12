@@ -2,9 +2,14 @@ package com.ternion.RFO.controller;
 
 import java.util.List;
 
-import com.ternion.RFO.dto.SaleHeaderDTO;
+//import com.ternion.RFO.dto.SaleHeaderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 import com.ternion.RFO.entity.SaleDetailData;
@@ -57,8 +62,8 @@ public class SaleController {
 	}
 
 	@GetMapping("/headers")
-	public ResponseEntity<?> getSaleHeaderList(@RequestParam("userId") int userId){
-		List<SaleHeaderDTO> all = saleService.getAllSaleHeaderByUserId(userId);
+	public ResponseEntity<?> getSaleHeaderList(){		//		@RequestParam("userId") int userId
+		List<SaleHeaderData> all = saleService.getAllOrderList();
 		
 		return ResponseEntity.ok().body(all);
 	}

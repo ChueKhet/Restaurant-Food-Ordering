@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -32,13 +33,15 @@ public class CategoryData implements java.io.Serializable {
 	private String description;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Required")
+	@NotNull(message = "Required")
 	private int user_id;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String created_at;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String modified_at;	
 	
 	@OneToMany(mappedBy = "category")

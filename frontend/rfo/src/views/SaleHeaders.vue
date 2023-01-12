@@ -1,35 +1,44 @@
 <template>
   <div class="ma-5">
-    <v-row style="margin-left: 5px; margin-top: 0px !important; margin-bottom: 20px;">
-      <v-title>
-        <h2>
-          Sale Headers
-        </h2>
-      </v-title>
-    </v-row>
+    <v-card>
+      <v-card-title class="d-flex justify-space-between">
+        <span class="mr-5">
+          Order List
+        </span>
 
-    <v-data-table
-      class="elevation-4"
-      :headers="hTableHeaders"
-      :items="saleHeaders"
-      :items-per-page="5">
-        <template v-slot:item.orderStatus="{ item }">
-          <div class="orderStatus">
-            {{item.orderStatus}}
-          </div>
-        </template>
-        <template v-slot:item.btn="{ item }">
+        <span style="width: 250px;">
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </span>
+      </v-card-title>
 
-          <v-btn
-            color="red"
-            fab
-            x-small
-            dark
-            @click="onClickDetail(item.id)" >
-              <v-icon>mdi-eye</v-icon>
-          </v-btn>
-        </template>
-    </v-data-table>
+      <v-data-table
+        :headers="hTableHeaders"
+        :items="saleHeaders"
+        :items-per-page="5">
+          <template v-slot:item.orderStatus="{ item }">
+            <div class="orderStatus">
+              {{item.orderStatus}}
+            </div>
+          </template>
+          <template v-slot:item.btn="{ item }">
+
+            <v-btn
+              color="red"
+              fab
+              x-small
+              dark
+              @click="onClickDetail(item.id)" >
+                <v-icon>mdi-eye</v-icon>
+            </v-btn>
+          </template>
+      </v-data-table>
+    </v-card>
 
     <v-dialog v-model="detailDialog" width="1000">
       <v-data-table
@@ -44,6 +53,7 @@
           </template>
           
       </v-data-table>
+      <v-btn @click="detailDialog = false">Cancel</v-btn>
     </v-dialog>
   </div>
 </template>
@@ -65,6 +75,7 @@ export default {
       saleHeaderId: "",
       saleHeaders: [],
       saleDetails: [],
+      search: "",
 
       hTableHeaders: [
         {
@@ -142,10 +153,11 @@ export default {
   methods: {
     async fetchSaleHeaders(){
       const STATUS={
-       0:'Order',
-       1:'Sales',
-       2:'Served'
-      }
+        0:'Order',
+        1:'Sales',
+        2:'Served'
+      };
+
       const userId=this.$store.state.userInfo?.id;
       const resp = await utils.http.get("/sale/headers"+"?userId="+userId);
 
@@ -153,7 +165,9 @@ export default {
         const data = await resp.json();
 
         if(data){
-          this.saleHeaders = data?.length>0?data.map(it=>({...it,orderStatus:STATUS[it.orderStatus]})):[];
+          this.saleHeaders = data?.length > 0 ? data.map(
+            it => ({...it, orderStatus:STATUS[it.orderStatus]})
+          ) : [];
         }
       }
     },

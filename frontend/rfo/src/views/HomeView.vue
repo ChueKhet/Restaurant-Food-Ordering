@@ -3,6 +3,61 @@
 
     <v-col cols="12" :sm="(loginUser && loginUser.role == 0) ? 6 : 12">
       <v-row>
+        <v-col style="padding-bottom: 0px; width: 100%;">
+
+          <div class="card ma-3 px-3 d-flex justify-space-between elevate" style="width: auto; margin-bottom: 0px !important;">
+
+            <div class="d-flex">
+
+              <div style="width: 250px; height: 32px;">
+                <v-select class="hv-vSelect"
+                  v-model="categories"
+                  :items="categoryList"
+                  attach
+                  chips
+                  label="Category"
+                  item-text="description"
+                  item-value="code"
+                  multiple
+                  :readonly="switch1"
+                  @change="getMenuByCategory"
+                ></v-select>
+                <!-- return-object -->
+              </div>
+
+              <template>
+                <v-sheet class="d-flex align-center pl-5" style="background-color: transparent;">
+                  <v-switch class="custom-purple"
+                    color="deep-purple lighten-1"
+                    v-model="switch1"
+                    inset
+                    @change="selectAllCategory"
+                  ></v-switch>
+                  <!-- color="deep-purple lighten-1" dark -->
+                </v-sheet>
+              </template>
+
+              <label class="d-flex align-center">Select All</label>
+
+            </div>
+
+            <div class="d-flex align-center" style="width: 250px;">
+              <v-text-field class="ma-0 pa-0"
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search Code/Name"
+                single-line
+                hide-details
+                @keyup="searchMenu"
+              ></v-text-field>
+            </div>
+
+          </div>
+
+        </v-col>
+      </v-row>
+
+      <v-row style="margin-top: 0px;">
         <v-col cols="12" 
         :sm="(loginUser && loginUser.role == 0) ? 12 : 6" 
         :md="(loginUser && loginUser.role == 0) ? 6 : 3" 
@@ -10,23 +65,19 @@
         v-for="menu in menuList" :key="menu.id">
 
           <!-- <v-card class="ma-2" elevation="8" width="220">
-
             <div align="right" style="padding-top: 5px; margin-right: 5px;">
               <v-btn color="deep-purple lighten-1" fab dark small>
                 <v-icon dark>mdi-cached</v-icon>
               </v-btn>
             </div>
-
             <div class="d-flex flex-column align-center justify-center">
               <v-img src="../assets/saved Images/menu/logo.png" width="200" height="215"></v-img>
-
               <v-card-title>{{menu.description}}</v-card-title>
               <v-card-text align="center">price : {{menu.code}}</v-card-text>
             </div>
-
           </v-card> -->
 
-          <div class="card ma-3">
+          <div class="card card-addition ma-3">
             <div class="card__inner" :id="'inner' + menu.id">
 
               <div class="card__face card__face--front">
@@ -162,7 +213,6 @@
 
 <script>
 import utils from "../utils/utils.js";
-import payment from "./Payment.vue"
 
 export default {
   name: 'home',
@@ -179,9 +229,30 @@ export default {
       imagePath: utils.constant.imagePath,
       loginUser: {},
       menuList: [],
+      allMenuList: [],
       saveHeaderData: this.getHeaderData(),
       saveDetailList: [],
       detailListSize: 0,
+
+      search: "",
+      categories: [],
+      categoryList: [
+        {
+          code: 1,
+          description: "Food"
+        },
+        {
+          code: 2,
+          description: "Drink"
+        }
+      ],
+
+      errorAlert: false,
+      alert_message: "",
+      message_type: "",
+
+      switch1: true,
+
       orderHeaders: [
         {
           text: 'Description',
@@ -195,6 +266,10 @@ export default {
         {
           text: 'QTY',
           value: 'qty',
+        },
+        {
+          text: 'Price',
+          value: 'price',
         },
         {
           text: 'Actions',
@@ -218,16 +293,12 @@ export default {
           "code": 3,
           "desc": "More"
         },
-      ],
-      errorAlert: false,
-      alert_message: "",
-      message_type: ""
+      ]
     };
   },
 
   async created() {
     this.loginUser = this.$store.state.loginUser;
-
     this.$store.watch(
       () => {
         return this.$store.state.loginUser;
@@ -239,7 +310,6 @@ export default {
         deep: true,
       }
     );
-
     this.saveHeaderData = this.getHeaderData();
 
     if(this.headData != undefined && this.headData.id != undefined){
@@ -261,19 +331,24 @@ export default {
 
       if(resp && resp.status == 200){
         this.menuList = await resp.json();
+
+        this.allMenuList = [];
+        this.menuList.map(
+          data => {
+            this.allMenuList.push(data);
+          }
+        );
       }
     },
 
     cardFlip(id){
       let innerId = "#inner" + id;
       const card = document.querySelector(innerId);
-
       card.classList.toggle('is-flipped');
     },
 
     addToCart(item){
       this.detailListSize++;
-
       let tempData = {
         id: this.detailListSize,
         qty: 1,
@@ -285,20 +360,16 @@ export default {
         remark: this.allRemark(item.ingredientList),
         orderStatus: 0    //    0 = Ordered, 1 = Served
       };
-
       let isExist = this.saveDetailList.some(
         data => {
           let boo = (data.menuId == tempData.menuId && data.menuCode == tempData.menuCode && data.remark == tempData.remark);
-
           if(boo){
             data.qty++;
             data.totalPrice = this.getTotalPrice(data.qty, data.price);
           }
-
           return boo;
         }
       );
-
       if(!isExist){
         this.saveDetailList.push(tempData);
       }
@@ -315,7 +386,6 @@ export default {
     allRemark(ingredients){
       let tempRemark = "";
       let remarkDesc = "";
-
       ingredients.map(
         data => {
           if(data.status != 0){
@@ -324,16 +394,13 @@ export default {
                 return rlData.code == data.status;
               } 
             )[0].desc;
-
             tempRemark += data.description + " : " + remarkDesc + " ";
           }
         }
       );
-
       if(tempRemark == ""){
         tempRemark = "-";
       }
-
       return tempRemark;
     },
 
@@ -343,14 +410,12 @@ export default {
           return data.id == item.id;
         }
       );
-
       if(isExist){
         let temp = this.saveDetailList.filter(
           data => {
             return data.id != item.id;
           }
         );
-
         this.detailListSize--;
         this.saveDetailList = temp;
       }
@@ -359,16 +424,13 @@ export default {
     validate(){
       if(this.saveHeaderData.tableNo == ""){
         this.alertbox("error", "Please add TableNo!!!", 3000);
-
         return false;
       }
       
       if(this.saveDetailList.length < 1){
         this.alertbox("error", "Please add Menu!!!", 3000);
-
         return false;
       }
-
       return true;
     },
 
@@ -381,11 +443,9 @@ export default {
         this.saveDetailList.map(
           data => {
             totalAmount += data.totalPrice;
-
             this.saveHeaderData.detailList.push(data);
           }
         );
-
         this.saveHeaderData.totalAmount = totalAmount;
         // this.saveHeaderData.userId=+this.$store.state.userInfo?.id;
 
@@ -398,19 +458,85 @@ export default {
         
         const resp = await utils.http.post(url, this.saveHeaderData);
         this.loading = false;
-
         if(resp && resp.status == 200){
           this.clear();
           let exportData = {
             headerData: {}
           };
-
           exportData.headerData = await resp.json();
           
           utils.goToScreenWithData("/payment", "payment", exportData);
         } else {
           console.log("FAIL!!!");
         }
+      }
+    },
+
+    selectAllCategory(){
+      if(this.switch1){
+        this.search = "";
+        this.categories = [];
+        this.fetchMenuList();
+      }
+    },
+
+    async getMenuByCategory(){
+      this.search = "";
+      
+      if(this.categories.length > 0){
+        let param = {
+          // "categories": this.getCategories()
+          "categories": this.categories
+        };
+
+        const resp = await utils.http.post("/menu/category/ingredient", param);
+
+        if(resp && resp.status == 200){
+          this.menuList = await resp.json();
+
+          this.allMenuList = [];
+          this.menuList.map(
+            data => {
+              this.allMenuList.push(data);
+            }
+          );
+        }
+      } else {
+        this.fetchMenuList();
+      }
+    },
+
+    getCategories(){
+      let passCategory = "";
+
+      this.categories.map(
+        data => {
+          passCategory += data.code + ",";
+        }
+      );
+
+      passCategory = passCategory.substring(0, passCategory.length - 1);
+
+      return passCategory;
+    },
+
+    searchMenu(){
+      this.menuList = this.allMenuList.filter(
+        data => {
+          if(data.code.includes(this.search) || data.description.includes(this.search)){
+            return data;
+          }
+        }
+      );
+
+      if(this.search == ""){
+        this.menuList = [];
+
+        this.allMenuList.map(
+          data => {
+            this.menuList.push(data);
+          }
+        );
       }
     },
 
@@ -435,14 +561,12 @@ export default {
       this.message_type = type;
       this.alert_message = message;
       this.errorAlert = true;
-
       setTimeout(() => {
         this.errorAlert = false;
       }, timer);
     }
   }
 }
-
 </script>
 
 <style>
@@ -451,6 +575,21 @@ export default {
   display: flex;
   align-items: center;
 } */
+
+.elevate {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.hv-vSelect > .v-input__control > .v-input__slot {
+  height: 32px;
+}
+
+.hv-vSelect > .v-input__control > .v-input__slot > .v-select__slot > .v-label {
+  top: 10px;
+}
 
 .right-input input {
   text-align: right;
@@ -466,7 +605,6 @@ export default {
 }
 
 /******** card flip ********/
-
 :root {
   --primary: #FFCE00;
   --secondary: #FE4880;
@@ -477,6 +615,9 @@ export default {
 .card {
   /* width: 220px; */
   width: 100%;
+}
+
+.card-addition {
   height: 300px;
   perspective: 1000px;
 }

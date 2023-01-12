@@ -1,6 +1,7 @@
 package com.ternion.RFO.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class MenuServiceImpl implements MenuService {
 		 
 		 for(int i=0; i<data.size(); i++) {
 			 ingredientList = new ArrayList<>();
-			 ingredientList = ingredientRepo.getAllByMenuId(data.get(i).getId());
+			// ingredientList = ingredientRepo.getAllByMenuId(data.get(i).getId());
 			 
 			 data.get(i).setIngredientList(ingredientList);
 		 }
@@ -73,4 +74,11 @@ public class MenuServiceImpl implements MenuService {
 		menuRepo.deleteById(id);
 		return true;
 	}
+
+	@Override
+	public List<MenuData> getMenuByCategory(List<String> categories) {		//		String categories
+		return menuRepo.getMenuByCategory(categories);
+
+	}
+	
 }

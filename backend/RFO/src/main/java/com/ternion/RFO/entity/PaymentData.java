@@ -42,11 +42,11 @@ public class PaymentData implements java.io.Serializable  {
 //	@OneToOne(mappedBy = "payment")
 //	private SaleHeaderData saleHeaders;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	@NotBlank(message = "Required")
 	private String createdAt;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	@NotBlank(message = "Required")
 	private String modifiedAt;
 	

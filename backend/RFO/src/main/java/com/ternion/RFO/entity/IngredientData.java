@@ -51,9 +51,11 @@ public class IngredientData implements java.io.Serializable {
 	private int userid;
 	
 	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String createdAt;
 	
 	@Column(nullable = false)
+	@NotBlank(message = "Required")
 	private String modifiedAt;
 	
 	private int status = 0;
@@ -83,7 +85,6 @@ public class IngredientData implements java.io.Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
-
 
 	public String getDescription() {
 		return description;

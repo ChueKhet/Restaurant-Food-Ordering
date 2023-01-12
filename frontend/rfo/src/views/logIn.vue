@@ -7,22 +7,18 @@
       <v-card-title>
         <v-form ref="loginForm" v-model="loginForm" class="d-flex flex-column justify-center align-center">
           <v-text-field 
-            label="Employee ID" 
-            placeholder="Enter Employee ID" 
-            v-model="userid" 
-            :rules = "[(v) => !!v || 'Required',]" required 
+            label="Employee ID"
+            v-model="userid"
+            @keydown.enter="onClickLogIn"
+            :rules="[(v) => !!v || 'Required',]" required 
           ></v-text-field>
 
           <v-text-field
-            v-model="password"
             type="password"
-            :rules="[
-              (v) => !!v || 'Required',
-              (v) =>
-                (v && v.length <= 10) ||
-                'Password must be less than 10 characters',
-            ]"
-            label="Password" required
+            label="Password"
+            v-model="password"
+            @keydown.enter="onClickLogIn"
+            :rules="[(v) => !!v || 'Required',]" required
           ></v-text-field>
           <v-btn @click="onClickLogIn">Login</v-btn>
         </v-form>

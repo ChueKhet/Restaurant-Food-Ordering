@@ -7,16 +7,17 @@
         </div>
       </v-card-title>
       <v-card-title>
-        <div class="mr-5 d-flex justify-space-between">
-        <h3 style="margin-right: 5px;">Table No: {{ saleHeaders.tableNo }}</h3>
-        <h3 style="margin-right: 5px;">Slip No: {{ saleHeaders.slipNo }}</h3>
-      </div>
+        <div class="mr-5 d-flex justify-space-between" style="width: 100%;">
+          <lable style="font-size: 1rem; margin-right: 5px;">Table No: {{ saleHeaders.tableNo }}</lable>
+          <lable style="font-size: 1rem; margin-right: 5px;">Slip No: {{ saleHeaders.slipNo }}</lable>
+        </div>
       </v-card-title>
       
 
       <v-data-table
         :headers="tableHeaders"
-        :items="this.saleHeaders.detailList">
+        :items="this.saleHeaders.detailList"
+        :hide-default-footer="true">
               
           <template v-slot:body.append>
             <tr>
@@ -191,7 +192,8 @@ export default {
         if(resp && resp.status == 200){
           // this.clear();
           // let exportData = await resp.json();
-          console.log("SUCCESS!!!");
+
+          utils.goToScreen("/");
         } else {
           console.log("FAIL!!!");
         }
@@ -203,8 +205,8 @@ export default {
       let exportData = {
         headData: {}
       };
-
       exportData.headData = this.saleHeaders;
+
       utils.goToScreenWithData("/", "home", exportData);  
     },
 

@@ -15,4 +15,6 @@ public interface MenuService {
 	public MenuData update(MenuData menu);
 
 	public boolean delete(int id);
+	
+	public List<MenuData> getMenuByCategory(List<String> categories);		//		String categories
 }
