@@ -13,7 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -47,8 +46,8 @@ public class IngredientData implements java.io.Serializable {
 	private String description;
 	
 	@Column(nullable = false)
-	@NotNull(message = "Required")
-	private int userid;
+	@NotBlank(message = "Required")
+	private String userid;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
@@ -94,11 +93,11 @@ public class IngredientData implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 

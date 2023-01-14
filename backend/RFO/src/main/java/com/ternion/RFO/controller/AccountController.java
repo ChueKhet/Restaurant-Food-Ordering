@@ -35,10 +35,16 @@ public class AccountController {
 	public ResponseEntity<?> login(@Valid @RequestBody HashMap<String,Object> data) {
 		AccountData acc = accService.checkLoginUser(data.get("userid").toString(), data.get("password").toString(), false);
 		
-		UserData user = userService.findById(acc.getParentId());
+		UserData user = new UserData();
 		
-		if (acc == null || user == null) {
+		if (acc == null) {
 			return ResponseEntity.badRequest().build();
+		} else {
+			user = userService.findById(acc.getParentId());
+			
+			if(user == null) {
+				return ResponseEntity.badRequest().build();
+			}
 		}
 		
 		HashMap<String, Object> result = new HashMap<String, Object>();

@@ -24,6 +24,7 @@ public class IngredientServiceImpl implements IngredientService {
 		String curDate = ServerUtil.getCurrentDate();
 		ingredient.setCreatedAt(curDate);
 		ingredient.setModifiedAt(curDate);
+		
 		return ingredientRepo.save(ingredient);
 	}
 
@@ -34,20 +35,20 @@ public class IngredientServiceImpl implements IngredientService {
 		ingredientRepo.deleteById(ingredient.getId());
 		ingredient.setId(0);
 		ingredient.setModifiedAt(curDate);
-		return ingredientRepo.save(ingredient);
 		
+		return ingredientRepo.save(ingredient);
 	}
 
 	@Override
 	public boolean delete(int id) {
 		IngredientData findIngredient = ingredientRepo.findById(id).orElse(null);
+		
 		if (findIngredient == null) {
 			return false;
 		}
+		
 		ingredientRepo.deleteById(id);
+		
 		return true;
 	}
-	
-	
-
 }

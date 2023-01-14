@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,16 +32,16 @@ public class CategoryData implements java.io.Serializable {
 	private String description;
 	
 	@Column(nullable = false)
-	@NotNull(message = "Required")
-	private int user_id;
+	@NotBlank(message = "Required")
+	private String userid;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String created_at;
+	private String createdAt;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Required")
-	private String modified_at;	
+	private String modifiedAt;	
 	
 	@OneToMany(mappedBy = "category")
 	List<MenuData> menuList;
@@ -71,31 +70,31 @@ public class CategoryData implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public String getCreated_at() {
-		return created_at;
+	public String getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreated_at(String created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	public String getModified_at() {
-		return modified_at;
+	public String getModifiedAt() {
+		return modifiedAt;
 	}
 
-	public void setModified_at(String modified_at) {
-		this.modified_at = modified_at;
+	public void setModifiedAt(String modifiedAt) {
+		this.modifiedAt = modifiedAt;
 	}
 
-//	@JsonBackReference
+	//	@JsonBackReference
 	@JsonManagedReference
 	public List<MenuData> getMenuList() {
 		return menuList;

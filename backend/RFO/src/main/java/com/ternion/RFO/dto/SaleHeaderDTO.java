@@ -1,5 +1,8 @@
 package com.ternion.RFO.dto;
+import java.util.List;
+
 import com.ternion.RFO.entity.PaymentData;
+import com.ternion.RFO.entity.SaleDetailData;
 import com.ternion.RFO.entity.SaleHeaderData;
 
 public class SaleHeaderDTO {
@@ -11,7 +14,7 @@ public class SaleHeaderDTO {
 
     private int slipNo;
 
-    private int userId;
+    private String userid;
 
     private int orderStatus;
 
@@ -19,9 +22,9 @@ public class SaleHeaderDTO {
 
     private String modifiedAt;
 
-    private int deleteStatus;
-
     private PaymentData payment;
+    
+    private List<SaleDetailData> detailList;
 
     public SaleHeaderDTO() {
     }
@@ -31,11 +34,12 @@ public class SaleHeaderDTO {
         this.tableNo=saleHeader.getTableNo();
         this.totalAmount=saleHeader.getTotalAmount();
         this.slipNo=saleHeader.getSlipNo();
-        this.userId=saleHeader.getUserId();
+        this.userid=saleHeader.getUserid();
         this.orderStatus=saleHeader.getOrderStatus();
         this.createdAt=saleHeader.getCreatedAt();
         this.modifiedAt=saleHeader.getModifiedAt();
         this.payment=saleHeader.getPayment();
+        this.detailList = saleHeader.getDetailList();
     }
 
     public int getId() {
@@ -70,15 +74,15 @@ public class SaleHeaderDTO {
         this.slipNo = slipNo;
     }
 
-    public int getUserId() {
-        return userId;
-    }
+	public String getUserid() {
+		return userid;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 
-    public int getOrderStatus() {
+	public int getOrderStatus() {
         return orderStatus;
     }
 
@@ -102,14 +106,6 @@ public class SaleHeaderDTO {
         this.modifiedAt = modifiedAt;
     }
 
-    public int getDeleteStatus() {
-        return deleteStatus;
-    }
-
-    public void setDeleteStatus(int deleteStatus) {
-        this.deleteStatus = deleteStatus;
-    }
-
     public PaymentData getPayment() {
         return payment;
     }
@@ -117,4 +113,12 @@ public class SaleHeaderDTO {
     public void setPayment(PaymentData payment) {
         this.payment = payment;
     }
+
+	public List<SaleDetailData> getDetailList() {
+		return detailList;
+	}
+
+	public void setDetailList(List<SaleDetailData> detailList) {
+		this.detailList = detailList;
+	}
 }

@@ -25,7 +25,6 @@ public class SaleController {
 	
 	@PostMapping("/order/confirm")
 	public ResponseEntity<?> create(@RequestBody SaleHeaderData header) {
-		System.out.println("userid "+header.getUserId());
 		String curDate = ServerUtil.getCurrentDate();
 		header.setCreatedAt(curDate);
 		header.setModifiedAt(curDate);

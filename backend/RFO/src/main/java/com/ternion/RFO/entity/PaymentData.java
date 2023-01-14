@@ -51,8 +51,8 @@ public class PaymentData implements java.io.Serializable  {
 	private String modifiedAt;
 	
 	@Column(nullable = false)
-	@NotNull(message = "Required")
-	private int userId;
+	@NotBlank(message = "Required")
+	private String userid;
 
 	public int getId() {
 		return id;
@@ -110,15 +110,15 @@ public class PaymentData implements java.io.Serializable  {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public int getUserId() {
-		return userId;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-//	@JsonBackReference
+	//	@JsonBackReference
 	public SaleHeaderData getSaleHeaders() {
 		return saleHeaders;
 	}

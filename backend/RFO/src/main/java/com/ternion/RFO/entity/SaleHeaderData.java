@@ -31,8 +31,8 @@ public class SaleHeaderData implements java.io.Serializable  {
 	private int slipNo;
 	
 	@Column(nullable = false)
-	@NotNull(message = "Required")
-	private int userId;
+	@NotBlank(message = "Required")
+	private String userid;
 	
 	@Column(nullable = false)
 	@NotNull(message = "Required")
@@ -88,12 +88,12 @@ public class SaleHeaderData implements java.io.Serializable  {
 		this.slipNo = slipNo;
 	}
 
-	public int getUserId() {
-		return userId;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 	public int getOrderStatus() {

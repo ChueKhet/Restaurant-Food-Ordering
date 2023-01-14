@@ -88,8 +88,10 @@
 
             <v-select
               v-model="category_id"
-              :items="categoryLists"
+              :items="categoryList"
               label="Choose Category"
+              item-text="description"
+              item-value="code"
               outlined
               required
               :rules="[(v) => !!v || 'Required']"
@@ -300,10 +302,11 @@ export default {
       price: "",
       created_at: new Date().toISOString().substr(0, 10),
       modified_at: new Date().toISOString().substr(0, 10),
-      user_id: this.$store.state.loginUser.name,
+      user_id: "",
       search: "",
       createMenuForm: "",
       editMenuForm: "",
+      loginUser: {},
 
       headers: [
         { text: "No", align: "start", value: "id" },
@@ -317,7 +320,7 @@ export default {
         { text: "Actions", value: "actions", sortable: false },
       ],
       menuRecords: [],
-      categoryLists: [1, 2],
+      categoryList: [],
 
       toUpdateMenu: {
         image: null,
@@ -344,7 +347,22 @@ export default {
 
   // Run once when screen is loaded
   async created(){
+    this.$store.watch(
+      () => {
+        return this.$store.state.loginUser;
+      },
+      (newVal, oldVal) => {
+        this.loginUser = newVal;
+      },
+      {
+        deep: true,
+      }
+    );
+    
+    this.loginUser = this.$store.state.loginUser;
+
     await this.fetchMenuLists();
+    await this.getCategoryList();
   },
 
   methods: {
@@ -373,6 +391,15 @@ export default {
       }
     },
 
+    async getCategoryList(){
+      const resp = await utils.http.get("/category/all");
+
+      if(resp && resp.status == 200){
+        this.categoryList = await resp.json();
+        console.log(this.categoryList);
+      }
+    },
+
     onClickCreateBtn() {
       this.createDialog = true;
       this.initialState();
@@ -395,16 +422,18 @@ export default {
           this.errorAlert = true;
         }
 
+        this.user_id = this.loginUser.userid;
         let saveData = {
           imagePath: respImageData,
           code: this.code,
           description: this.description,
           price: +this.price,
           created_at: this.created_at,
-          user_id: this.user_id,
+          userid: this.user_id,
           category: {
             id: this.category_id
-          }
+          },
+          ingredientList: []
         };
         console.log('saveData',saveData);
 

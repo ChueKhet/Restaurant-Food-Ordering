@@ -57,8 +57,8 @@ public class MenuServiceImpl implements MenuService {
 		findMenu.getCategory().setId(menu.getCategory().getId());
 		findMenu.setPrice(menu.getPrice());
 		findMenu.setDescription(menu.getDescription());
-		findMenu.setModified_at(menu.getModified_at());
-		findMenu.setUser_id(menu.getUser_id());
+		findMenu.setModifiedAt(menu.getModifiedAt());
+		findMenu.setUserid(menu.getUserid());
 		
 		return menuRepo.save(findMenu);
 	}

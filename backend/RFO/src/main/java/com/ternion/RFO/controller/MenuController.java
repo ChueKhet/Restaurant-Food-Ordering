@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ternion.RFO.entity.MenuData;
 import com.ternion.RFO.service.MenuService;
+import com.ternion.RFO.utility.ServerUtil;
 
 @RestController
 @RequestMapping("/api/menu")
@@ -40,7 +41,10 @@ public class MenuController {
 
 	@PostMapping("/add")
 	public ResponseEntity<?> create(@RequestBody MenuData data) {
-		System.out.println("price"+data.getPrice());
+		String curDate = ServerUtil.getCurrentDate();
+		data.setCreatedAt(curDate);
+		data.setModifiedAt(curDate);
+		
 		MenuData menuData = menuService.create(data);
 		
 		if (menuData == null) {

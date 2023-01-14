@@ -217,6 +217,19 @@ export default {
   },
 
   async created() {
+    this.$store.watch(
+      () => {
+        return this.$store.state.loginUser;
+      },
+      (newVal, oldVal) => {
+        this.loginUser = newVal;
+      },
+      {
+        deep: true,
+      }
+    );
+    this.loginUser = this.$store.state.loginUser;
+    
     await this.fetchIngredientAddedMenuLists();
   },
 
@@ -261,6 +274,7 @@ export default {
       if (this.$refs.addIngredientForm.validate()) {
         let param = {
           code: this.code,
+          userid: this.loginUser.userid,
           description: this.description,
           menuDataList: this.menuList 
         };

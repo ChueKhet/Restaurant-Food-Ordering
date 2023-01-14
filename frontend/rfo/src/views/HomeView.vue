@@ -236,16 +236,7 @@ export default {
 
       search: "",
       categories: [],
-      categoryList: [
-        {
-          code: 1,
-          description: "Food"
-        },
-        {
-          code: 2,
-          description: "Drink"
-        }
-      ],
+      categoryList: [],
 
       errorAlert: false,
       alert_message: "",
@@ -298,7 +289,6 @@ export default {
   },
 
   async created() {
-    this.loginUser = this.$store.state.loginUser;
     this.$store.watch(
       () => {
         return this.$store.state.loginUser;
@@ -310,6 +300,8 @@ export default {
         deep: true,
       }
     );
+    this.loginUser = this.$store.state.loginUser;
+
     this.saveHeaderData = this.getHeaderData();
 
     if(this.headData != undefined && this.headData.id != undefined){
@@ -323,6 +315,7 @@ export default {
     }
 
     await this.fetchMenuList();
+    await this.getCategoryList();
   },
 
   methods: { 
@@ -338,6 +331,15 @@ export default {
             this.allMenuList.push(data);
           }
         );
+      }
+    },
+
+    async getCategoryList(){
+      const resp = await utils.http.get("/category/all");
+
+      if(resp && resp.status == 200){
+        this.categoryList = await resp.json();
+        console.log(this.categoryList);
       }
     },
 
@@ -549,6 +551,7 @@ export default {
     getHeaderData(){
       return {
         id: "",
+        userid: (this.loginUser && this.loginUser.userid != "") ? this.loginUser.userid : "",
         slipNo: "",
         tableNo: "",
         orderStatus: 0,     //    0 = Order Confirmed, 1 = Sales Confirmed, 2 = Served

@@ -129,16 +129,16 @@
       async submit() {
         if(this.validate()){
           let param = {
-            userId: "",
+            userid: "",
             oldPwd: this.current_pwd,
             newPwd: this.new_pwd,
             isForgetPwd: this.isForgetPwd ? "true" : "false",
           };
 
           if(this.isForgetPwd){
-            param.userId = this.userId;
+            param.userid = this.userId;
           } else {
-            param.userId = this.loginUser.userid;
+            param.userid = this.loginUser.userid;
           }
 
           const resp = await utils.http.put("/account/password/update", param);

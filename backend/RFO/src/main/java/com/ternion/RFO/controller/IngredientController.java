@@ -24,10 +24,6 @@ public class IngredientController {
 	
 	@PostMapping("/add")
 	public ResponseEntity<?> create(@RequestBody IngredientData data) {
-		String curDate = ServerUtil.getCurrentDate();
-		data.setCreatedAt(curDate);
-		data.setModifiedAt(curDate);
-		
 		IngredientData ingreData = ingredientService.create(data);
 		
 		if (ingreData == null) {
