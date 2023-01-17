@@ -17,4 +17,6 @@ public interface MenuService {
 	public boolean delete(int id);
 	
 	public List<MenuData> getMenuByCategory(List<String> categories);		//		String categories
+	
+	public MenuData findByCode(String code);
 }

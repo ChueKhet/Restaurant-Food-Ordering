@@ -40,12 +40,15 @@ public class MediaController {
 	public ResponseEntity<String> updateFile(
 			@RequestParam("file") MultipartFile file,
 			@RequestParam("fileType") String fileType,
-			@RequestParam("filePath") String filePath
+			@RequestParam("filePath") String filePath,
+			@RequestParam("folderName") String folderName
 	) {
-		String newFilePath = storageService.update(file, fileType, filePath);
+		String newFilePath = storageService.update(file, fileType, filePath, folderName);
+		
 		if (newFilePath == null) {
 			return ResponseEntity.internalServerError().build();
 		}
+		
 		return ResponseEntity.ok(newFilePath);
 	}
 

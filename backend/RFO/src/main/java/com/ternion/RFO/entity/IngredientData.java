@@ -1,37 +1,35 @@
 package com.ternion.RFO.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
+//import java.util.List;
+//
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.UniqueConstraint;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.JoinTable;
+//import javax.persistence.ManyToMany;
+//import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 
-//import com.fasterxml.jackson.annotation.JsonBackReference;
-//import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class IngredientData implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToMany(cascade = {CascadeType.MERGE})
-	@JoinTable(
-		name = "menu_ingredient",
-		joinColumns = @JoinColumn(name = "ingredient_id"),
-		inverseJoinColumns = @JoinColumn(name = "menu_id"),
-		uniqueConstraints={@UniqueConstraint(columnNames={"ingredient_id", "menu_id"})}
-	)
-	@JsonIgnoreProperties("ingredientList")
-	List<MenuData> menuDataList;
+//	@ManyToMany(cascade = {CascadeType.MERGE})
+//	@JoinTable(
+//		name = "menu_ingredient",
+//		joinColumns = @JoinColumn(name = "ingredient_id"),
+//		inverseJoinColumns = @JoinColumn(name = "menu_id"),
+//		uniqueConstraints={@UniqueConstraint(columnNames={"ingredient_id", "menu_id"})}
+//	)
+//	@JsonIgnoreProperties("ingredientList")
+//	List<MenuData> menuDataList;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,15 +57,13 @@ public class IngredientData implements java.io.Serializable {
 	
 	private int status = 0;
 
-//	@JsonIgnore
-//	@JsonBackReference
-	public List<MenuData> getMenuDataList() {
-		return menuDataList;
-	}
-
-	public void setMenuDataList(List<MenuData> menuDataList) {
-		this.menuDataList = menuDataList;
-	}
+//	public List<MenuData> getMenuDataList() {
+//		return menuDataList;
+//	}
+//
+//	public void setMenuDataList(List<MenuData> menuDataList) {
+//		this.menuDataList = menuDataList;
+//	}
 
 	public int getId() {
 		return id;

@@ -6,11 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ternion.RFO.entity.IngredientData;
 import com.ternion.RFO.entity.MenuData;
 import com.ternion.RFO.repository.IngredientRepo;
 import com.ternion.RFO.repository.MenuRepo;
+import com.ternion.RFO.utility.ServerUtil;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -46,19 +48,25 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
+	@Transactional
 	public MenuData update(MenuData menu) {
 		MenuData findMenu = menuRepo.findById(menu.getId()).orElse(null);
 		
 		if (findMenu == null) {
 			return null;
 		}
-		
+
+		String curDate = ServerUtil.getCurrentDate();
+
+		findMenu.setModifiedAt(curDate);
 		findMenu.setImagePath(menu.getImagePath());
-		findMenu.getCategory().setId(menu.getCategory().getId());
+		findMenu.setCategory(menu.getCategory());
+		findMenu.setIngredientList(menu.getIngredientList());
 		findMenu.setPrice(menu.getPrice());
 		findMenu.setDescription(menu.getDescription());
-		findMenu.setModifiedAt(menu.getModifiedAt());
 		findMenu.setUserid(menu.getUserid());
+		
+//		menuRepo.updateMenu(curDate, menu.getImagePath(), menu.getCategory().getId(), menu.getPrice(), menu.getDescription(), menu.getUserid(), menu.getId());
 		
 		return menuRepo.save(findMenu);
 	}
@@ -79,6 +87,11 @@ public class MenuServiceImpl implements MenuService {
 	public List<MenuData> getMenuByCategory(List<String> categories) {		//		String categories
 		return menuRepo.getMenuByCategory(categories);
 
+	}
+
+	@Override
+	public MenuData findByCode(String code) {
+		return menuRepo.findByCode(code);
 	}
 	
 }

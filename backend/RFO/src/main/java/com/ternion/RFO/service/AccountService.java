@@ -1,7 +1,6 @@
 package com.ternion.RFO.service;
 
 import com.ternion.RFO.entity.AccountData;
-import com.ternion.RFO.entity.UserData;
 
 public interface AccountService {
 	public AccountData checkLoginUser(String username, String password, boolean isForgetPwd);
@@ -14,5 +13,5 @@ public interface AccountService {
 	
 	public int getMaxId();
 	
-	public UserData updatePassword(String userId, String oldPwd, String newPwd, boolean isForgetPwd);
+	public AccountData updatePassword(String userId, String oldPwd, String newPwd, boolean isForgetPwd);
 }

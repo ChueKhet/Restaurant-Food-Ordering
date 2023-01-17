@@ -27,7 +27,7 @@
       >
         <template v-slot:item.actions="{ item }">
 
-          <div style="text-align:right;">
+          <div>
             <v-btn 
             class="mr-3"
             color="primary"
@@ -56,7 +56,7 @@
         </v-card-title>
         <v-card-text>
           <v-form ref="addIngredientForm" v-model="addIngredientForm">
-            <v-select
+            <!-- <v-select
               v-model="menuList"
               :items="menuRecords"
               attach
@@ -65,7 +65,15 @@
               item-text="description"
               return-object
               multiple
-            ></v-select>
+            ></v-select> -->
+
+            <v-text-field
+              v-model="code"
+              label="Code"
+              required
+              :rules="[(v) => !!v || 'Required']"
+              outlined
+            ></v-text-field>
 
             <v-text-field
               v-model="description"
@@ -101,7 +109,7 @@
         </v-card-title>
         <v-card-text>
           <v-form ref="editIngredientForm" v-model="editIngredientForm">
-            <v-select
+            <!-- <v-select
               v-model="menuList"
               :items="menuRecords"
               attach
@@ -110,7 +118,16 @@
               item-text="description"
               return-object
               multiple
-            ></v-select>
+            ></v-select> -->
+
+            <v-text-field
+              v-model="code"
+              label="Code"
+              :readonly="true"
+              required
+              :rules="[(v) => !!v || 'Required']"
+              outlined
+            ></v-text-field>
 
             <v-text-field
               v-model="description"
@@ -137,13 +154,12 @@
     </v-dialog>
 
     <!-- Delete Dialog -->
-    <v-dialog v-model="deleteDialog" width="500">
+    <v-dialog v-model="deleteDialog" width="300">
       <v-card>
         <v-card-title>Delete Ingredient</v-card-title>
-        <v-card-text> Are you sure to delete this Ingredient? </v-card-text>
+        <v-card-text>Are you sure to delete this Ingredient?</v-card-text>
         <v-card-actions>
           <v-btn @click="deleteDialog = false">Cancel</v-btn>
-          <v-spacer></v-spacer>
           <v-btn color="red" dark @click="deleteIngredient(toDeleteID.id)"
             >Delete</v-btn
           >
@@ -180,7 +196,7 @@ export default {
       menuRecords: [], //menu list binding
      
       id: "",
-      code: Math.floor(1000 + Math.random() * 9000),
+      code: "",
       menu:[], //selected menu list for creating ingredient 
       ingredient:"",
       created_at: new Date().toISOString().substr(0, 10),
@@ -191,9 +207,9 @@ export default {
       editIngredientForm: "",
 
       headers: [
-        { text: "No", align: "start", value: "id" },
+        { text: "Code", align: "start", value: "code" },
         { text: "Ingredient", align: "start", value: "description" },
-        { text: "Actions", value: "actions", sortable: false },
+        { text: "Actions", align: "center", value: "actions", sortable: false },
       ],
 
       createDialog: false,
@@ -236,7 +252,8 @@ export default {
   methods: {
     initialState() {
       this.id = "";
-      this.code = Math.floor(1000 + Math.random() * 9000);
+      this.description = "";
+      this.code = "";
       this.user_id = "";
     },
 
@@ -246,15 +263,12 @@ export default {
         const data = await resp.json();
         if (data) {
           this.ingredientAddedMenuRecords = data;
-          console.log(data);
-          console.log(this.ingredientAddedMenuRecords);
         }
       }
     },
 
     onClickCreateBtn() {
       this.createDialog = true;
-      this.fetchmenuRecords();
     },
 
     //fetch menu list in create ingredient page load
@@ -264,8 +278,6 @@ export default {
         const data = await resp.json();
         if (data) {
           this.menuRecords = data;
-          console.log(data);
-          console.log(this.menuRecords);
         }
       }
     },
@@ -276,26 +288,14 @@ export default {
           code: this.code,
           userid: this.loginUser.userid,
           description: this.description,
-          menuDataList: this.menuList 
         };
-
-        // this.menuList.map(
-        //   data=>{
-        //     param.menuDataList.push(data);
-        //   }
-        // );
   
         const resp = await http.post("/ingredient/add", param)
-        //   code: this.code,
-        //   menuId: this.menu.id,
-        //  ingredient:this.ingredientRows,
-        //   created_at: this.created_at,
-        //   user_id: this.user_id,
        
         if (resp && resp.status === 200) {
           await this.fetchIngredientAddedMenuLists();
-          this.createDialog = false;
           this.initialState();
+          this.createDialog = false;
 
            this.createSuccessSnackBar = true;
          }
@@ -303,19 +303,10 @@ export default {
     },
 
     onClickEditBtn(item) {
-      // console.log(item.category_id);
-      // this.id = item.id;
-      // this.category_id = item.category_id;
-      // this.price = item.price;
-      // this.description = item.description;
-      // this.modified_at;
-      // this.user_id = item.user_id;
-      this.fetchmenuRecords();
       this.id = item.id;
       this.code = item.code;
       this.created_at = item.created_at;
       this.description = item.description;
-      this.menuList = item.menuDataList;
       this.editDialog = true;
     },
     async editIngredient() {
@@ -324,12 +315,11 @@ export default {
           id: this.id,
           code: this.code,
           description: this.description,
-          menuDataList: this.menuList 
         };
         const resp = await http.put("/ingredient/update",param);
         if (resp && resp.status === 200) {
           this.editSuccessSnackBar = true;
-          await this.fetchmenuRecords();
+          await this.fetchIngredientAddedMenuLists();
           this.editDialog = false;
         }
       }

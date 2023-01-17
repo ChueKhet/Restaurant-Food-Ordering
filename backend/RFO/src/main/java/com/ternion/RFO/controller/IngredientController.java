@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ternion.RFO.entity.IngredientData;
 import com.ternion.RFO.service.IngredientService;
-import com.ternion.RFO.utility.ServerUtil;
 
 @RestController
 @RequestMapping("/api/ingredient/")

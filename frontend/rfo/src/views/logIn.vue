@@ -25,6 +25,13 @@
       </v-card-title>
       <v-card-title><a @click="utl.goToScreen('/changepwd')">Forgot Password?</a></v-card-title>
     </v-card>
+
+    <span class="alertboxReg" v-if="message_type != ''">
+      <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
+        :type="message_type">
+          {{alert_message}}
+      </v-alert>
+    </span>
   </v-container>
 </template>
 
@@ -39,6 +46,11 @@ export default {
       userid: "",
       password: "",
       loginForm: false,
+
+      errorAlert: false,
+      alert_message: "",
+      message_type: "",
+
       utl: utils
     };
   },
@@ -51,30 +63,58 @@ export default {
           userid: this.userid,
           password: this.password,
         });
+        this.loading = false;
 
         if (resp.status === 200){
           const data = await resp.json();
-          this.loading = false;
 
-          if (data) {
-            this.$store.commit("setLoginUser", data);
-
-            utils.goToScreen("/");                     
+          if(data.message.toString() === "WRONG_ID"){
+            this.alertbox("error", "Wrong UserId!!!", 3000);
+            return;
+          } else if(data.message.toString() === "WRONG_PASSWORD"){
+            this.alertbox("error", "Wrong Password!!!", 3000);
+            return;
+          } else if(data.message.toString() === "USER_NOT_FOUND"){
+            this.alertbox("error", "User Not Found!!!", 3000);
+            return;
           }
+
+          this.$store.commit("setLoginUser", data);
+
+          utils.goToScreen("/dashBoard");
         }
       }
-    }
+    },
 
+    alertbox(type, message, timer){
+      this.message_type = type;
+      this.alert_message = message;
+      this.errorAlert = true;
+
+      setTimeout(() => {
+        this.errorAlert = false;
+      }, timer);
+    }
   }
 
 }
 </script>
 
 <style>
+
 /* .fullSize {
   height: 77.3%;
   width: 90%;
 } */
+
+.alertboxReg {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  z-index: 1;
+}
 
 .logoLogIn{
   height: 150px;

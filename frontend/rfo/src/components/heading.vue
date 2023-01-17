@@ -1,6 +1,6 @@
 <template>
     <v-app-bar class="headMenuBar" color="deep-purple lighten-1" dark>
-      <div class="logoApp" @click = "utl.goToScreen('/')"></div>
+      <div class="logoApp" @click = "utl.goToScreen('/dashBoard')"></div>
       
       <v-spacer></v-spacer>
 
@@ -78,9 +78,9 @@ export default {
       if(this.isLogIn){
         this.$store.commit("logout");
 
-        if(this.$router.currentRoute.path !="/"){ //  || this.$router.currentRoute.path !="/home"
+        if(this.$router.currentRoute.path != "/dashBoard"){ //  || this.$router.currentRoute.path !="/dashBoard"
           // this.isLogIn = false;
-          utils.goToScreen("/");
+          utils.goToScreen("/dashBoard");
         }
       } else{
         // this.$store.commit("setRegister", data);

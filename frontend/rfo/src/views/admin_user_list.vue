@@ -106,11 +106,11 @@ export default {
         },  
         {
           text: 'Created Date',
-          value: 'createdDate',
+          value: 'createdAt',
         },
         {
           text: 'Modified Date',
-          value: 'modifiedDate',
+          value: 'modifiedAt',
         },
         {
           text: 'Address',

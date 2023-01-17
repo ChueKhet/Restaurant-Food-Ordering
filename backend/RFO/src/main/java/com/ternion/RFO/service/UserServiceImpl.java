@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserData> getAll() {	
-		return userRepo.findAll();
+	public List<UserData> getAll() {
+		return userRepo.findAllByStaff();
 	}
 
 	@Override

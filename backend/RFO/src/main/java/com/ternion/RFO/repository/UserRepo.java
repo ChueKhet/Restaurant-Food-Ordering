@@ -1,12 +1,18 @@
 package com.ternion.RFO.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.ternion.RFO.entity.UserData;
 
 public interface UserRepo extends JpaRepository<UserData, Integer> {
 
 	public UserData findByName(String name);
+	
+	@Query(value="SELECT * FROM user_data u INNER JOIN account_data a ON a.parent_id = u.id WHERE a.role = 0", nativeQuery=true)
+	public List<UserData> findAllByStaff();
 
 //	@Override
 //	public Page<User> findAll(Pageable pageable) {

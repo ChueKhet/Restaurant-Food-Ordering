@@ -25,6 +25,21 @@
         :search="search"
         :items-per-page="5"
       >
+
+        <template v-slot:item.category_id="{ item }">
+          <label>{{ catIdOutput(item.category.id) }}</label>
+        </template>
+
+        <template v-slot:item.image="{ item }">
+          <v-img 
+            :src="ucImagePath + item.imagePath"
+            width="100"
+            height="105"
+            contain
+          >
+          </v-img>
+        </template>
+
         <template v-slot:item.actions="{ item }">
           <v-btn
             class="mr-3"
@@ -91,9 +106,23 @@
               :items="categoryList"
               label="Choose Category"
               item-text="description"
-              item-value="code"
+              item-value="id"
               outlined
               required
+              :rules="[(v) => !!v || 'Required']"
+            ></v-select>
+
+            <v-select
+              v-model="ingredients"
+              :items="ingredientList"
+              label="Choose Ingredient"
+              item-text="description"
+              outlined
+              required
+              attach
+              chips
+              return-object
+              multiple
               :rules="[(v) => !!v || 'Required']"
             ></v-select>
      
@@ -103,6 +132,7 @@
               required
               :rules="[(v) => !!v || 'Required']"
               outlined
+              ref='codeCreate'
             ></v-text-field>
 
             <v-text-field
@@ -122,20 +152,6 @@
               outlined
             ></v-text-field>
 
-            <!-- <v-text-field
-              v-model="created_at"
-              label="Created At"
-              type="date"
-              disabled
-              outlined
-            ></v-text-field>
-
-            <v-text-field
-              v-model="user_id"
-              label="Created By"
-              outlined
-            ></v-text-field> -->
-
             <v-btn class="mt-5 width-100" color="success" @click="createMenu()"
               >Create</v-btn
             >
@@ -149,6 +165,13 @@
           </v-form>
         </v-card-text>
       </v-card>
+
+      <span class="alertboxRegMenu d-flex justify-center" v-if="message_type != '' && createDialog">
+        <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
+          :type="message_type">
+            {{alert_message}}
+        </v-alert>
+      </span>
     </v-dialog>
 
     <!-- Edit Dialog -->
@@ -186,19 +209,35 @@
               accept="image/png, image/jpeg"
               :rules="[
               (v) =>
-                  !v ||
-                  v.size < 10000000 ||
-                  'Image size should be less than 10 MB!',
+                !v ||
+                v.size < 10000000 ||
+                'Image size should be less than 10 MB!',
               ]"
               @change="onChangeImage"
             ></v-file-input>
 
             <v-select
-              :items="categoryLists"
+              :items="categoryList"
               v-model="category_id"
               label="Choose Category"
+              item-text="description"
+              item-value="id"
               outlined
               required
+              :rules="[(v) => !!v || 'Required']"
+            ></v-select>
+
+            <v-select
+              v-model="ingredients"
+              :items="ingredientList"
+              label="Choose Ingredient"
+              item-text="description"
+              outlined
+              required
+              attach
+              chips
+              return-object
+              multiple
               :rules="[(v) => !!v || 'Required']"
             ></v-select>
 
@@ -255,10 +294,17 @@
           </v-form>
         </v-card-text>
       </v-card>
+
+      <span class="alertboxRegMenu d-flex justify-center" v-if="message_type != '' && editDialog">
+        <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
+          :type="message_type">
+            {{alert_message}}
+        </v-alert>
+      </span>
     </v-dialog>
 
     <!-- Delete Dialog -->
-    <v-dialog v-model="deleteDialog" width="500">
+    <v-dialog v-model="deleteDialog" width="300">
       <v-card>
         <v-card-title>Delete Menu</v-card-title>
         <v-card-text> Are you sure to delete this menu? </v-card-text>
@@ -269,22 +315,29 @@
           >
         </v-card-actions>
       </v-card>
+
+      <span class="alertboxRegMenu d-flex justify-center" v-if="message_type != '' && deleteDialog">
+        <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
+          :type="message_type">
+            {{alert_message}}
+        </v-alert>
+      </span>
     </v-dialog>
 
-    <!--create success msg-->
+    <!--create success msg->
     <v-snackbar v-model="createSuccessSnackBar">
       {{ createSuccessMsg }}
     </v-snackbar>
 
-    <!--edit success msg-->
+    <!--edit success msg->
     <v-snackbar v-model="editSuccessSnackBar">
       {{ editSuccessMsg }}
     </v-snackbar>
 
-    <!--delete success msg-->
+    <!--delete success msg->
     <v-snackbar v-model="deleteSuccessSnackBar">
       {{ deleteSuccessMsg }}
-    </v-snackbar>
+    </v-snackbar> -->
   </div>
 </template>
 
@@ -308,25 +361,33 @@ export default {
       editMenuForm: "",
       loginUser: {},
 
+      errorAlert: false,
+      alert_message: "",
+      message_type: "",
+
       headers: [
-        { text: "No", align: "start", value: "id" },
+        { text: "Photo", value: "image" },
+        // { text: "No", align: "start", value: "id" },
         { text: "Code", value: "code" },
         { text: "Menu", value: "description" },
-        { text: "Category", value: "catId" },
+        { text: "Category", value: "category_id" },
         { text: "Price", value: "price" },
-        { text: "Created At", value: "created_at" },
-        { text: "Modified At", value: "modified_at" },
-        { text: "Created By", value: "user_id" },
+        { text: "Created At", value: "createdAt" },
+        { text: "Modified At", value: "modifiedAt" },
+        { text: "Created By", value: "userid" },
         { text: "Actions", value: "actions", sortable: false },
       ],
       menuRecords: [],
       categoryList: [],
+      ingredientList: [],
+      ingredients: [],
 
       toUpdateMenu: {
         image: null,
         imagePath: "",
       },
       imagePreviewPath: null,
+      ucImagePath: utils.constant.imagePath,
 
       createDialog: false,
       createMenuForm: false,
@@ -363,19 +424,31 @@ export default {
 
     await this.fetchMenuLists();
     await this.getCategoryList();
+    await this.getIngredientList();
   },
 
   methods: {
     initialState() {
       this.id = "";
       this.description = "";
-      this.code = "";//Math.floor(1000 + Math.random() * 9000)
+      this.code = "";
       this.category_id = "";
       this.price = "";
       this.user_id = "";
       this.toUpdateMenu.image = null;
       this.toUpdateMenu.imagePath = "";
       this.imagePreviewPath = null;
+      this.ingredients = [];
+    },
+
+    catIdOutput(catId){
+      let id = this.categoryList.filter(
+        data => {
+          return data.id == catId;
+        }
+      )[0].description;
+
+      return id;
     },
 
     async fetchMenuLists() {
@@ -385,8 +458,6 @@ export default {
 
         if (data) {
           this.menuRecords = data;
-
-          console.log(data);
         }
       }
     },
@@ -396,14 +467,20 @@ export default {
 
       if(resp && resp.status == 200){
         this.categoryList = await resp.json();
-        console.log(this.categoryList);
+      }
+    },
+
+    async getIngredientList(){
+      const resp = await utils.http.get("/ingredient/all");
+
+      if(resp && resp.status == 200){
+        this.ingredientList = await resp.json();
       }
     },
 
     onClickCreateBtn() {
       this.createDialog = true;
       this.initialState();
-      // console.log(this.created_at);
     },
 
     async createMenu() {
@@ -433,18 +510,28 @@ export default {
           category: {
             id: this.category_id
           },
-          ingredientList: []
+          ingredientList: this.ingredients
         };
-        console.log('saveData',saveData);
 
         const resp = await http.post("/menu/add", saveData);
 
         if (resp && resp.status === 200) {
+          const data = await resp.json();
+
+          if(data.message.toString() == "CODE_ALREADY_EXIST"){
+            this.alertbox("error", "Code Already Exist!!!", 3000);
+            this.$refs.codeCreate.focus();
+            return;
+          }
+
           await this.fetchMenuLists();
           this.createDialog = false;
           this.initialState();
+          this.alertbox("error", "CREATE SUCCESSFUL!!!", 3000);
 
-          this.createSuccessSnackBar = true;
+          // this.createSuccessSnackBar = true;
+        } else {
+          this.alertbox("error", "CREATE FAILED!!!", 3000);
         }
       }
     },
@@ -459,11 +546,18 @@ export default {
       // this.toUpdateMenu.image = item.imagePath;
       // this.imagePreviewPath = this.toUpdateMenu.imagePath + item.imagePath;
       this.code = item.code;
-      this.category_id = item.catId;
+      this.category_id = item.category.id;
       this.price = item.price;
       this.description = item.description;
       this.modified_at;
       this.user_id = item.user_id;
+
+      this.ingredients = [];
+      item.ingredientList.map(
+        data => {
+          this.ingredients.push(data);
+        }
+      );
       this.editDialog = true;
     },
 
@@ -481,10 +575,11 @@ export default {
     async editMenu() {
       if (this.$refs.editMenuForm.validate()) {
         let respImageData = null;
-        const respImage = await http.postMedia(
-          "/media/file/create",
+        const respImage = await http.putMedia(
+          "/media/file/update",
           this.toUpdateMenu.image,
           this.toUpdateMenu.image.type,
+          this.toUpdateMenu.imagePath,
           "Menu"
         );
 
@@ -494,6 +589,7 @@ export default {
           this.errorAlert = true;
         }
 
+        this.user_id = this.loginUser.userid;
         const resp = await http.put("/menu/update", {
           id: this.id,
           imagePath: respImageData,
@@ -501,16 +597,18 @@ export default {
           description: this.description,
           price: this.price,
           created_at: this.created_at,
-          user_id: this.user_id,
+          userid: this.user_id,
           category: {
             id: this.category_id
-          }
+          },
+          ingredientList: this.ingredients
         });
 
         if (resp && resp.status === 200) {
           this.editSuccessSnackBar = true;
           await this.fetchMenuLists();
           this.editDialog = false;
+          this.initialState();
         }
       }
     },
@@ -534,6 +632,33 @@ export default {
     onChangeImage(image) {
       this.imagePreviewPath = URL.createObjectURL(image);
     },
+
+    alertbox(type, message, timer){
+      this.message_type = type;
+      this.alert_message = message;
+      this.errorAlert = true;
+
+      setTimeout(() => {
+        this.errorAlert = false;
+      }, timer);
+    }
   },
 };
 </script>
+
+<style>
+
+.alertboxRegMenu {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.alertboxRegMenu > .alert {
+  display: inline-block;
+}
+
+</style>

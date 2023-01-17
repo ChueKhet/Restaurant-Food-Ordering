@@ -51,7 +51,7 @@
       </div>
     </v-card>
 
-    <span class="alertboxReg">
+    <span class="alertboxReg" v-if="message_type != ''">
       <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
         :type="message_type">
           {{alert_message}}
@@ -193,9 +193,9 @@ export default {
           // this.clear();
           // let exportData = await resp.json();
 
-          utils.goToScreen("/");
+          utils.goToScreen("/dashBoard");
         } else {
-          console.log("FAIL!!!");
+          
         }
       }
 
@@ -207,7 +207,7 @@ export default {
       };
       exportData.headData = this.saleHeaders;
 
-      utils.goToScreenWithData("/", "home", exportData);  
+      utils.goToScreenWithData("/dashBoard", "home", exportData);  
     },
 
     alertbox(type, message, timer){

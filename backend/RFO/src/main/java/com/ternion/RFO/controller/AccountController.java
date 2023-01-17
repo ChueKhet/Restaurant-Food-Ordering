@@ -37,17 +37,29 @@ public class AccountController {
 		
 		UserData user = new UserData();
 		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("message", "SUCCESS");
+		
 		if (acc == null) {
-			return ResponseEntity.badRequest().build();
+			result.put("message", "WRONG_ID");
+			
+			return ResponseEntity.ok().body(result);
 		} else {
+			if(acc.getPassword().equals("")) {
+				result.put("message", "WRONG_PASSWORD");
+				
+				return ResponseEntity.ok().body(result);
+			}
+			
 			user = userService.findById(acc.getParentId());
 			
-			if(user == null) {
-				return ResponseEntity.badRequest().build();
+			if(user == null && (!acc.getUserid().equals("admin"))) {
+				result.put("message", "USER_NOT_FOUND");
+				
+				return ResponseEntity.ok().body(result);
 			}
 		}
 		
-		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("account", acc);
 		result.put("user", user);
 		
@@ -70,10 +82,20 @@ public class AccountController {
 	public ResponseEntity<?> updatePassword(@Valid @RequestBody HashMap<String, Object> data) {
 		boolean isForgetPwd = data.get("isForgetPwd").toString().equals("true")? true : false;
 		
-		accService.updatePassword(data.get("userId").toString(),data.get("oldPwd").toString(), 
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("message", "SUCCESS");
+		
+		AccountData acc = accService.updatePassword(data.get("userid").toString(), data.get("oldPwd").toString(), 
 				data.get("newPwd").toString(), isForgetPwd);
 		
-		return ResponseEntity.ok().body("Password Changed!!!");
+		if(acc == null) {
+			result.put("message", "WRONG_ID");
+		} else if(acc.getPassword().equals("")) {
+			result.put("message", "WRONG_PASSWORD");
+		} else {
+			result.put("acc", acc);
+		}
+		
+		return ResponseEntity.ok().body(result);
 	}
-	
 }

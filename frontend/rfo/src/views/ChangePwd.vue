@@ -11,6 +11,7 @@
 
         <v-text-field
           v-model="current_pwd"
+          type="password"
           label="Current Password"
           v-show="!isForgetPwd"
           required
@@ -18,12 +19,14 @@
 
         <v-text-field
           v-model="new_pwd"
+          type="password"
           label="New Password"
           required
         ></v-text-field>
 
         <v-text-field
           v-model="con_new_pwd"
+          type="password"
           label="Confirm New Password"
           :rules="[
             (v) => (confirmPassword(v)) || 'Password not match!!!',
@@ -41,7 +44,7 @@
       </form>
     </v-container>
 
-    <span class="alertboxReg">
+    <span class="alertboxReg" v-if="message_type != ''">
       <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
         :type="message_type">
           {{alert_message}}
@@ -144,7 +147,17 @@
           const resp = await utils.http.put("/account/password/update", param);
 
           if (resp.status === 200) {
-            this.$router.push({ path: "/" });
+            const data = await resp.json();
+
+            if(data.message.toString() === "WRONG_ID"){
+              this.alertbox("error", "Wrong UserId!!!", 3000);
+              return;
+            } else if(data.message.toString() === "WRONG_PASSWORD"){
+              this.alertbox("error", "Wrong Current Password!!!", 3000);
+              return;
+            }
+
+            this.$router.push({ path: "/dashBoard" });
           } 
           // else {
           //   this.errorAlert = true;

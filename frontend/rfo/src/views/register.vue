@@ -9,7 +9,7 @@
                     
                         <v-row>
                             <v-col style="padding-left: 50px; padding-right: 50px; padding-top: 25px; padding-bottom: 25px;" cols="12" sm="8">
-                                <v-title><h3>Staff Info</h3></v-title>
+                                <v-card-title><h3>Staff Info</h3></v-card-title>
                                 
                                 <v-row>
                                     <v-col cols="12" sm="5">
@@ -87,7 +87,10 @@
                                                 </v-select>
                                             </v-col>
                                             <v-col>
-                                                <v-text-field class="m_p_top_0" v-model="phone" label="Phone No">
+                                                <v-text-field class="m_p_top_0" 
+                                                    v-model="phone" 
+                                                    label="Phone No"
+                                                    @keypress="validatePhone($event)">
                                                 </v-text-field>
                                             </v-col>
                                         </v-row>
@@ -140,7 +143,10 @@
                                                 cols="12"
                                                 sm="4"
                                                 >
-                                                <v-text-field class="m_p_top_0" v-model="nrc_num"></v-text-field>
+                                                <v-text-field class="m_p_top_0" 
+                                                    v-model="nrc_num"
+                                                    @keypress="validateNrcNum($event)">
+                                                </v-text-field>
                                             </v-col>
                                         </v-row>
 
@@ -155,7 +161,7 @@
                                 
                             </v-col>
                             <v-col style="padding-left: 50px; padding-right: 50px; padding-top: 25px; padding-bottom: 25px;" cols="12" sm="4">
-                                <v-title><h3>User Info</h3></v-title>
+                                <v-card-title><h3>User Info</h3></v-card-title>
                                
                                 <v-text-field v-model="username" label="User Name"></v-text-field>
 
@@ -210,7 +216,7 @@
                             </v-col>
                         </v-row>
 
-                        <span class="alertboxReg">
+                        <span class="alertboxReg" v-if="message_type != ''">
                             <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
                                 :type="message_type">
                                     {{alert_message}}
@@ -364,6 +370,30 @@ export default {
             }
         },
 
+        validatePhone(e){
+            let regex = /^\d$/;
+
+            if(!regex.exec(e.key)){
+                this.alertbox("warning", "Only Digits", 3000);
+                e.preventDefault();
+            } else if(this.phone.length == 11){
+                this.alertbox("warning", "at most 11 digits", 3000);
+                e.preventDefault();
+            }
+        },
+
+        validateNrcNum(e){
+            let regex = /^\d$/;
+
+            if(!regex.exec(e.key)){
+                this.alertbox("warning", "Only Digits", 3000);
+                e.preventDefault();
+            } else if(this.nrc_num.length == 6){
+                this.alertbox("warning", "Must be exactly 6 digits", 3000);
+                e.preventDefault();
+            }
+        },
+
         validate(){
             if(this.image == null || this.image == ""){
                 this.alertbox("error", "Please add Image!!!", 3000);
@@ -391,6 +421,10 @@ export default {
 
             if(this.nrc == ""){
                 this.alertbox("error", "Please add NRC!!!", 3000);
+
+                return false;
+            } else if(this.nrc_num.length != 6) {
+                this.alertbox("error", "Invalid NRC Number!!!", 3000);
 
                 return false;
             }

@@ -68,6 +68,7 @@
                   :items="['Male','Female','Other']"
                   v-model="userInfo.gender"
                   label="Gender"
+                  :disabled="!isEdit"
                   dense>
                 </v-select>
               </v-col>
@@ -136,7 +137,7 @@
 
     </v-card>
 
-    <span class="alertboxReg">
+    <span class="alertboxReg" v-if="message_type != ''">
       <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
         :type="message_type">
           {{alert_message}}

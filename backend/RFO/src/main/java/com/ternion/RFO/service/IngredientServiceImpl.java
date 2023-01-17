@@ -32,11 +32,16 @@ public class IngredientServiceImpl implements IngredientService {
 	public IngredientData update(IngredientData ingredient) {
 		String curDate = ServerUtil.getCurrentDate();
 		
-		ingredientRepo.deleteById(ingredient.getId());
-		ingredient.setId(0);
-		ingredient.setModifiedAt(curDate);
+//		ingredientRepo.deleteById(ingredient.getId());
+//		ingredient.setId(0);
+//		ingredient.setModifiedAt(curDate);
 		
-		return ingredientRepo.save(ingredient);
+		IngredientData data = ingredientRepo.findById(ingredient.getId()).orElse(null);
+		
+		data.setModifiedAt(curDate);
+		data.setDescription(ingredient.getDescription());
+		
+		return ingredientRepo.save(data);
 	}
 
 	@Override

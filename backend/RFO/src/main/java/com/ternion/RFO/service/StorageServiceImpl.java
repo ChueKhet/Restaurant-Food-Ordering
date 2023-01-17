@@ -44,25 +44,22 @@ public class StorageServiceImpl implements StorageService{
 			String fileName = Instant.now().getEpochSecond() + "_"
 					+ StringUtils.cleanPath(file.getOriginalFilename());
 			
-			switch (fileType) {			
+			switch (fileType) {
 				case "image/jpg" :
 				case "image/jpeg" :
 					ft = "jpg";
 					filePath = getFilePath(folderName, ft, fileName);
-//					filePath = "/media/" + fileName;
 					break;
 				case "image/png" :
 				default :
 					ft = "png";
 					filePath = getFilePath(folderName, ft, fileName);
-//					filePath = "/media/" + fileName;
 					break;
 			}
 			
 			Files.copy(
 				file.getInputStream(), 
 				this.storagePath.resolve(folderName).resolve(ft).resolve(fileName),
-//				this.storagePath.resolve(fileName),
 				StandardCopyOption.REPLACE_EXISTING
 			);
 		} catch (IOException e) {
@@ -80,21 +77,10 @@ public class StorageServiceImpl implements StorageService{
 		
 		File dir = new File(path);
 	    if (!dir.exists()) {
-	    	dir.mkdirs();
+	    	dir.mkdirs(); 
 	    }
 		
-		/*
-		Path temp = this.storagePath.resolve(folderName).resolve(fileType);
-		
-		if (!Files.exists(temp)) {
-			Files.createDirectories(temp);
-		}
-		*/
-		
 		result = "/media/" + folderName + "/" + fileType + "/" + fileName;
-		
-		
-//		result = folderName + "_" + fileType + "_" + fileName;
 		
 		return result;
 	}
@@ -106,7 +92,7 @@ public class StorageServiceImpl implements StorageService{
 		try {
 			Path filePath = this.storagePath.resolve(fileName);
 			Resource resource = new UrlResource(filePath.toUri());
-			if (resource.exists() && resource.isReadable()) {
+			if (resource.exists() && resource.isReadable()) { 
 				retBytes = StreamUtils
 						.copyToByteArray(resource.getInputStream());
 			}
@@ -139,44 +125,43 @@ public class StorageServiceImpl implements StorageService{
 	}
 
 	@Override
-	public String update(MultipartFile file, String fileType, String filePath) {
+	public String update(MultipartFile file, String fileType, String filePath, String folderName) {
 
 		String retfilePath = null;
-
-		filePath = filePath.replace("/media/jpg/", "");
-		filePath = filePath.replace("/media/png/", "");
-		filePath = filePath.replace("/media/mp4/", "");
 		
 		try {
+			String ft = "";
+			String fileName = Instant.now().getEpochSecond() + "_"
+					+ StringUtils.cleanPath(file.getOriginalFilename());
+			
+			switch (fileType) {
+				case "image/jpg" :
+				case "image/jpeg" :
+					ft = "jpg";
+					retfilePath = getFilePath(folderName, ft, fileName);
+					break;
+				case "image/png" :
+				default :
+					ft = "png";
+					retfilePath = getFilePath(folderName, ft, fileName);
+					break;
+			}
+			
+			filePath = filePath.replace("/media/" + folderName + "/" + ft + "/", "");
+			
 			if (filePath != null && filePath != "") {
 				try {
-					Files.delete(this.storagePath.resolve(filePath));
+					Files.delete(this.storagePath.resolve(folderName).resolve(ft).resolve(filePath));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-
-			String fileName = Instant.now().getEpochSecond() + "_"
-					+ StringUtils.cleanPath(file.getOriginalFilename());
 			
 			Files.copy(
-					file.getInputStream(), this.storagePath.resolve(fileName),
-					StandardCopyOption.REPLACE_EXISTING
+				file.getInputStream(), 
+				this.storagePath.resolve(folderName).resolve(ft).resolve(fileName),
+				StandardCopyOption.REPLACE_EXISTING
 			);
-			
-			switch (fileType) {
-				case "video/mp4" :
-					retfilePath = "/media/mp4/" + fileName;
-					break;
-				case "image/jpg" :
-				case "image/jpeg" :
-					retfilePath = "/media/jpg/" + fileName;
-					break;
-				case "image/png" :
-				default :
-					retfilePath = "/media/png/" + fileName;
-					break;
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

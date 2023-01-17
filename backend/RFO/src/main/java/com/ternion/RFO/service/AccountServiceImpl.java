@@ -5,7 +5,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ternion.RFO.entity.AccountData;
-import com.ternion.RFO.entity.UserData;
 import com.ternion.RFO.repository.AccountRepo;
 import com.ternion.RFO.utility.ServerUtil;
 
@@ -36,7 +35,8 @@ public class AccountServiceImpl implements AccountService {
 
 		if ((!isForgetPwd) && (!password.equals(acc.getPassword())) ) {
 			//		(login, change password) => isForgetPwd = false / forget password => isForgetPwd = true
-			return null;
+			
+			acc.setPassword("");
 		}
 		
 		return acc;
@@ -76,18 +76,20 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public UserData updatePassword(String userId, String oldPwd, String newPwd, boolean isForgetPwd) {
+	public AccountData updatePassword(String userId, String oldPwd, String newPwd, boolean isForgetPwd) {
 		AccountData acc = checkLoginUser(userId, oldPwd, isForgetPwd);
 		
 		if(acc == null) {
 			return null;
 		}
 		
-		acc.setPassword(newPwd);
-		acc.setModifiedAt(ServerUtil.getCurrentDate());
+		if(!acc.getPassword().equals("")) {
+			acc.setPassword(newPwd);
+			acc.setModifiedAt(ServerUtil.getCurrentDate());
+			
+			accRepo.save(acc);
+		}
 		
-		accRepo.save(acc);
-		
-		return null;
+		return acc;
 	}
 }

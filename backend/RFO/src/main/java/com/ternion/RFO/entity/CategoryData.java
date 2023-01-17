@@ -43,8 +43,8 @@ public class CategoryData implements java.io.Serializable {
 	@NotBlank(message = "Required")
 	private String modifiedAt;	
 	
-	@OneToMany(mappedBy = "category")
-	List<MenuData> menuList;
+//	@OneToMany(mappedBy = "category")
+//	List<MenuData> menuList;
 
 	public int getId() {
 		return id;
@@ -95,12 +95,12 @@ public class CategoryData implements java.io.Serializable {
 	}
 
 	//	@JsonBackReference
-	@JsonManagedReference
-	public List<MenuData> getMenuList() {
-		return menuList;
-	}
-
-	public void setMenuList(List<MenuData> menuList) {
-		this.menuList = menuList;
-	}
+//	@JsonManagedReference
+//	public List<MenuData> getMenuList() {
+//		return menuList;
+//	}
+//
+//	public void setMenuList(List<MenuData> menuList) {
+//		this.menuList = menuList;
+//	}
 }

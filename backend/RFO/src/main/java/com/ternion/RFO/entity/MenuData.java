@@ -16,9 +16,9 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-//import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -33,11 +33,11 @@ public class MenuData implements java.io.Serializable {
 		inverseJoinColumns = @JoinColumn(name = "ingredient_id"),
 		uniqueConstraints={@UniqueConstraint(columnNames={"menu_id", "ingredient_id"})}
 	)
-	@JsonIgnoreProperties("menuDataList")
+//	@JsonIgnoreProperties("menuDataList")
 	private List<IngredientData> ingredientList;
 	
 	@ManyToOne
-	@JoinColumn(name="category_id", nullable=false)
+	@JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
 	private CategoryData category;
 
 	@Id
@@ -68,7 +68,7 @@ public class MenuData implements java.io.Serializable {
 	@NotNull(message = "Required")
 	private double price;
 		
-	private int catId;
+//	private int catId;
 	
 	@Column(length = 200)
 	@NotBlank(message = "Required")
@@ -90,8 +90,8 @@ public class MenuData implements java.io.Serializable {
 		this.id = id;
 	}
 
+//	@JsonBackReference
 //	@JsonManagedReference
-	@JsonBackReference
 	public CategoryData getCategory() {
 		return category;
 	}
@@ -148,13 +148,13 @@ public class MenuData implements java.io.Serializable {
 		this.price = price;
 	}
 
-	public int getCatId() {
-		return catId;
-	}
-
-	public void setCatId(int catId) {
-		this.catId = catId;
-	}
+//	public int getCatId() {
+//		return catId;
+//	}
+//
+//	public void setCatId(int catId) {
+//		this.catId = catId;
+//	}
 
 	public String getImagePath() {
 		return imagePath;

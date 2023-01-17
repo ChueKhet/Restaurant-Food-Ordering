@@ -32,34 +32,46 @@ public class MenuController {
 	public List<MenuData> listMenu() {
 		List<MenuData> retList = menuService.getAll();
 		
-		for(int i = 0; i < retList.size(); i++) {
-			retList.get(i).setCatId(retList.get(i).getCategory().getId());
-		}
+//		for(int i = 0; i < retList.size(); i++) {
+//			retList.get(i).setCatId(retList.get(i).getCategory().getId());
+//		}
 		
 		return retList;
 	}
 
 	@PostMapping("/add")
 	public ResponseEntity<?> create(@RequestBody MenuData data) {
-		String curDate = ServerUtil.getCurrentDate();
-		data.setCreatedAt(curDate);
-		data.setModifiedAt(curDate);
+		MenuData menuData = menuService.findByCode(data.getCode());
 		
-		MenuData menuData = menuService.create(data);
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("message", "SUCCESS");
 		
-		if (menuData == null) {
-			return ResponseEntity.badRequest().body("Menu already exists!");
+		if(menuData != null) {
+			result.put("message", "CODE_ALREADY_EXIST");
+		} else {
+			String curDate = ServerUtil.getCurrentDate();
+			data.setCreatedAt(curDate);
+			data.setModifiedAt(curDate);
+			
+			menuData = menuService.create(data);
+			
+			if (menuData == null) {
+				return ResponseEntity.badRequest().build();
+			}
 		}
 		
-		return ResponseEntity.ok().body(menuData);
+		result.put("menuData", menuData);
+		return ResponseEntity.ok().body(result);
 	}
 	
 	@PutMapping("/update")
 	public ResponseEntity<?> update(@RequestBody MenuData menu) {
 		MenuData updatedMenu = menuService.update(menu);
+		
 		if (updatedMenu == null) {
 			return ResponseEntity.badRequest().body("Menu cannot be updated");
 		}
+		
 		//receipt.setDate(LocalDateTime.now());
 		return ResponseEntity.ok(updatedMenu);
 	}

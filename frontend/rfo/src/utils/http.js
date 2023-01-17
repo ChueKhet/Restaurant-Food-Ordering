@@ -28,22 +28,27 @@ async function postMedia(path, file, fileType, folderName) {
   formData.append("file", file);
   formData.append("fileType", fileType);
   formData.append("folderName", folderName);
+  
   const resp = await fetch(constant.localDomain + path, {
     method: "POST",
     body: formData,
   });
+
   return resp;
 }
 
-async function putMedia(path, file, fileType, filePath) {
+async function putMedia(path, file, fileType, filePath, folderName) {
   let formData = new FormData();
   formData.append("file", file);
   formData.append("fileType", fileType);
   formData.append("filePath", filePath);
+  formData.append("folderName", folderName);
+
   const resp = await fetch(constant.localDomain + path, {
     method: "PUT",
     body: formData,
   });
+
   return resp;
 }
 
@@ -68,7 +73,7 @@ async function get(path){
   
       return resp;
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
   
   return null;
