@@ -21,15 +21,17 @@
         :headers="hTableHeaders"
         :items="saleHeaders"
         :items-per-page="5">
+
           <template v-slot:item.orderStatus="{ item }">
-            <div class="orderStatus">
-              {{item.orderStatus}}
+            <div :class="CssClass[item.orderStatus]">
+              {{ STATUS[item.orderStatus] }}
             </div>
           </template>
+
           <template v-slot:item.btn="{ item }">
 
             <v-btn
-              color="red"
+              color="deep-purple lighten-1"
               fab
               x-small
               dark
@@ -41,19 +43,34 @@
     </v-card>
 
     <v-dialog v-model="detailDialog" width="1000">
-      <v-data-table
-        class="elevation-4"
-        :headers="dTableHeaders"
-        :items="saleDetails"
-        :items-per-page="5">
-          <template v-slot:item.status="{ item }">
-            <div class="orderStatus">
-              {{item.orderStatus.toString() == "0" ? "Ordered" : "Served"}}
-            </div>
-          </template>
+      <v-card>
+
+        <v-card-title>
+          Order Detail
+        </v-card-title>
+
+        <v-card-text>
+
+          <v-data-table
+            class="elevation-4"
+            :headers="dTableHeaders"
+            :items="saleDetails"
+            :items-per-page="5">
+              <template v-slot:item.status="{ item }">
+                <div :class="item.orderStatus.toString() == '0' ? 'orderStatus1' : 'orderStatus3'">
+                  {{item.orderStatus.toString() == "0" ? "Ordered" : "Served"}}
+                </div>
+              </template>
+              
+          </v-data-table>
+
+          <div class="d-flex justify-end">
+            <v-btn class="mt-5 width-100" color="success" @click="detailDialog = false">Cancel</v-btn>
+          </div>
           
-      </v-data-table>
-      <v-btn @click="detailDialog = false">Cancel</v-btn>
+        </v-card-text>
+
+      </v-card>
     </v-dialog>
   </div>
 </template>
@@ -76,6 +93,9 @@ export default {
       saleHeaders: [],
       saleDetails: [],
       search: "",
+
+      STATUS: ["Order", "Sales", "Served"],
+      CssClass: ["orderStatus1", "orderStatus2", "orderStatus3"],
 
       hTableHeaders: [
         {
@@ -152,11 +172,11 @@ export default {
 
   methods: {
     async fetchSaleHeaders(){
-      const STATUS={
-        0:'Order',
-        1:'Sales',
-        2:'Served'
-      };
+      // const STATUS={
+      //   0:'Order',
+      //   1:'Sales',
+      //   2:'Served'
+      // };
 
       const userId=this.$store.state.userInfo?.id;
       const resp = await utils.http.get("/sale/headers"+"?userId="+userId);
@@ -165,15 +185,15 @@ export default {
         const data = await resp.json();
 
         if(data){
-          this.saleHeaders = data?.length > 0 ? data.map(
-            it => ({...it, orderStatus:STATUS[it.orderStatus]})
-          ) : [];
+          this.saleHeaders = data;
+          // this.saleHeaders = data?.length > 0 ? data.map(
+          //   it => ({...it, orderStatus:STATUS[it.orderStatus]})
+          // ) : [];
         }
       }
     },
 
     async onClickDetail(headerId){
-      // utils.goToScreen("/sale_detail/"+headerId);
       this.saleHeaderId = headerId;
       await this.fetchSaleDetail();
 
@@ -198,11 +218,29 @@ export default {
 </script>
 
 <style>
-.orderStatus{
+
+.orderStatus1{
   width:fit-content;
   padding:5px 10px;
   border-radius:20px 20px;
-  background-color:red;
+  background-color:rgb(255, 0, 0);
   color:white;
 }
+
+.orderStatus2{
+  width:fit-content;
+  padding:5px 10px;
+  border-radius:20px 20px;
+  background-color:rgb(255, 170, 0);
+  color:white;
+}
+
+.orderStatus3{
+  width:fit-content;
+  padding:5px 10px;
+  border-radius:20px 20px;
+  background-color:#4caf50;
+  color:white;
+}
+
 </style>

@@ -11,6 +11,6 @@ public interface IngredientRepo extends JpaRepository<IngredientData, Integer> {
 			+ "inner join menu_ingredient mi on mi.ingredient_id = i.id "
 			+ "where menu_id = ?", nativeQuery = true)
 	public List<IngredientData> getAllByMenuId(int id);
+	
+	public IngredientData findByCode(String code);
 }
-
-

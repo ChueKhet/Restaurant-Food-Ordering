@@ -37,14 +37,10 @@
         <v-btn class="mr-4" @click="submit"> submit </v-btn>
 
         <v-btn @click="clear"> clear </v-btn>
-
-        <!-- <v-alert class="mt-3" v-show="errorAlert" dense type="error">
-          {{ errMsg }} <br />
-        </v-alert> -->
       </form>
     </v-container>
 
-    <span class="alertboxReg" v-if="message_type != ''">
+    <span class="alertbox" v-if="message_type != ''">
       <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
         :type="message_type">
           {{alert_message}}
@@ -157,13 +153,15 @@
               return;
             }
 
-            this.$router.push({ path: "/dashBoard" });
-          } 
-          // else {
-          //   this.errorAlert = true;
-          //   const data = await resp.json();
-          //   this.errMsg = data.message;
-          // }
+            if(this.isForgetPwd){
+              this.$router.push({ path: "/login" });
+            } else {
+              this.$router.push({ path: "/profile" });
+            }
+            
+          } else {
+            this.alertbox("error", "Password Not Change!!!", 3000);
+          }
         }
       },
 
@@ -192,7 +190,7 @@
 
 <style>
 
-.alertboxReg {
+.alertbox {
   position: fixed;
   top: 30px;
   left: 50%;

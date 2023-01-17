@@ -26,7 +26,7 @@
       <v-card-title><a @click="utl.goToScreen('/changepwd')">Forgot Password?</a></v-card-title>
     </v-card>
 
-    <span class="alertboxReg" v-if="message_type != ''">
+    <span class="alertbox" v-if="message_type != ''">
       <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
         :type="message_type">
           {{alert_message}}
@@ -107,7 +107,7 @@ export default {
   width: 90%;
 } */
 
-.alertboxReg {
+.alertbox {
   position: fixed;
   top: 30px;
   left: 50%;

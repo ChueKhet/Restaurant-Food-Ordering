@@ -1,5 +1,6 @@
 package com.ternion.RFO.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,23 @@ public class IngredientController {
 	
 	@PostMapping("/add")
 	public ResponseEntity<?> create(@RequestBody IngredientData data) {
-		IngredientData ingreData = ingredientService.create(data);
+		IngredientData ingredientData = ingredientService.findByCode(data.getCode());
 		
-		if (ingreData == null) {
-			return ResponseEntity.badRequest().body("Menu already exists!");
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("message", "SUCCESS");
+		
+		if(ingredientData != null) {
+			result.put("message", "CODE_ALREADY_EXIST");
+		} else {
+			ingredientData = ingredientService.create(data);
+			
+			if (ingredientData == null) {
+				return ResponseEntity.badRequest().build();
+			}
 		}
 		
-		return ResponseEntity.ok().body(ingreData);
+		result.put("ingredientData", ingredientData);
+		return ResponseEntity.ok().body(result);
 	}
 	
 	@PutMapping("/update")

@@ -4,7 +4,7 @@
       <v-card-title class="d-flex justify-space-between">
         <span class="mr-5">
           Create Menu
-          <v-icon @click="onClickCreateBtn()">mdi-plus-box</v-icon>
+          <v-icon @click="onClickCreateBtn">mdi-plus-box</v-icon>
         </span>
 
         <span style="width: 250px;">
@@ -152,21 +152,22 @@
               outlined
             ></v-text-field>
 
-            <v-btn class="mt-5 width-100" color="success" @click="createMenu()"
-              >Create</v-btn
-            >
+            <div class="d-flex justify-end">
+              <v-btn class="mt-5 width-100 mr-5"
+                color="success" @click="createDialog = false">
+                  Cancel
+              </v-btn>
 
-            <v-btn
-              class="mt-5 width-100 ml-5"
-              color="success"
-              @click="createDialog = false"
-              >Cancel</v-btn
-            >
+              <v-btn class="mt-5 width-100" color="success" @click="createMenu">
+                Create
+              </v-btn>
+            </div>
+            
           </v-form>
         </v-card-text>
       </v-card>
 
-      <span class="alertboxRegMenu d-flex justify-center" v-if="message_type != '' && createDialog">
+      <span class="alertboxMenu d-flex justify-center" v-if="message_type != '' && createDialog">
         <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
           :type="message_type">
             {{alert_message}}
@@ -281,21 +282,22 @@
               outlined
             ></v-text-field> -->
 
-            <v-btn class="mt-5 width-100" color="success" @click="editMenu()"
-              >Edit</v-btn
-            >
-
-            <v-btn
-              class="mt-5 width-100 ml-5"
-              color="success"
-              @click="editDialog = false"
-              >Cancel</v-btn
-            >
+            <div class="d-flex justify-end">
+              <v-btn class="mt-5 width-100 mr-5"
+                color="success" @click="editDialog = false">
+                  Cancel
+              </v-btn>
+              
+              <v-btn class="mt-5 width-100" color="success" @click="editMenu">
+                Edit
+              </v-btn>
+            </div>
+            
           </v-form>
         </v-card-text>
       </v-card>
 
-      <span class="alertboxRegMenu d-flex justify-center" v-if="message_type != '' && editDialog">
+      <span class="alertboxMenu d-flex justify-center" v-if="message_type != '' && editDialog">
         <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
           :type="message_type">
             {{alert_message}}
@@ -308,36 +310,24 @@
       <v-card>
         <v-card-title>Delete Menu</v-card-title>
         <v-card-text> Are you sure to delete this menu? </v-card-text>
-        <v-card-actions>
-          <v-btn @click="deleteDialog = false">Cancel</v-btn>
-          <v-btn color="red" dark @click="deleteMenu(toDeleteMenu.id)"
-            >Delete</v-btn
-          >
-        </v-card-actions>
-      </v-card>
 
-      <span class="alertboxRegMenu d-flex justify-center" v-if="message_type != '' && deleteDialog">
-        <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
-          :type="message_type">
-            {{alert_message}}
-        </v-alert>
-      </span>
+        <v-card-actions class="d-flex justify-end">
+          <v-btn @click="deleteDialog = false">Cancel</v-btn>
+
+          <v-btn color="red" dark @click="deleteMenu(toDeleteMenu.id)">
+            Delete
+          </v-btn>
+        </v-card-actions>
+
+      </v-card>
     </v-dialog>
 
-    <!--create success msg->
-    <v-snackbar v-model="createSuccessSnackBar">
-      {{ createSuccessMsg }}
-    </v-snackbar>
-
-    <!--edit success msg->
-    <v-snackbar v-model="editSuccessSnackBar">
-      {{ editSuccessMsg }}
-    </v-snackbar>
-
-    <!--delete success msg->
-    <v-snackbar v-model="deleteSuccessSnackBar">
-      {{ deleteSuccessMsg }}
-    </v-snackbar> -->
+    <span class="alertbox" v-if="message_type1 != ''">
+      <v-alert class="mt-3" v-show="errorAlert1" transition="scroll-y-transition" dense 
+        :type="message_type1">
+          {{alert_message1}}
+      </v-alert>
+    </span>
   </div>
 </template>
 
@@ -350,7 +340,7 @@ export default {
     return {
       id: "",
       description: "",
-      code: "",//Math.floor(1000 + Math.random() * 9000)
+      code: "",
       category_id: "",
       price: "",
       created_at: new Date().toISOString().substr(0, 10),
@@ -365,9 +355,12 @@ export default {
       alert_message: "",
       message_type: "",
 
+      errorAlert1: false,
+      alert_message1: "",
+      message_type1: "",
+
       headers: [
         { text: "Photo", value: "image" },
-        // { text: "No", align: "start", value: "id" },
         { text: "Code", value: "code" },
         { text: "Menu", value: "description" },
         { text: "Category", value: "category_id" },
@@ -388,6 +381,7 @@ export default {
       },
       imagePreviewPath: null,
       ucImagePath: utils.constant.imagePath,
+      editImageChanges: false,
 
       createDialog: false,
       createMenuForm: false,
@@ -422,9 +416,9 @@ export default {
     
     this.loginUser = this.$store.state.loginUser;
 
-    await this.fetchMenuLists();
     await this.getCategoryList();
     await this.getIngredientList();
+    await this.fetchMenuLists();
   },
 
   methods: {
@@ -438,6 +432,7 @@ export default {
       this.toUpdateMenu.image = null;
       this.toUpdateMenu.imagePath = "";
       this.imagePreviewPath = null;
+      this.editImageChanges = false;
       this.ingredients = [];
     },
 
@@ -524,27 +519,27 @@ export default {
             return;
           }
 
-          await this.fetchMenuLists();
-          this.createDialog = false;
-          this.initialState();
-          this.alertbox("error", "CREATE SUCCESSFUL!!!", 3000);
+          this.alertbox1("success", "Create Successful!", 4200);
 
-          // this.createSuccessSnackBar = true;
+          setTimeout(async () => {
+            await this.fetchMenuLists();
+            this.createDialog = false;
+            this.initialState();
+          }, 1200);
         } else {
-          this.alertbox("error", "CREATE FAILED!!!", 3000);
+          this.alertbox("error", "Create Failed!", 3000);
         }
       }
     },
 
     onClickEditBtn(item) {
+      this.initialState();
       this.toUpdateMenu = Object.assign({}, item);
       this.imagePreviewPath = utils.constant.imagePath + item.imagePath;
       
       this.toUpdateMenu.image = this.fileCreate(item);
 
       this.id = item.id;
-      // this.toUpdateMenu.image = item.imagePath;
-      // this.imagePreviewPath = this.toUpdateMenu.imagePath + item.imagePath;
       this.code = item.code;
       this.category_id = item.category.id;
       this.price = item.price;
@@ -575,20 +570,25 @@ export default {
     async editMenu() {
       if (this.$refs.editMenuForm.validate()) {
         let respImageData = null;
-        const respImage = await http.putMedia(
-          "/media/file/update",
-          this.toUpdateMenu.image,
-          this.toUpdateMenu.image.type,
-          this.toUpdateMenu.imagePath,
-          "Menu"
-        );
 
-        if (respImage && respImage.status === 200) {
-          respImageData = await respImage.text();
+        if(this.editImageChanges){
+          const respImage = await http.putMedia(
+            "/media/file/update",
+            this.toUpdateMenu.image,
+            this.toUpdateMenu.image.type,
+            this.toUpdateMenu.imagePath,
+            "Menu"
+          );
+
+          if (respImage && respImage.status === 200) {
+            respImageData = await respImage.text();
+          } else {
+            this.errorAlert = true;
+          }
         } else {
-          this.errorAlert = true;
+          respImageData = this.toUpdateMenu.imagePath;
         }
-
+        
         this.user_id = this.loginUser.userid;
         const resp = await http.put("/menu/update", {
           id: this.id,
@@ -606,9 +606,15 @@ export default {
 
         if (resp && resp.status === 200) {
           this.editSuccessSnackBar = true;
-          await this.fetchMenuLists();
-          this.editDialog = false;
-          this.initialState();
+          this.alertbox1("success", "Update Successful!", 4200);
+
+          setTimeout(async () => {
+            await this.fetchMenuLists();
+            this.editDialog = false;
+            this.initialState();
+          }, 1200);
+        } else {
+          this.alertbox("error", "Update Failed!", 3000);
         }
       }
     },
@@ -622,15 +628,20 @@ export default {
       const resp = await http.del("/menu/del", {
         id: toDeleteID,
       });
+
       if (resp && resp.status === 200) {
         this.deleteSuccessSnackBar = true;
         await this.fetchMenuLists();
         this.deleteDialog = false;
+        this.alertbox1("success", "Delete Successful!", 3000);
+      } else {
+        this.alertbox("error", "Delete Failed!", 3000);
       }
     },
 
     onChangeImage(image) {
       this.imagePreviewPath = URL.createObjectURL(image);
+      this.editImageChanges = true;
     },
 
     alertbox(type, message, timer){
@@ -641,6 +652,16 @@ export default {
       setTimeout(() => {
         this.errorAlert = false;
       }, timer);
+    },
+
+    alertbox1(type, message, timer){
+      this.message_type1 = type;
+      this.alert_message1 = message;
+      this.errorAlert1 = true;
+
+      setTimeout(() => {
+        this.errorAlert1 = false;
+      }, timer);
     }
   },
 };
@@ -648,7 +669,7 @@ export default {
 
 <style>
 
-.alertboxRegMenu {
+.alertbox, .alertboxMenu {
   position: fixed;
   top: 30px;
   left: 50%;
@@ -657,7 +678,7 @@ export default {
   z-index: 1;
 }
 
-.alertboxRegMenu > .alert {
+.alertboxMenu > .alert {
   display: inline-block;
 }
 

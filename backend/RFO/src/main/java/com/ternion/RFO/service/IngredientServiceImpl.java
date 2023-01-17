@@ -56,4 +56,9 @@ public class IngredientServiceImpl implements IngredientService {
 		
 		return true;
 	}
+
+	@Override
+	public IngredientData findByCode(String code) {
+		return ingredientRepo.findByCode(code);
+	}
 }

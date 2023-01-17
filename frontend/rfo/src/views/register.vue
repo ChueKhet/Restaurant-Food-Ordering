@@ -4,7 +4,6 @@
 
         <div class="d-flex flex-column align-center fullScreenReg" style="margin-top: 5px;">
             <v-card class="mx-3" elevation="8">
-            <!-- style="width: 98%;" -->
                 <v-form ref="registerForm" v-model="registerForm">            
                     
                         <v-row>
@@ -162,28 +161,63 @@
                             </v-col>
                             <v-col style="padding-left: 50px; padding-right: 50px; padding-top: 25px; padding-bottom: 25px;" cols="12" sm="4">
                                 <v-card-title><h3>User Info</h3></v-card-title>
-                               
-                                <v-text-field v-model="username" label="User Name"></v-text-field>
-
-                                <!-- <v-calendar v-model="DOB"          
-                                    :rules="[
-                                        (v) => !!v || 'Required'
-                                    ]"
-                                    label="DOB" required>
-                                </v-calendar> -->
                                 
-                                <v-text-field type="password" v-model="password" label="Password"></v-text-field>
+                                <v-row>
+                                    <v-col>
+                                        <v-select
+                                            class="mt-6 mb-1"
+                                            :items="roleList"
+                                            v-model="role"
+                                            item-text="desc"
+                                            item-value="code"
+                                            label="Role"
+                                            dense>
+                                        </v-select>
+                                    </v-col>
+                                </v-row>
+                                
+                                <v-row>
+                                    <v-col>
+                                        <v-text-field class="m_p_top_0" v-model="username" label="User Name"></v-text-field>
+                                    </v-col>
+                                </v-row>
 
-                                <v-text-field
-                                    type="password"
-                                    v-model="confirmpwd"
-                                    :rules="[
-                                        (v) => (confirmPassword(v)) || 'Password not match!!!',
-                                    ]"
-                                    label="Confirm Password"
-                                ></v-text-field>
+                                <v-row>
+                                    <v-col>
+                                        <v-text-field class="m_p_top_0" type="password" v-model="password" label="Password"></v-text-field>
+                                    </v-col>
+                                </v-row>
 
-                                <v-row style="margin-top: 20px; margin-left: 0px;">
+                                <v-row>
+                                    <v-col>
+                                        <v-text-field
+                                            class="m_p_top_0"
+                                            type="password"
+                                            v-model="confirmpwd"
+                                            :rules="[
+                                                (v) => (confirmPassword(v)) || 'Password not match!!!',
+                                            ]"
+                                            label="Confirm Password"
+                                        ></v-text-field>
+                                    </v-col>
+                                </v-row>
+
+                                <v-row class="mb-5 d-flex justify-end" style="margin-top: 20px; margin-left: 0px;">
+
+                                    <v-btn
+                                        color="success"
+                                        class="mr-4"
+                                        @click="clear"
+                                        style="width: 91px;"
+                                    >
+                                        <span v-if="!loading">Clear</span>
+                                        <v-progress-circular
+                                        v-else
+                                        indeterminate
+                                        color="primary"
+                                        ></v-progress-circular>
+                                    </v-btn>
+
                                     <v-btn
                                         :disabled="!registerForm"
                                         color="success"
@@ -199,33 +233,16 @@
                                         ></v-progress-circular>
                                     </v-btn>
 
-                                    <v-btn
-                                        color="success"
-                                        class="mr-4"
-                                        @click="clear"
-                                        style="width: 91px;"
-                                    >
-                                        <span v-if="!loading">Clear</span>
-                                        <v-progress-circular
-                                        v-else
-                                        indeterminate
-                                        color="primary"
-                                        ></v-progress-circular>
-                                    </v-btn>
                                 </v-row>
                             </v-col>
                         </v-row>
 
-                        <span class="alertboxReg" v-if="message_type != ''">
+                        <span class="alertbox" v-if="message_type != ''">
                             <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
                                 :type="message_type">
                                     {{alert_message}}
                             </v-alert>
                         </span>
-                        <!-- <v-alert class="mt-3 alertboxReg" v-show="errorAlert" transition="scroll-y-transition" dense 
-                            :type="message_type">
-                                {{alert_message}}
-                        </v-alert> -->
                     
                 </v-form>
             </v-card>
@@ -257,6 +274,7 @@ export default {
             username: "",
             password: "",
             confirmpwd: "",
+            role: 0,
             township: "",
             division: "",
             nation: "",
@@ -270,7 +288,18 @@ export default {
             nations: [],
             errorAlert: false,
             alert_message: "",
-            message_type: ""
+            message_type: "",
+
+            roleList: [
+                {
+                    code: 0,
+                    desc: "Staff"
+                },
+                {
+                    code: 1,
+                    desc: "Admin"
+                }
+            ]
         };
     },
 
@@ -338,11 +367,12 @@ export default {
                             nrc: this.nrc,
                             phone: this.phone,
                             address: this.address,
-                            imagePath: respImageData,
+                            imagePath: respImageData
                         },
                         accountData: {
                             username: this.username,
-                            password: this.password
+                            password: this.password,
+                            role: this.role
                         }
                     };
 
@@ -397,7 +427,7 @@ export default {
         validate(){
             if(this.image == null || this.image == ""){
                 this.alertbox("error", "Please add Image!!!", 3000);
-                //  Please add image
+                
                 return false;
             }
 
@@ -479,6 +509,7 @@ export default {
             this.division = "";
             this.nation = "";
             this.nrc_num = "";
+            this.role = 0;
             this.imagePreviewPath = null;
         },
 
@@ -508,7 +539,7 @@ export default {
     margin: 0;
 }
 
-.alertboxReg {
+.alertbox {
   position: fixed;
   top: 30px;
   left: 50%;

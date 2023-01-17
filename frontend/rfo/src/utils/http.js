@@ -52,13 +52,6 @@ async function putMedia(path, file, fileType, filePath, folderName) {
   return resp;
 }
 
-// async function get(path) {
-//   const resp = await fetch(constant.localDomain + path, {
-//     method: "GET",
-//   });
-//   return resp;
-// }
-
 async function get(path){
   try {
       const resp = await fetch(

@@ -86,8 +86,6 @@ export default {
 
   methods: {
     async fetchSaleDetail() {
-      // const headerId = this.$route.params.headerId;
-
       const resp = await utils.http.get(
         "/sale/detail" + "?headerId=" + this.headerId
       );
