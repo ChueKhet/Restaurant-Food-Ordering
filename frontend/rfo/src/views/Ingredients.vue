@@ -326,7 +326,6 @@ export default {
       if (this.$refs.editIngredientForm.validate()) {
         let param = {
           id: this.id,
-          code: this.code,
           description: this.description,
         };
         const resp = await http.put("/ingredient/update",param);
