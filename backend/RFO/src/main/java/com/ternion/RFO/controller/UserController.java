@@ -56,7 +56,7 @@ public class UserController {
 		acc.setUserid(ServerUtil.generateUserId(maxId));
 		acc.setUsername(((HashMap<String, Object>) data.get("accountData")).get("username").toString());
 		acc.setPassword(((HashMap<String, Object>) data.get("accountData")).get("password").toString());
-		acc.setRole(0);
+		acc.setRole( Integer.parseInt( ( (HashMap<String, Object>) data.get("accountData") ).get("role").toString() ) );
 		acc.setCreatedAt(curDate);
 		acc.setModifiedAt(curDate);
 		

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ternion.RFO.entity.IngredientData;
 import com.ternion.RFO.repository.IngredientRepo;
@@ -38,12 +39,17 @@ public class IngredientServiceImpl implements IngredientService {
 		
 		IngredientData data = ingredientRepo.findById(ingredient.getId()).orElse(null);
 		
+		if(data == null) {
+			return null;
+		}
+		
 		data.setModifiedAt(curDate);
 		data.setDescription(ingredient.getDescription());
 		
 		return ingredientRepo.save(data);
 	}
 
+	@Transactional
 	@Override
 	public boolean delete(int id) {
 		IngredientData findIngredient = ingredientRepo.findById(id).orElse(null);
@@ -52,8 +58,14 @@ public class IngredientServiceImpl implements IngredientService {
 			return false;
 		}
 		
+		ingredientRepo.deleteJunctionById(id);
 		ingredientRepo.deleteById(id);
 		
 		return true;
+	}
+
+	@Override
+	public IngredientData findByCode(String code) {
+		return ingredientRepo.findByCode(code);
 	}
 }

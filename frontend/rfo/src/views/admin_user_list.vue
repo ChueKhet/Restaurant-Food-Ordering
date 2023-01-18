@@ -4,7 +4,7 @@
       <v-card-title class="d-flex justify-space-between">
         <span class="mr-5">
           Staff List
-          <v-icon @click="register()">mdi-plus-box</v-icon>
+          <v-icon @click="register">mdi-plus-box</v-icon>
         </span>
 
         <span style="width: 250px;">
@@ -61,6 +61,13 @@
 
       </v-card>
     </v-dialog>
+
+    <span class="alertbox" v-if="message_type != ''">
+      <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
+        :type="message_type">
+          {{alert_message}}
+      </v-alert>
+    </span>
   </div>
 </template>
 
@@ -121,6 +128,7 @@ export default {
           value: 'btn',
         },
       ],
+
       userList: [],
       toEditId: 0,
       name: "",
@@ -133,6 +141,10 @@ export default {
       toDeleteUser: {},
       createDialog: false,
       search: "",
+
+      errorAlert: false,
+      alert_message: "",
+      message_type: "",
     };
   },
 
@@ -177,6 +189,9 @@ export default {
       if(resp && resp.status == 200){
         await this.fetchUserList();
         this.deleteDialog = false;
+        this.alertbox("success", "Delete Successful!", 3000);
+      } else {
+        this.alertbox("error", "Delete Failed!", 3000);
       }
     }
   },
@@ -184,5 +199,14 @@ export default {
 </script>
 
 <style>
+
+.alertbox {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  z-index: 1;
+}
 
 </style>

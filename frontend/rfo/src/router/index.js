@@ -14,7 +14,6 @@ import ChangePwd from '../views/ChangePwd.vue';
 import SaleHeaders from '../views/SaleHeaders.vue';
 import Payment from '../views/Payment.vue';
 
-// import store from '../store/index.js';
 import beforeEach from './beforeEach.js';
 
 Vue.use(VueRouter)
@@ -78,11 +77,6 @@ const routes = [
     name: 'sale_headers',
     component: SaleHeaders
   },
-  // {
-  //   path: "/sale_detail/:headerId",
-  //   name: 'sale_detail',
-  //   component: SaleDetail
-  // },
   {
     path: "/payment/:headerData",
     name: "payment",
@@ -98,10 +92,5 @@ const router = new VueRouter({
 });
 
 router.beforeEach(beforeEach);
-
-// router.beforeEach((to, from, next) => {
-//   store.commit("logout");
-//   next();
-// });
 
 export default router;

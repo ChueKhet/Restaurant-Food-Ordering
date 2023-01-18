@@ -12,4 +12,6 @@ public interface IngredientService {
 	public IngredientData update(IngredientData ingredient);
 
 	public boolean delete(int id);
+	
+	public IngredientData findByCode(String code);
 }

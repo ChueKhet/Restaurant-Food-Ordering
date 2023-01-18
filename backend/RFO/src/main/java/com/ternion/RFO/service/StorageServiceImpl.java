@@ -130,6 +130,17 @@ public class StorageServiceImpl implements StorageService{
 		String retfilePath = null;
 		
 		try {
+			String arr[] = filePath.split("/");
+			filePath = filePath.replace("/media/" + folderName + "/" + arr[3] + "/", "");
+			
+			if (filePath != null && filePath != "") {
+				try {
+					Files.delete(this.storagePath.resolve(folderName).resolve(arr[3]).resolve(filePath));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
 			String ft = "";
 			String fileName = Instant.now().getEpochSecond() + "_"
 					+ StringUtils.cleanPath(file.getOriginalFilename());
@@ -145,16 +156,6 @@ public class StorageServiceImpl implements StorageService{
 					ft = "png";
 					retfilePath = getFilePath(folderName, ft, fileName);
 					break;
-			}
-			
-			filePath = filePath.replace("/media/" + folderName + "/" + ft + "/", "");
-			
-			if (filePath != null && filePath != "") {
-				try {
-					Files.delete(this.storagePath.resolve(folderName).resolve(ft).resolve(filePath));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 			
 			Files.copy(

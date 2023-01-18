@@ -4,7 +4,7 @@
       <v-card-title class="d-flex justify-space-between">
         <span class="mr-5">
           Create Ingredients
-          <v-icon @click="onClickCreateBtn()">mdi-plus-box</v-icon>
+          <v-icon @click="onClickCreateBtn">mdi-plus-box</v-icon>
         </span>
         
         <span style="width: 250px;">
@@ -56,16 +56,6 @@
         </v-card-title>
         <v-card-text>
           <v-form ref="addIngredientForm" v-model="addIngredientForm">
-            <!-- <v-select
-              v-model="menuList"
-              :items="menuRecords"
-              attach
-              chips
-              label="Menu"
-              item-text="description"
-              return-object
-              multiple
-            ></v-select> -->
 
             <v-text-field
               v-model="code"
@@ -82,22 +72,29 @@
               :rules="[(v) => !!v || 'Required']"
               outlined
             ></v-text-field>
-            <v-btn
-              class="mt-5 width-100"
-              color="success"
-              @click="createIngredient()"
-              >Save</v-btn
-            >
 
-            <v-btn
-              class="mt-5 width-100 ml-5"
-              color="success"
-              @click="createDialog = false"
-              >Cancel</v-btn
-            >
+            <div class="d-flex justify-end">
+              <v-btn class="mt-5 width-100 mr-5"
+                color="success" @click="createDialog = false">
+                  Cancel
+              </v-btn>
+
+              <v-btn class="mt-5 width-100"
+                color="success" @click="createIngredient">
+                  Save
+              </v-btn>
+            </div>
+            
           </v-form>
         </v-card-text>
       </v-card>
+
+      <span class="alertboxIngredient d-flex justify-center" v-if="message_type != '' && createDialog">
+        <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
+          :type="message_type">
+            {{alert_message}}
+        </v-alert>
+      </span>
     </v-dialog>
 
     <!-- Edit Dialog -->
@@ -109,16 +106,6 @@
         </v-card-title>
         <v-card-text>
           <v-form ref="editIngredientForm" v-model="editIngredientForm">
-            <!-- <v-select
-              v-model="menuList"
-              :items="menuRecords"
-              attach
-              chips
-              label="Menu"
-              item-text="description"
-              return-object
-              multiple
-            ></v-select> -->
 
             <v-text-field
               v-model="code"
@@ -135,22 +122,30 @@
               required
               :rules="[(v) => !!v || 'Required']"
               outlined
-            ></v-text-field>        
-            <v-btn
-              class="mt-5 width-100"
-              color="success"
-              @click="editIngredient()"
-              >Edit</v-btn
-            >
-            <v-btn
-              class="mt-5 width-100 ml-5"
-              color="success"
-              @click="editDialog = false"
-              >Cancel</v-btn
-            >
+            ></v-text-field>
+            
+            <div class="d-flex justify-end">
+              <v-btn class="mt-5 width-100 mr-5"
+                color="success" @click="editDialog = false">
+                  Cancel
+              </v-btn>
+
+              <v-btn class="mt-5 width-100"
+                color="success" @click="editIngredient">
+                  Edit
+              </v-btn>
+            </div>
+            
           </v-form>
         </v-card-text>
       </v-card>
+
+      <span class="alertboxIngredient d-flex justify-center" v-if="message_type != '' && editDialog">
+        <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
+          :type="message_type">
+            {{alert_message}}
+        </v-alert>
+      </span>
     </v-dialog>
 
     <!-- Delete Dialog -->
@@ -158,29 +153,24 @@
       <v-card>
         <v-card-title>Delete Ingredient</v-card-title>
         <v-card-text>Are you sure to delete this Ingredient?</v-card-text>
-        <v-card-actions>
+
+        <v-card-actions class="d-flex justify-end">
           <v-btn @click="deleteDialog = false">Cancel</v-btn>
-          <v-btn color="red" dark @click="deleteIngredient(toDeleteID.id)"
-            >Delete</v-btn
-          >
+
+          <v-btn color="red" dark @click="deleteIngredient(toDeleteID.id)">
+            Delete
+          </v-btn>
         </v-card-actions>
+
       </v-card>
     </v-dialog>
 
-    <!--create success msg-->
-    <v-snackbar v-model="createSuccessSnackBar">
-      {{ createSuccessMsg }}
-    </v-snackbar>
-
-    <!--edit success msg-->
-    <v-snackbar v-model="editSuccessSnackBar">
-      {{ editSuccessMsg }}
-    </v-snackbar>
-
-    <!--delete success msg-->
-    <v-snackbar v-model="deleteSuccessSnackBar">
-      {{ deleteSuccessMsg }}
-    </v-snackbar>
+    <span class="alertbox" v-if="message_type1 != ''">
+      <v-alert class="mt-3" v-show="errorAlert1" transition="scroll-y-transition" dense 
+        :type="message_type1">
+          {{alert_message1}}
+      </v-alert>
+    </span>
   </div>
 </template>
 
@@ -202,6 +192,7 @@ export default {
       created_at: new Date().toISOString().substr(0, 10),
       modified_at: new Date().toISOString().substr(0, 10),
       user_id: "",
+      description: "",
       
       addIngredientForm: "",
       editIngredientForm: "",
@@ -229,6 +220,14 @@ export default {
 
       updateBtn: true,
       saveBtn: false,
+
+      errorAlert: false,
+      alert_message: "",
+      message_type: "",
+
+      errorAlert1: false,
+      alert_message1: "",
+      message_type1: "",
     };
   },
 
@@ -268,6 +267,7 @@ export default {
     },
 
     onClickCreateBtn() {
+      this.initialState();
       this.createDialog = true;
     },
 
@@ -293,27 +293,39 @@ export default {
         const resp = await http.post("/ingredient/add", param)
        
         if (resp && resp.status === 200) {
+          const data = await resp.json();
+
+          if(data.message.toString() == "CODE_ALREADY_EXIST"){
+            this.alertbox("error", "Code Already Exist!!!", 3000);
+            this.$refs.codeCreate.focus();
+            return;
+          }
+
           await this.fetchIngredientAddedMenuLists();
           this.initialState();
           this.createDialog = false;
 
            this.createSuccessSnackBar = true;
-         }
+           this.alertbox1("success", "Create Successful!", 3000);
+        } else {
+          this.alertbox("error", "Create Failed!", 3000);
+        }
       }
     },
 
     onClickEditBtn(item) {
+      this.initialState();
       this.id = item.id;
       this.code = item.code;
       this.created_at = item.created_at;
       this.description = item.description;
       this.editDialog = true;
     },
+
     async editIngredient() {
       if (this.$refs.editIngredientForm.validate()) {
         let param = {
           id: this.id,
-          code: this.code,
           description: this.description,
         };
         const resp = await http.put("/ingredient/update",param);
@@ -321,6 +333,9 @@ export default {
           this.editSuccessSnackBar = true;
           await this.fetchIngredientAddedMenuLists();
           this.editDialog = false;
+          this.alertbox1("success", "Update Successful!", 3000);
+        } else {
+          this.alertbox("error", "Update Failed!", 3000);
         }
       }
     },
@@ -334,16 +349,55 @@ export default {
       const resp = await http.del("/ingredient/del", {
         id: toDeleteID,
       });
+
       if (resp && resp.status === 200) {
         this.deleteDialog = false;
         await this.fetchIngredientAddedMenuLists();
         
         this.initialState();
         this.deleteSuccessSnackBar = true;
-       
-       
+        this.alertbox1("success", "Delete Successful!", 3000);
+      } else {
+        this.alertbox("error", "Delete Failed!", 3000);
       }
     },
+
+    alertbox(type, message, timer){
+      this.message_type = type;
+      this.alert_message = message;
+      this.errorAlert = true;
+
+      setTimeout(() => {
+        this.errorAlert = false;
+      }, timer);
+    },
+
+    alertbox1(type, message, timer){
+      this.message_type1 = type;
+      this.alert_message1 = message;
+      this.errorAlert1 = true;
+
+      setTimeout(() => {
+        this.errorAlert1 = false;
+      }, timer);
+    }
   },
 };
 </script>
+
+<style>
+
+.alertbox, .alertboxIngredient {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.alertboxIngredient > .alert {
+  display: inline-block;
+}
+
+</style>

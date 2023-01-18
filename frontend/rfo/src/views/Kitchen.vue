@@ -31,21 +31,10 @@
               <!-- @click:row="(item) => !detailDialog ? fetchOrderDetail(item) : (this.closeFormSnackBar = true)" -->
 
                 <template v-slot:item.orderStatus="{ item }">
-                  <div class="orderStatus">
+                  <div :class="CssClass[item.orderStatus]">
                     {{ STATUS[item.orderStatus] }}
                   </div>
                 </template>
-                <!-- <template v-slot:item.btn="{ item }">
-
-                  <v-btn
-                    color="red"
-                    fab
-                    x-small
-                    dark
-                    @click="onClickDetail(item.id)" >
-                      <v-icon>mdi-eye</v-icon>
-                  </v-btn>
-                </template> -->
             </v-data-table>
           </v-card>
 
@@ -56,9 +45,6 @@
             class="ma-3 ml-1 pa-3"
             style="height: 630px; position: sticky; right: 0; top: 80px"
           >
-          <!-- v-if="detailDialog" -->
-
-            <!-- <v-icon class="align-left" @click="closeDetailForm()">mdi-close</v-icon> -->
             <v-card-title>
               <v-row>
                 <v-col>
@@ -67,20 +53,10 @@
                     <h6 style="margin-left: 5px">
                       Table No: {{ tableNo }}
                     </h6>
-                    <!-- <v-text-field 
-                      v-model="tableNo"
-                      class="pa0_ma0 px-2 kit-vtxt"
-                      min="1"
-                    ></v-text-field> -->
 
                     <h6 style="margin-right: 5px">
                       Slip No: {{ slipNo }}
                     </h6>
-                    <!-- <v-text-field 
-                      v-model="slipNo"
-                      class="pa0_ma0 px-2 kit-vtxt"
-                      min="1"
-                    ></v-text-field> -->
                   </div>
 
                   <v-data-table
@@ -88,9 +64,8 @@
                     :items="headerDetailRecords"
                     :hide-default-footer="true"
                   >
-                  <!-- :item-key="slipNo" -->
                     <template v-slot:item.updateStatus="{ item }">
-                      <v-btn
+                      <!-- <v-btn
                         text
                         x-small
                         class="width-100"
@@ -98,151 +73,45 @@
                         :disabled="item.orderStatus.toString() == '1'"
                         @click="tempData(item)"
                       >
-                      <!-- (served && tempId.includes(item.id)) || -->
                         {{ item.orderStatus.toString() == "1" ? "Served" : "Ordered" }}
+                      </v-btn> -->
+
+                      <v-btn text small :disabled="item.orderStatus.toString() == '1'" @click="tempData(item)">
+                        <div :class="item.orderStatus.toString() == '1' ? 'orderStatus3' : 'orderStatus1'">
+                          {{ item.orderStatus.toString() == "1" ? "Served" : "Ordered" }}
+                        </div>
                       </v-btn>
                     </template>
                   </v-data-table>
 
                 </v-col>
               </v-row>
-
-              <!-- <span class="text-uppercase mt-5" v-if="allMenuServed">All Served</span> -->
               
             </v-card-title>
 
-            <v-card-title>
+            <v-card-title class="d-flex justify-end">
               <v-btn
                 class="mt-5 width-100"
                 color="success"
                 :disabled="!allMenuServed"
-                @click="allServed()"
+                @click="allServed"
                 >Complete
               </v-btn>
             </v-card-title>
           </v-card>
-
-          <v-snackbar color="red" v-model="MenuLeftToServeSnackBar">
-            {{ menuLeftToServeMsg }}
-          </v-snackbar>
-
-          <v-snackbar v-model="allServedSnackBar">
-            {{ allServedMsg }}
-          </v-snackbar>
-
-          <v-snackbar v-model="closeFormSnackBar">
-            {{ closeFormMsg }}
-          </v-snackbar>
         </v-col>
 
       </v-row>
       
     </v-card>
+
+    <span class="alertbox" v-if="message_type != ''">
+      <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
+        :type="message_type">
+          {{alert_message}}
+      </v-alert>
+    </span>
   </div>
-
-  <!-- <v-row style="height: 100%">
-    <v-col cols="12" sm="6">
-      <div class="ml-5 mt-10 mb-2 font-weight-bold item-center;">
-        <span class="align-center">Today's Order </span>
-      </div>
-
-      <v-data-table
-        class="ml-10"
-        :headers="headers"
-        :items="headerRecords"
-        :item-key="slipNo"
-        :items-per-page="10"
-        @click:row="
-          (item) =>
-            !detailDialog
-              ? fetchOrderDetail(item)
-              : (this.closeFormSnackBar = true)
-        "
-      >
-      </v-data-table>
-    </v-col>
-
-    <v-col cols="12" sm="6" style="position: sticky">
-      <v-card
-        class="ma-3 pa-3"
-        style="height: 630px; position: sticky; right: 0; top: 80px"
-        v-if="detailDialog"
-      >
-        <v-icon class="align-left" @click="closeDetailForm()">mdi-close</v-icon>
-        <v-card-title>
-          <v-row>
-            <v-col>
-              <div class="d-flex">
-                <h6 style="margin-left: 5px">Table No:</h6>
-                <v-text-field 
-                  v-model="tableNo"
-                  class="pa0_ma0 px-2 kit-vtxt"
-                  min="1"
-                ></v-text-field>
-
-                <h6 style="margin-right: 5px">Slip No:</h6>
-                <v-text-field 
-                  v-model="slipNo"
-                  class="pa0_ma0 px-2 kit-vtxt"
-                  min="1"
-                ></v-text-field>
-              </div>
-              <v-data-table
-                :headers="detailHeaders"
-                :items="headerDetailRecords"
-                :item-key="slipNo"
-                :hide-default-footer="true"
-              >
-                <template v-slot:item.updateStatus="{ item }">
-                  <v-btn
-                    text
-                    x-small
-                    class="width-100"
-                    color="success"
-                    :disabled="
-                      (served && tempId.includes(item.id)) ||
-                      item.orderStatus == '2'
-                    "
-                    @click="tempData(item)"
-                  >
-                    {{
-                      (served && tempId.includes(item.id)) ||
-                      item.orderStatus == "2"
-                        ? "Served"
-                        : "Sale"
-                    }}</v-btn
-                  >
-                </template>
-              </v-data-table>
-            </v-col>
-          </v-row>
-
-          <span class="text-uppercase mt-5" v-if="allMenuServed"
-            >All Served</span
-          >
-          <v-btn
-            v-else
-            class="mt-5 width-100"
-            color="success"
-            @click="allServed()"
-            >Complete
-          </v-btn>
-        </v-card-title>
-      </v-card>
-
-      <v-snackbar color="red" v-model="MenuLeftToServeSnackBar">
-        {{ menuLeftToServeMsg }}
-      </v-snackbar>
-
-      <v-snackbar v-model="allServedSnackBar">
-        {{ allServedMsg }}
-      </v-snackbar>
-
-      <v-snackbar v-model="closeFormSnackBar">
-        {{ closeFormMsg }}
-      </v-snackbar>
-    </v-col>
-  </v-row> -->
 
 </template>
 
@@ -269,6 +138,10 @@ export default {
       count: 0,
       detailCount: 0,
 
+      errorAlert: false,
+      alert_message: "",
+      message_type: "",
+
       hTableHeaders: [
         {
           text: 'Slip No',
@@ -284,10 +157,6 @@ export default {
           text: 'Confirm Status',
           value: 'orderStatus',
         },
-        // {
-        //   text: 'Actions',
-        //   value: 'btn',
-        // },
       ],
 
       detailHeaders: [
@@ -298,17 +167,7 @@ export default {
       ],
 
       STATUS: ["Order", "Sales", "Served"],
-
-      // served: false,
-      // formId: "",
-      // tempId: [],
-
-      // MenuLeftToServeSnackBar: false,
-      // allServedSnackBar: false,
-      // closeFormSnackBar: false,
-      // menuLeftToServeMsg: "Menu still left to serve",
-      // allServedMsg: "All Served",
-      // closeFormMsg: "Please close the form first",
+      CssClass: ["orderStatus1", "orderStatus2", "orderStatus3"]
     };
   },
 
@@ -324,11 +183,7 @@ export default {
         const data = await resp.json();
 
         if (data) {
-          // this.saleHeaders = data;
-
-          this.saleHeaders = data?.length > 0 ? data.map(
-            it => ({...it, orderStatus:STATUS[it.orderStatus]})
-          ) : [];
+          this.saleHeaders = data;
         }
       }
     },
@@ -340,23 +195,10 @@ export default {
       this.header_id = item.id;
       this.detailCount = item.detailList.length;
 
-      // this.detailDialog = true;
-      // this.formId = item.id;
-
       this.checkAllServe();
     },
 
     async checkAllServe() {
-      // this.headerDetailRecords.map((detail) => {
-      //   if (detail.orderStatus == "2") {
-      //     this.count++;
-      //   }
-      // });
-
-      // if (this.count == this.detailCount) {
-      //   this.allMenuServed = true;
-      // }
-
       let allNotServe = this.headerDetailRecords.some(
         data => {
           return data.orderStatus.toString() != "1";
@@ -379,34 +221,26 @@ export default {
       });
 
       if (resp && resp.status === 200) {
-        // this.served = true;
-        // this.count++;
-        // this.tempId.push(item.id);
-
+        this.alertbox("success", "Detail Status Changed!", 3000);
         item.orderStatus = 1;
         this.checkAllServe();
+      } else {
+        this.alertbox("error", "Detail Status Not Changed!", 3000);
       }
     },
 
     async allServed() {
-      // if (this.count !== this.detailCount) {
-      //   this.MenuLeftToServeSnackBar = true;
-      //   return false;
-      // }
-
       const resp = await http.put("/kitchen/order/status/done", {
         id: this.header_id,
         orderStatus: "2",
       });
 
       if (resp && resp.status === 200) {
-        // this.served = true;
-        // this.allServedSnackBar = true;
-        // this.closeDetailForm();
+        this.alertbox("success", "Header Status Changed!", 3000);
 
         this.saleHeaders.map(
           data => {
-            if(data.id = this.header_id){
+            if(data.id == this.header_id){
               data.orderStatus = 2;
             }
           }
@@ -414,22 +248,52 @@ export default {
 
         this.headerDetailRecords = [];
         this.allMenuServed = false;
+      } else {
+        this.alertbox("error", "Header Status Not Changed!", 3000);
       }
     },
 
-    // async closeDetailForm() {
-    //   // this.detailDialog = false;
-      
-    //   this.allMenuServed = false;
-    //   this.count = 0;
-    //   this.fetchKitchenOrderLists();
-    // },
+    alertbox(type, message, timer){
+      this.message_type = type;
+      this.alert_message = message;
+      this.errorAlert = true;
+
+      setTimeout(() => {
+        this.errorAlert = false;
+      }, timer);
+    },
   },
 };
 </script>
 
 <style>
+
 .kit-vtxt > .v-input__control > .v-input__slot:before {
   border-style: none;
 }
+
+.orderStatus1{
+  width:fit-content;
+  padding:5px 10px;
+  border-radius:20px 20px;
+  background-color:rgb(255, 0, 0);
+  color:white;
+}
+
+.orderStatus2{
+  width:fit-content;
+  padding:5px 10px;
+  border-radius:20px 20px;
+  background-color:rgb(255, 170, 0);
+  color:white;
+}
+
+.orderStatus3{
+  width:fit-content;
+  padding:5px 10px;
+  border-radius:20px 20px;
+  background-color:#4caf50;
+  color:white;
+}
+
 </style>

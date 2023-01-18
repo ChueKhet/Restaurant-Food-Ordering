@@ -29,7 +29,7 @@ public class MenuServiceImpl implements MenuService {
 		 
 		 for(int i=0; i<data.size(); i++) {
 			 ingredientList = new ArrayList<>();
-			// ingredientList = ingredientRepo.getAllByMenuId(data.get(i).getId());
+			 ingredientList = ingredientRepo.getAllByMenuId(data.get(i).getId());
 			 
 			 data.get(i).setIngredientList(ingredientList);
 		 }

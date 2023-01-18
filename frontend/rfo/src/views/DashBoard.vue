@@ -1,7 +1,7 @@
 <template>
   <v-row style="height: 100%;">
 
-    <v-col cols="12" :sm="(loginUser && loginUser.role == 0) ? 6 : 12">
+    <v-col cols="12" :sm="(loginUser && loginUser.role != 1) ? 6 : 12">
       <v-row>
         <v-col style="padding-bottom: 0px; width: 100%;">
 
@@ -22,7 +22,6 @@
                   :readonly="switch1"
                   @change="getMenuByCategory"
                 ></v-select>
-                <!-- return-object -->
               </div>
 
               <template>
@@ -33,7 +32,6 @@
                     inset
                     @change="selectAllCategory"
                   ></v-switch>
-                  <!-- color="deep-purple lighten-1" dark -->
                 </v-sheet>
               </template>
 
@@ -59,38 +57,25 @@
 
       <v-row style="margin-top: 0px;">
         <v-col cols="12" 
-        :sm="(loginUser && loginUser.role == 0) ? 12 : 6" 
-        :md="(loginUser && loginUser.role == 0) ? 6 : 3" 
-        :lg="(loginUser && loginUser.role == 0) ? 4 : 2" 
+        :sm="(loginUser && loginUser.role != 1) ? 12 : 6" 
+        :md="(loginUser && loginUser.role != 1) ? 6 : 3" 
+        :lg="(loginUser && loginUser.role != 1) ? 4 : 2" 
         v-for="menu in menuList" :key="menu.id">
-
-          <!-- <v-card class="ma-2" elevation="8" width="220">
-            <div align="right" style="padding-top: 5px; margin-right: 5px;">
-              <v-btn color="deep-purple lighten-1" fab dark small>
-                <v-icon dark>mdi-cached</v-icon>
-              </v-btn>
-            </div>
-            <div class="d-flex flex-column align-center justify-center">
-              <v-img src="../assets/saved Images/menu/logo.png" width="200" height="215"></v-img>
-              <v-card-title>{{menu.description}}</v-card-title>
-              <v-card-text align="center">price : {{menu.code}}</v-card-text>
-            </div>
-          </v-card> -->
 
           <div class="card card-addition ma-3">
             <div class="card__inner" :id="'inner' + menu.id">
 
-              <div class="card__face card__face--front" :style="{ 'z-index': (cardFlipBack(menu.id) ? -1 : 1) }">
+              <div class="card__face card__face--front" :style="{ 'z-index': (menu.isBack ? -1 : 1) }">
                 <div class="card__content d-flex flex-column align-center justify-center">
 
                   <div class="card__header d-flex flex-column align-center justify-center">
                     <v-icon color="deep-purple lighten-1" dark @click="addToCart(menu)"
                       style="position: absolute; top: 3px; left: 10px;"
-                      v-show="loginUser && loginUser.role == 0">
+                      v-show="loginUser && loginUser.role != 1">
                         shopping_cart
                     </v-icon>
 
-                    <v-icon color="deep-purple lighten-1" dark @click="cardFlip(menu.id)"
+                    <v-icon color="deep-purple lighten-1" dark @click="cardFlip(menu)"
                       style="position: absolute; top: 3px; right: 10px;">
                         mdi-cached
                     </v-icon>
@@ -107,14 +92,14 @@
                 </div>
               </div>
 
-              <div class="card__face card__face--back" :style="{ 'z-index': (cardFlipBack(menu.id) ? 1 : -1) }">
+              <div class="card__face card__face--back" :style="{ 'z-index': (menu.isBack ? 1 : -1) }">
                 <v-icon color="deep-purple lighten-1" dark @click="addToCart(menu)"
                   style="position: absolute; top: 3px; left: 10px;"
-                  v-show="loginUser && loginUser.role == 0">
+                  v-show="loginUser && loginUser.role != 1">
                     shopping_cart
                 </v-icon>
 
-                <v-icon color="deep-purple lighten-1" dark @click="cardFlip(menu.id)"
+                <v-icon color="deep-purple lighten-1" dark @click="cardFlip(menu)"
                   style="position: absolute; top: 3px; right: 10px;">
                     mdi-cached
                 </v-icon>
@@ -149,7 +134,7 @@
       </v-row>
     </v-col>
 
-    <v-col cols="12" sm="6" style="position: sticky;" v-show="loginUser && loginUser.role == 0">
+    <v-col cols="12" sm="6" style="position: sticky;" v-show="loginUser && loginUser.role != 1">
       <v-card class="ma-3 pa-3" style="height: 630px; position: sticky; right: 0; top: 80px;">
 
         <v-card-title>
@@ -201,7 +186,7 @@
 
       </v-card>
     </v-col>
-    <span class="alertboxReg" v-if="message_type != ''">
+    <span class="alertbox" v-if="message_type != ''">
       <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
         :type="message_type">
           {{alert_message}}
@@ -221,7 +206,8 @@ export default {
 
   props: {
     headData: Object,
-    required: true
+
+    isPaymentSuccess: Boolean,
   },
 
   data() {
@@ -245,7 +231,14 @@ export default {
       switch1: true,
       isCardBack: [],
 
+      isNew: true,
+
       orderHeaders: [
+        {
+          text: 'Code',
+          value: 'menuCode',
+          sortable: true,
+        },
         {
           text: 'Description',
           value: 'menuDesc',
@@ -290,6 +283,10 @@ export default {
   },
 
   async created() {
+    if(this.isPaymentSuccess){
+      this.alertbox("success", "Payment Successful!", 3000);
+    }
+
     this.$store.watch(
       () => {
         return this.$store.state.loginUser;
@@ -304,9 +301,11 @@ export default {
     this.loginUser = this.$store.state.loginUser;
 
     this.saveHeaderData = this.getHeaderData();
+    this.isNew = true;
 
     if(this.headData != undefined && this.headData.id != undefined){
       this.saveHeaderData = this.headData;
+      this.isNew = false;
 
       this.saveHeaderData.detailList.map(
         data=>{
@@ -330,6 +329,7 @@ export default {
         this.allMenuList = [];
         this.menuList.map(
           data => {
+            data.isBack = false;
             this.allMenuList.push(data);
           }
         );
@@ -344,46 +344,12 @@ export default {
       }
     },
 
-    cardFlip(id){
-      let innerId = "#inner" + id;
-      let temp = {
-        id: id,
-        isBack: true
-      };
-      let someTemp = false;
-
-      let isExist = this.isCardBack.some(
-        data => {
-          someTemp = (data.id == temp.id);
-
-          if(someTemp){
-            data.isBack = !data.isBack;
-          }
-
-          return someTemp;
-        }
-      );
-
-      if(!isExist){
-        this.isCardBack.push(temp);
-      }
+    cardFlip(passMenu){
+      let innerId = "#inner" + passMenu.id;
+      passMenu.isBack = !passMenu.isBack;
 
       const card = document.querySelector(innerId);
       card.classList.toggle('is-flipped');
-    },
-
-    cardFlipBack(id){
-      if(this.isCardBack.length == 0){
-        return false;
-      }
-
-      let temp = this.isCardBack.filter(
-        data => {
-          return data.id == id;
-        }
-      );
-
-      return (temp == undefined || temp == null) ? false : temp[0].isBack;
     },
 
     addToCart(item){
@@ -486,7 +452,6 @@ export default {
           }
         );
         this.saveHeaderData.totalAmount = totalAmount;
-        // this.saveHeaderData.userId=+this.$store.state.userInfo?.id;
 
         let url = "";
         if(this.saveHeaderData.id == ""){
@@ -499,14 +464,16 @@ export default {
         this.loading = false;
         if(resp && resp.status == 200){
           this.clear();
+
           let exportData = {
-            headerData: {}
+            headerData: {},
+            isNew: this.isNew
           };
           exportData.headerData = await resp.json();
           
           utils.goToScreenWithData("/payment", "payment", exportData);
         } else {
-          
+          this.alertbox("error", "Order Failed!", 3000);
         }
       }
     },
@@ -524,7 +491,6 @@ export default {
       
       if(this.categories.length > 0){
         let param = {
-          // "categories": this.getCategories()
           "categories": this.categories
         };
 
@@ -537,6 +503,7 @@ export default {
           this.allMenuList = [];
           this.menuList.map(
             data => {
+              data.isBack = false;
               this.allMenuList.push(data);
             }
           );
@@ -631,7 +598,7 @@ export default {
   text-align: right;
 }
 
-.alertboxReg {
+.alertbox {
   position: fixed;
   top: 30px;
   left: 50%;

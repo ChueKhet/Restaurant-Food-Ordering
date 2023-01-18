@@ -8,14 +8,6 @@
       
       <footing class="fixed-footer"></footing>
       
-      <!-- <heading></heading>
-      
-      <router-view/>
-
-      <div style="position: relative;">
-        <footing class="appFooter"></footing>
-      </div> -->
-      
     </v-main>  
   </v-app>
 </template>

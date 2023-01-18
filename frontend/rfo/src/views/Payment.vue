@@ -8,8 +8,8 @@
       </v-card-title>
       <v-card-title>
         <div class="mr-5 d-flex justify-space-between" style="width: 100%;">
-          <lable style="font-size: 1rem; margin-right: 5px;">Table No: {{ saleHeaders.tableNo }}</lable>
-          <lable style="font-size: 1rem; margin-right: 5px;">Slip No: {{ saleHeaders.slipNo }}</lable>
+          <label style="font-size: 1rem; margin-right: 5px;">Table No: {{ saleHeaders.tableNo }}</label>
+          <label style="font-size: 1rem; margin-right: 5px;">Slip No: {{ saleHeaders.slipNo }}</label>
         </div>
       </v-card-title>
       
@@ -46,12 +46,12 @@
       </v-data-table>
 
       <div align="right">
-        <v-btn class="ma-3" color="red" dark @click="backToOrder()" style="width: 103px;">Back</v-btn>
-        <v-btn class="ma-3" color="primary" dark @click="savePayment()">Confirm</v-btn>
+        <v-btn class="ma-3" color="red" dark @click="backToOrder" style="width: 103px;">Back</v-btn>
+        <v-btn class="ma-3" color="primary" dark @click="savePayment">Confirm</v-btn>
       </div>
     </v-card>
 
-    <span class="alertboxReg" v-if="message_type != ''">
+    <span class="alertbox" v-if="message_type != ''">
       <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
         :type="message_type">
           {{alert_message}}
@@ -68,15 +68,9 @@ export default {
 
   props: {
     headerData: Object,
-    required: true
+    
+    isNew: Boolean
   },
-
-  // props: {
-  //   primative: {
-  //     type: data_type,
-  //     required: true
-  //   }
-  // },
 
   components: {},
 
@@ -91,6 +85,8 @@ export default {
       errorAlert: false,
       alert_message: "",
       message_type: "",
+      
+      loginUser: {},
 
       tableHeaders: [
         {
@@ -128,13 +124,28 @@ export default {
   },
 
   async created(){
+    if(this.isNew){
+      this.alertbox("success", "Order Successful!", 3000);
+    } else {
+      this.alertbox("success", "Update Order Successful!", 3000);
+    }
+
+    this.$store.watch(
+      () => {
+        return this.$store.state.loginUser;
+      },
+      (newVal, oldVal) => {
+        this.loginUser = newVal;
+      },
+      {
+        deep: true,
+      }
+    );
+    
+    this.loginUser = this.$store.state.loginUser;
+
     await this.getOrderData();
   },
-
-  // async mounted() {
-  //   this.saleHeaders = this.$route.params.data;
-  //   await this.getOrderData();
-  // },
 
   methods: {
     getOrderData(){
@@ -182,7 +193,7 @@ export default {
           totalAmount: this.totalAmount,
           paidAmount: this.paidAmount,
           changeAmount: this.changeAmount,
-          userId: this.$store.state.loginUser.name,
+          userid: this.loginUser.userid,
           hId: this.saleHeaders.id
         }
        
@@ -190,12 +201,13 @@ export default {
         this.loading = false;
 
         if(resp && resp.status == 200){
-          // this.clear();
-          // let exportData = await resp.json();
-
-          utils.goToScreen("/dashBoard");
+          let exportData = {
+            isPaymentSuccess: true,
+            headData: undefined
+          };
+          utils.goToScreenWithData("/dashBoard", "dashBoard", exportData);
         } else {
-          
+          this.alertbox("error", "Payment Failed!", 3000);
         }
       }
 
@@ -203,11 +215,12 @@ export default {
 
     backToOrder(){
       let exportData = {
+        isPaymentSuccess: false,
         headData: {}
       };
       exportData.headData = this.saleHeaders;
 
-      utils.goToScreenWithData("/dashBoard", "home", exportData);  
+      utils.goToScreenWithData("/dashBoard", "dashBoard", exportData);
     },
 
     alertbox(type, message, timer){
@@ -241,7 +254,7 @@ export default {
   text-align: right;
 }
 
-.alertboxReg {
+.alertbox {
   position: fixed;
   top: 30px;
   left: 50%;

@@ -1,12 +1,11 @@
 <template>
   <div class="ma-5">
     <v-card class="mx-auto" max-width="900">
-      <!-- max-width="700" -->
 
       <v-card-title>
         <span class="mr-5">
           Profile
-          <v-icon @click="onClickEdit" v-show="loginUser && loginUser.role == 1">mdi-pencil</v-icon>
+          <v-icon @click="onClickEdit" v-show="loginUser && loginUser.role != 0">mdi-pencil</v-icon>
         </span>
       </v-card-title>
 
@@ -16,40 +15,6 @@
           <v-col cols="5">
             <v-img :src="domainPath + userInfo.imagePath"></v-img>
           </v-col>
-
-          <!-- <v-col cols="5" v-show="!isEdit">
-
-            <v-row>
-              <v-col cols="4" class="font-weight-bold">Name</v-col>
-              <v-col cols="8">{{userInfo.name}}</v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="4" class="font-weight-bold">NRC</v-col>
-              <v-col cols="8">{{userInfo.nrc}}</v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="4" class="font-weight-bold">DOB</v-col>
-              <v-col cols="8">{{userInfo.dob}}</v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="4" class="font-weight-bold">Gender</v-col>
-              <v-col cols="8">{{userInfo.gender}}</v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="4" class="font-weight-bold">Phone_No</v-col>
-              <v-col cols="8">{{userInfo.phone}}</v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="4" class="font-weight-bold">Address</v-col>
-              <v-col cols="8">{{userInfo.address}}</v-col>
-            </v-row>
-
-          </v-col> -->
 
           <v-col>
 
@@ -61,9 +26,6 @@
               </v-col>
 
               <v-col class="d-flex align-center pt-6">
-                <!-- <v-text-field v-model="userInfo.gender" label="Gender" single-line
-                  :disabled="!isEdit">
-                </v-text-field> -->
                 <v-select
                   :items="['Male','Female','Other']"
                   v-model="userInfo.gender"
@@ -90,15 +52,14 @@
 
             <v-row>
               <v-col>
-                <!-- <v-text-field v-model="userInfo.dob" label="Dob" single-line></v-text-field> -->
                 <v-menu v-model="dobPopup" transition="scale-transition" min-width="auto"
                   :close-on-content-click="false"
-                  :nudge-right="40" :disabled="!isEdit"
+                  :nudge-right="40" 
                   offset-y>
                     <template v-slot:activator="{ on, attrs }" >
                       <v-text-field v-model="userInfo.dob" label="DOB"
                         prepend-icon="mdi-calendar" v-bind="attrs" v-on="on"
-                        readonly>
+                        readonly :disabled="!isEdit">
                       </v-text-field>
                     </template>
 
@@ -120,24 +81,26 @@
         
       </v-card-text>
 
-      <v-btn text color="red" @click="changePwd()" v-show="userInfo.userId == testUser.userId">
-        Change Password
-      </v-btn>
+      <div class="d-flex justify-end">
+        <v-btn text color="red" @click="changePwd" v-show="userInfo.id == testUser.id">
+          Change Password
+        </v-btn>
 
-      <v-btn text color="red" @click="updateInfo()">
-        Update Info
-      </v-btn>
+        <v-btn text color="red" @click="deleteUser" v-show="(loginUser && loginUser.role != 0) && (userInfo.id != testUser.id)">
+          <span v-if="!loading">Delete</span>
+          <v-progress-circular
+            v-else indeterminate color="primary">
+          </v-progress-circular>
+        </v-btn>
 
-      <v-btn text color="red" @click="clear" v-show="loginUser && loginUser.role == 1">
-        <span v-if="!loading">Delete</span>
-        <v-progress-circular
-          v-else indeterminate color="primary">
-        </v-progress-circular>
-      </v-btn> 
+        <v-btn text color="red" @click="updateInfo" v-show="(loginUser && loginUser.role != 0)" :disabled="!isEdit">
+          Update Info
+        </v-btn>
+      </div>
 
     </v-card>
 
-    <span class="alertboxReg" v-if="message_type != ''">
+    <span class="alertbox" v-if="message_type != ''">
       <v-alert class="mt-3" v-show="errorAlert" transition="scroll-y-transition" dense 
         :type="message_type">
           {{alert_message}}
@@ -168,6 +131,8 @@ export default {
       userInfo: {},
       testUser: {},
       loginUser:{},
+
+      loading: false,
 
       isEdit: false,
       dobPopup: false,
@@ -325,7 +290,20 @@ export default {
               this.edit = false;
             }
           }
+        } else {
+          this.alertbox("error", "Update Failed!", 3000);
         }
+      }
+    },
+
+    async deleteUser(){
+      const resp = await utils.http.del("/user/delete", {id: this.userInfo.id});
+
+      if(resp && resp.status == 200){
+        this.alertbox("success", "Delete Successful!", 3000);
+        utils.goToScreen("/admin_user_list");
+      } else {
+        this.alertbox("error", "Delete Failed!", 3000);
       }
     },
 
