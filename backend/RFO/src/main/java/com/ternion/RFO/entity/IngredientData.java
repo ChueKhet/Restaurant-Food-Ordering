@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.JoinTable;
 //import javax.persistence.ManyToMany;
@@ -55,6 +56,7 @@ public class IngredientData implements java.io.Serializable {
 	@NotBlank(message = "Required")
 	private String modifiedAt;
 	
+	@Transient
 	private int status = 0;
 
 //	public List<MenuData> getMenuDataList() {

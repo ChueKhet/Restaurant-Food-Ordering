@@ -154,9 +154,18 @@
             }
 
             if(this.isForgetPwd){
-              this.$router.push({ path: "/login" });
+              let exportData = {
+                isPasswordChange: true
+              };
+
+              utils.goToScreenWithData("/login", "login", exportData);
             } else {
-              this.$router.push({ path: "/profile" });
+              let exportData = {
+                userProfile: undefined,
+                isPasswordChange: true
+              };
+
+              utils.goToScreenWithData("/profile", "profile", exportData);
             }
             
           } else {
