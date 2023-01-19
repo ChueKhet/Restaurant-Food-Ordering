@@ -117,7 +117,8 @@ export default {
 
   props: {
     userProfile: Object,
-    required: true
+    
+    isPasswordChange: Boolean
   },
 
   components:{},
@@ -168,6 +169,10 @@ export default {
         deep: true,
       }
     );
+
+    if(this.isPasswordChange){
+      this.alertbox("success", "Password Changed!", 3000);
+    }
 
     this.loginUser = this.$store.state.loginUser;
     this.testUser = this.$store.state.userInfo;
@@ -232,37 +237,37 @@ export default {
     },
 
     validate(){
-      if(this.name == ""){
+      if(this.userInfo.name == ""){
         this.alertbox("error", "Please add Name!!!", 3000);
 
         return false;
       }
 
-      if(this.dob == ""){
+      if(this.userInfo.dob == ""){
         this.alertbox("error", "Please add DOB!!!", 3000);
 
         return false;
       }
 
-      if(this.gender == ""){
+      if(this.userInfo.gender == ""){
         this.alertbox("error", "Please add gender!!!", 3000);
 
         return false;
       }
 
-      if(this.nrc == ""){
+      if(this.userInfo.nrc == ""){
         this.alertbox("error", "Please add NRC!!!", 3000);
 
         return false;
       }
 
-      if(this.phone == ""){
+      if(this.userInfo.phone == ""){
         this.alertbox("error", "Please add Phone!!!", 3000);
 
         return false;
       }
 
-      if(this.address == ""){
+      if(this.userInfo.address == ""){
         this.alertbox("error", "Please add Address!!!", 3000);
 
         return false;

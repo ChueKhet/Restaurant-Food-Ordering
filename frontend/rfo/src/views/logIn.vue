@@ -40,6 +40,11 @@ import utils from '@/utils/utils';
 
 export default {
   name: "Login",
+
+  props: {
+    isPasswordChange: Boolean
+  },
+
   data() {
     return {
       loading: false,
@@ -53,6 +58,12 @@ export default {
 
       utl: utils
     };
+  },
+
+  created() {
+    if(this.isPasswordChange){
+      this.alertbox("success", "Password Changed!", 3000);
+    }
   },
   
   methods: {
@@ -68,8 +79,8 @@ export default {
         if (resp.status === 200){
           const data = await resp.json();
 
-          if(data.message.toString() === "WRONG_ID"){
-            this.alertbox("error", "Wrong UserId!!!", 3000);
+          if(data.message.toString() === "ID_NOT_FOUND"){
+            this.alertbox("error", "User ID Not Found!!!", 3000);
             return;
           } else if(data.message.toString() === "WRONG_PASSWORD"){
             this.alertbox("error", "Wrong Password!!!", 3000);

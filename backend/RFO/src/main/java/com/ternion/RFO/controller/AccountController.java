@@ -41,7 +41,7 @@ public class AccountController {
 		result.put("message", "SUCCESS");
 		
 		if (acc == null) {
-			result.put("message", "WRONG_ID");
+			result.put("message", "ID_NOT_FOUND");
 			
 			return ResponseEntity.ok().body(result);
 		} else {
@@ -89,7 +89,7 @@ public class AccountController {
 				data.get("newPwd").toString(), isForgetPwd);
 		
 		if(acc == null) {
-			result.put("message", "WRONG_ID");
+			result.put("message", "ID_NOT_FOUND");
 		} else if(acc.getPassword().equals("")) {
 			result.put("message", "WRONG_PASSWORD");
 		} else {

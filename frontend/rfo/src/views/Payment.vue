@@ -69,7 +69,9 @@ export default {
   props: {
     headerData: Object,
     
-    isNew: Boolean
+    isNew: Boolean,
+
+    isFromList: Boolean,
   },
 
   components: {},
@@ -126,7 +128,7 @@ export default {
   async created(){
     if(this.isNew){
       this.alertbox("success", "Order Successful!", 3000);
-    } else {
+    } else if(!this.isFromList) {
       this.alertbox("success", "Update Order Successful!", 3000);
     }
 

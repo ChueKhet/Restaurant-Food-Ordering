@@ -23,21 +23,31 @@
         :items-per-page="5">
 
           <template v-slot:item.orderStatus="{ item }">
-            <div :class="CssClass[item.orderStatus]">
-              {{ STATUS[item.orderStatus] }}
+            <div class="d-flex justify-center">
+              <div :class="CssClass[item.orderStatus]">
+                {{ STATUS[item.orderStatus] }}
+              </div>
             </div>
           </template>
 
           <template v-slot:item.btn="{ item }">
 
-            <v-btn
+            <v-btn class="mr-3"
               color="deep-purple lighten-1"
               fab
               x-small
               dark
-              @click="onClickDetail(item.id)" >
+              @click="onClickDetail(item.id)">
                 <v-icon>mdi-eye</v-icon>
             </v-btn>
+
+            <v-btn :disabled="item.orderStatus.toString() != '0' ? true : false"
+              color="deep-purple lighten-1"
+              fab x-small :dark="item.orderStatus.toString() == '0' ? true : false"
+              @click="goToPayment(item)">
+                <v-icon>mdi-credit-card</v-icon>
+            </v-btn>
+
           </template>
       </v-data-table>
     </v-card>
@@ -56,9 +66,12 @@
             :headers="dTableHeaders"
             :items="saleDetails"
             :items-per-page="5">
+
               <template v-slot:item.status="{ item }">
-                <div :class="item.orderStatus.toString() == '0' ? 'orderStatus1' : 'orderStatus3'">
-                  {{item.orderStatus.toString() == "0" ? "Ordered" : "Served"}}
+                <div class="d-flex justify-center">
+                  <div :class="item.orderStatus.toString() == '0' ? 'orderStatus1' : 'orderStatus3'">
+                    {{item.orderStatus.toString() == "0" ? "Ordered" : "Served"}}
+                  </div>
                 </div>
               </template>
               
@@ -120,21 +133,26 @@ export default {
         {
           text: 'Created Date',
           value: 'createdAt',
+          sortable: false,
         },
         {
           text: 'Confirm Status',
           value: 'orderStatus',
+          align: 'center',
+          sortable: false,
         },
         {
           text: 'Actions',
           value: 'btn',
+          align: 'center',
+          sortable: false,
         },
       ],
       dTableHeaders: [
         {
           text: 'ID',
           value: 'id',
-          sortable: true,
+          sortable: false,
         },
         {
           text: 'Code',
@@ -161,6 +179,8 @@ export default {
         {
           text: 'Status',
           value: 'status',
+          align: 'center',
+          sortable: false,
         },
       ],
     };
@@ -179,7 +199,7 @@ export default {
       // };
 
       const userId=this.$store.state.userInfo?.id;
-      const resp = await utils.http.get("/sale/headers"+"?userId="+userId);
+      const resp = await utils.http.get("/sale/headers");
 
       if(resp && resp.status == 200){
         const data = await resp.json();
@@ -212,6 +232,16 @@ export default {
           this.saleDetails = data;
         }
       }
+    },
+
+    goToPayment(item){
+      let exportData = {
+        headerData: item,
+        isFromList: true,
+        isNew: false
+      };
+
+      utils.goToScreenWithData("/payment", "payment", exportData);
     },
   },
 }

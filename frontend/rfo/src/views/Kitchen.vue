@@ -42,7 +42,7 @@
         
         <v-col cols="6" style="position: sticky">
           <v-card
-            class="ma-3 ml-1 pa-3"
+            class="ma-3 ml-1 px-3 pb-3 pt-0"
             style="height: 630px; position: sticky; right: 0; top: 80px"
           >
             <v-card-title>

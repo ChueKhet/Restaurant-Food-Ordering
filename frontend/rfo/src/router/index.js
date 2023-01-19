@@ -33,7 +33,8 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: login
+    component: login,
+    props: true
   },
   {
     path: '/register',
@@ -70,12 +71,14 @@ const routes = [
   {
     path: '/changepwd',
     name: 'changepwd',
-    component: ChangePwd
+    component: ChangePwd,
+    props: true
   },
   {
     path: "/sale_headers",
     name: 'sale_headers',
-    component: SaleHeaders
+    component: SaleHeaders,
+    props: true
   },
   {
     path: "/payment/:headerData",

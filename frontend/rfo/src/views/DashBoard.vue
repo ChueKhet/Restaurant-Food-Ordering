@@ -467,7 +467,8 @@ export default {
 
           let exportData = {
             headerData: {},
-            isNew: this.isNew
+            isNew: this.isNew,
+            isFromList: false,
           };
           exportData.headerData = await resp.json();
           
