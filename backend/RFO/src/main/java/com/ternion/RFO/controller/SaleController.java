@@ -49,7 +49,7 @@ public class SaleController {
 		return ResponseEntity.ok().body(headerData);
 	}
 	
-	@PostMapping("/order/update")
+	@PutMapping("/order/update")
 	public ResponseEntity<?> update(@RequestBody SaleHeaderData header) {
 		SaleHeaderData updatedSale = saleService.updateOrder(header);
 		

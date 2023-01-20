@@ -11,32 +11,38 @@
 
         <v-text-field
           v-model="current_pwd"
-          type="password"
+          :type="visible3 ? 'text' : 'password'"
           label="Current Password"
           v-show="!isForgetPwd"
+          :append-icon="visible3 ? 'visibility' : 'visibility_off'"
+          @click:append="() => (visible3 = !visible3)"
           required
         ></v-text-field>
 
         <v-text-field
           v-model="new_pwd"
-          type="password"
+          :type="visible1 ? 'text' : 'password'"
           label="New Password"
+          :append-icon="visible1 ? 'visibility' : 'visibility_off'"
+          @click:append="() => (visible1 = !visible1)"
           required
         ></v-text-field>
 
         <v-text-field
           v-model="con_new_pwd"
-          type="password"
+          :type="visible2 ? 'text' : 'password'"
           label="Confirm New Password"
+          :append-icon="visible2 ? 'visibility' : 'visibility_off'"
+          @click:append="() => (visible2 = !visible2)"
           :rules="[
             (v) => (confirmPassword(v)) || 'Password not match!!!',
           ]"
           required
         ></v-text-field>
 
-        <v-btn class="mr-4" @click="submit"> submit </v-btn>
+        <v-btn class="mr-4" @click="submit" color="success"> submit </v-btn>
 
-        <v-btn @click="clear"> clear </v-btn>
+        <v-btn @click="clear" color="success"> clear </v-btn>
       </form>
     </v-container>
 
@@ -61,7 +67,7 @@
         con_new_pwd: "",
         new_pwd:"",
         current_pwd: "",
-        userid: "",
+        userId: "",
 
         errorAlert: false,
         alert_message: "",
@@ -69,6 +75,10 @@
 
         loginUser: {},
         isForgetPwd: true,
+        visible1:false,
+        visible2:false,
+        visible3:false,
+
       };
     },
 
@@ -96,15 +106,15 @@
 
     methods: {
       validate(){
-        if(this.isChangePwd){
-          if(this.current_pwd == ""){
-            this.alertbox("error", "Please Add Current Password!!!", 3000);
+        if(this.isForgetPwd){
+          if(this.userId == ""){
+            this.alertbox("error", "Please Add Employee ID!!!", 3000);
 
             return false;
           }
         } else {
-          if(this.userId == ""){
-            this.alertbox("error", "Please Add Employee ID!!!", 3000);
+          if(this.current_pwd == ""){
+            this.alertbox("error", "Please Add Current Password!!!", 3000);
 
             return false;
           }
@@ -126,12 +136,15 @@
       },
 
       async submit() {
+
+       
+
         if(this.validate()){
           let param = {
-            userid: "",
+            //userid: param.userid,
             oldPwd: this.current_pwd,
-            newPwd: this.new_pwd,
-            isForgetPwd: this.isForgetPwd ? "true" : "false",
+            newPwd: this.new_pwd, 
+            isForgetPwd: this.isForgetPwd ? "true" : "false",      
           };
 
           if(this.isForgetPwd){
@@ -139,14 +152,15 @@
           } else {
             param.userid = this.loginUser.userid;
           }
+      
 
           const resp = await utils.http.put("/account/password/update", param);
 
           if (resp.status === 200) {
             const data = await resp.json();
 
-            if(data.message.toString() === "WRONG_ID"){
-              this.alertbox("error", "Wrong UserId!!!", 3000);
+            if(data.message.toString() === "ID_NOT_FOUND"){
+              this.alertbox("error", "Employee ID Not Found!!!", 3000);
               return;
             } else if(data.message.toString() === "WRONG_PASSWORD"){
               this.alertbox("error", "Wrong Current Password!!!", 3000);
@@ -179,6 +193,7 @@
       },
 
       clear() {
+        this.userId = "";
         this.current_pwd = "";
         this.new_pwd = "";
         this.con_new_pwd = "";

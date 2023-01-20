@@ -123,7 +123,6 @@
               chips
               return-object
               multiple
-              :rules="[(v) => !!v || 'Required']"
             ></v-select>
      
             <v-text-field
@@ -239,7 +238,6 @@
               chips
               return-object
               multiple
-              :rules="[(v) => !!v || 'Required']"
             ></v-select>
 
             <v-text-field

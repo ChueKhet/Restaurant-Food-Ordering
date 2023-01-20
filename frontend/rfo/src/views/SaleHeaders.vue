@@ -20,6 +20,7 @@
       <v-data-table
         :headers="hTableHeaders"
         :items="saleHeaders"
+        :search="search"
         :items-per-page="5">
 
           <template v-slot:item.orderStatus="{ item }">

@@ -17,7 +17,7 @@
                   chips
                   label="Category"
                   item-text="description"
-                  item-value="code"
+                  item-value="id"
                   multiple
                   :readonly="switch1"
                   @change="getMenuByCategory"
@@ -178,7 +178,13 @@
 
           <v-row>
             <v-col class="d-flex flex-column align-center justify-center">
-              <v-btn color="primary" @click="saveTransition">Order</v-btn>
+              <div class="d-flex justify-center">
+                
+                <v-btn class="mr-1" color="primary" @click="clear">Clear</v-btn>
+
+                <v-btn class="ml-1" color="primary" @click="saveTransition">Order</v-btn>
+
+              </div>
             </v-col>
           </v-row>
 
@@ -410,17 +416,19 @@ export default {
     },
 
     onClickRemoveBtn(item){
-      let isExist = this.saveDetailList.filter(
+      let isExist = this.saveDetailList.some(
         data => {
           return data.id == item.id;
         }
       );
+
       if(isExist){
         let temp = this.saveDetailList.filter(
           data => {
             return data.id != item.id;
           }
         );
+        
         this.detailListSize--;
         this.saveDetailList = temp;
       }
@@ -454,13 +462,16 @@ export default {
         this.saveHeaderData.totalAmount = totalAmount;
 
         let url = "";
+        let resp = "";
+        
         if(this.saveHeaderData.id == ""){
           url = "/sale/order/confirm";
+          resp = await utils.http.post(url, this.saveHeaderData);
         } else {
           url = "/sale/order/update";
+          resp = await utils.http.put(url, this.saveHeaderData);
         }
         
-        const resp = await utils.http.post(url, this.saveHeaderData);
         this.loading = false;
         if(resp && resp.status == 200){
           this.clear();
@@ -471,6 +482,14 @@ export default {
             isFromList: false,
           };
           exportData.headerData = await resp.json();
+
+          let sortId = 0;
+          exportData.headerData.detailList.map(
+            data => {
+              sortId++;
+              data.id = sortId;
+            }
+          );
           
           utils.goToScreenWithData("/payment", "payment", exportData);
         } else {

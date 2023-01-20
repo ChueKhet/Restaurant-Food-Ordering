@@ -14,15 +14,27 @@
           ></v-text-field>
 
           <v-text-field
-            type="password"
+            :type="visible ? 'text' : 'password'"
             label="Password"
             v-model="password"
             @keydown.enter="onClickLogIn"
+            :append-icon="visible ? 'visibility' : 'visibility_off'"
+            @click:append="() => (visible = !visible)"
+            style="width: 184px;"
             :rules="[(v) => !!v || 'Required',]" required
           ></v-text-field>
-          <v-btn @click="onClickLogIn">Login</v-btn>
+
+          <v-btn @click="onClickLogIn" color="success">
+            <span v-if="!loading">LOGIN</span>
+            <v-progress-circular
+              v-else
+              indeterminate
+              color="primary"
+            ></v-progress-circular>
+          </v-btn>
         </v-form>
       </v-card-title>
+
       <v-card-title><a @click="utl.goToScreen('/changepwd')">Forgot Password?</a></v-card-title>
     </v-card>
 
@@ -52,6 +64,8 @@ export default {
       password: "",
       loginForm: false,
 
+      visible: false,
+
       errorAlert: false,
       alert_message: "",
       message_type: "",
@@ -80,7 +94,7 @@ export default {
           const data = await resp.json();
 
           if(data.message.toString() === "ID_NOT_FOUND"){
-            this.alertbox("error", "User ID Not Found!!!", 3000);
+            this.alertbox("error", "Employee ID Not Found!!!", 3000);
             return;
           } else if(data.message.toString() === "WRONG_PASSWORD"){
             this.alertbox("error", "Wrong Password!!!", 3000);
