@@ -207,6 +207,8 @@ export default {
 
       if(!allNotServe){
         this.allMenuServed = true;
+      } else {
+        this.allMenuServed = false;
       }
     },
 
