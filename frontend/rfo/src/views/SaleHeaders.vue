@@ -134,6 +134,9 @@ export default {
           value: 'createdAt',
           sortable: false,
         },
+        { text: "Created By", 
+          value: "userid" 
+        },
         {
           text: 'Confirm Status',
           value: 'orderStatus',

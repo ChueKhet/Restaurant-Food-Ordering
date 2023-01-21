@@ -115,7 +115,11 @@ export default {
           text: 'PhoneNo',
           value: 'phone',
           sortable: true,
-        },  
+        },
+        {
+          text: 'Address',
+          value: 'address',
+        },
         {
           text: 'Created Date',
           value: 'createdAt',
@@ -123,10 +127,6 @@ export default {
         {
           text: 'Modified Date',
           value: 'modifiedAt',
-        },
-        {
-          text: 'Address',
-          value: 'address',
         },
         {
           text: 'Actions',

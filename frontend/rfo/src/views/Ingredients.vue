@@ -200,6 +200,7 @@ export default {
       headers: [
         { text: "Code", align: "start", value: "code" },
         { text: "Ingredient", align: "start", value: "description" },
+        { text: "Created By", value: "userid" },
         { text: "Actions", align: "center", value: "actions", sortable: false },
       ],
 
