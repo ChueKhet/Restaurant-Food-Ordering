@@ -184,7 +184,13 @@
 
                                 <v-row>
                                     <v-col>
-                                        <v-text-field class="m_p_top_0" type="password" v-model="password" label="Password"></v-text-field>
+                                        <v-text-field class="m_p_top_0"  
+                                            :type="visible1 ? 'text' : 'password'"
+                                            :append-icon="visible1 ? 'visibility' : 'visibility_off'"
+                                            @click:append="() => (visible1 = !visible1)"
+                                            v-model="password" 
+                                            label="Password">
+                                        </v-text-field>
                                     </v-col>
                                 </v-row>
 
@@ -192,7 +198,9 @@
                                     <v-col>
                                         <v-text-field
                                             class="m_p_top_0"
-                                            type="password"
+                                            :type="visible2 ? 'text' : 'password'"
+                                            :append-icon="visible2 ? 'visibility' : 'visibility_off'"
+                                            @click:append="() => (visible2 = !visible2)"
                                             v-model="confirmpwd"
                                             :rules="[
                                                 (v) => (confirmPassword(v)) || 'Password not match!!!',
@@ -259,6 +267,10 @@ import utils from "../utils/utils";
 export default {
     name: "Register",
 
+    props: {
+        isFromUserList: Boolean
+    },
+
     components: {},
 
     data(){
@@ -279,7 +291,6 @@ export default {
             division: "",
             nation: "",
             nrc_num: "",
-            fromProfile: false,
             imagePreviewPath: null,
             loading: false,
             registerForm: false,
@@ -289,6 +300,9 @@ export default {
             errorAlert: false,
             alert_message: "",
             message_type: "",
+
+            visible1:false,
+            visible2:false,
 
             roleList: [
                 {
@@ -385,8 +399,13 @@ export default {
                         if (data) {
                             this.$store.commit("setRegister", data);
                             
-                            if(this.fromProfile){
-                                utils.goToScreen("/profile");
+                            if(this.isFromUserList){
+                                let exportData = {
+                                    isFromProfile: false,
+                                    isFromRegister: true,
+                                };
+
+                                utils.goToScreenWithData("/admin_user_list", "userList", exportData);
                             } else {
                                 this.alertbox("success", "Registered Successful!", 3000);
                                 this.clear();
@@ -449,7 +468,7 @@ export default {
                 return false;
             }
 
-            if(this.nrc == ""){
+            if(this.division == "" || this.township == "" || this.nation == "" || this.nrc_num == ""){
                 this.alertbox("error", "Please add NRC!!!", 3000);
 
                 return false;

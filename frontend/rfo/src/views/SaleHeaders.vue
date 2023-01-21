@@ -42,9 +42,9 @@
                 <v-icon>mdi-eye</v-icon>
             </v-btn>
 
-            <v-btn :disabled="item.orderStatus.toString() != '0' ? true : false"
+            <v-btn :disabled="(item.orderStatus.toString() != '0' || loginUser.role.toString() == '1') ? true : false"
               color="deep-purple lighten-1"
-              fab x-small :dark="item.orderStatus.toString() == '0' ? true : false"
+              fab x-small :dark="(item.orderStatus.toString() != '0' || loginUser.role.toString() == '1') ? false : true"
               @click="goToPayment(item)">
                 <v-icon>mdi-credit-card</v-icon>
             </v-btn>
@@ -91,17 +91,15 @@
 
 <script>
 import utils from '@/utils/utils';
-import saleDetail from '../components/SaleDetail.vue';
 
 export default {
   name: 'SaleHeaders',
 
-  components: {
-    saleDetail
-  },
+  components: { },
 
   data(){
     return {
+      loginUser: {},
       detailDialog: false,
       saleHeaderId: "",
       saleHeaders: [],
@@ -188,6 +186,20 @@ export default {
   },
 
   async created(){
+    this.$store.watch(
+      () => {
+        return this.$store.state.loginUser;
+      },
+      (newVal, oldVal) => {
+        this.loginUser = newVal;
+      },
+      {
+        deep: true,
+      }
+    );
+
+    this.loginUser = this.$store.state.loginUser;
+
     await this.fetchSaleHeaders();
   },
 

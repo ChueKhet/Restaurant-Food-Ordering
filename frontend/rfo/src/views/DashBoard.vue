@@ -55,7 +55,7 @@
         </v-col>
       </v-row>
 
-      <v-row style="margin-top: 0px;">
+      <v-row class="mr-3" style="margin-top: 0px;">
         <v-col cols="12" 
         :sm="(loginUser && loginUser.role != 1) ? 12 : 6" 
         :md="(loginUser && loginUser.role != 1) ? 6 : 3" 
@@ -550,7 +550,7 @@ export default {
     searchMenu(){
       this.menuList = this.allMenuList.filter(
         data => {
-          if(data.code.includes(this.search) || data.description.includes(this.search)){
+          if(data.code.toLowerCase().includes(this.search.toLowerCase()) || data.description.toLowerCase().includes(this.search.toLowerCase())){
             return data;
           }
         }

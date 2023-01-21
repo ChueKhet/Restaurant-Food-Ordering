@@ -77,6 +77,11 @@ import utils from '@/utils/utils';
 export default {
   name: 'UserList',
 
+  props: {
+    isFromProfile: Boolean,
+    isFromRegister: Boolean
+  },
+
   components: {},
 
   data(){
@@ -149,6 +154,14 @@ export default {
   },
 
   async created(){
+    if(this.isFromProfile){
+      this.alertbox("success", "Delete Successful!", 3000);
+    }
+
+    if(this.isFromRegister){
+      this.alertbox("success", "Register Successful!", 3000);
+    }
+
     await this.fetchUserList();
   },
 
@@ -166,7 +179,11 @@ export default {
     },  
 
     register(){
-      utils.goToScreen("/register");       
+      let exportData = {
+        isFromUserList: true
+      };
+
+      utils.goToScreenWithData("/register", "register", exportData);
     },
 
     onClickEditBtn(item){
@@ -193,6 +210,16 @@ export default {
       } else {
         this.alertbox("error", "Delete Failed!", 3000);
       }
+    },
+
+    alertbox(type, message, timer){
+      this.message_type = type;
+      this.alert_message = message;
+      this.errorAlert = true;
+
+      setTimeout(() => {
+        this.errorAlert = false;
+      }, timer);
     }
   },
 }

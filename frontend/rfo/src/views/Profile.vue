@@ -305,8 +305,12 @@ export default {
       const resp = await utils.http.del("/user/delete", {id: this.userInfo.id});
 
       if(resp && resp.status == 200){
-        this.alertbox("success", "Delete Successful!", 3000);
-        utils.goToScreen("/admin_user_list");
+        let exportData = {
+          isFromProfile: true,
+          isFromRegister: false,
+        };
+
+        utils.goToScreenWithData("/admin_user_list", "userList", exportData);
       } else {
         this.alertbox("error", "Delete Failed!", 3000);
       }

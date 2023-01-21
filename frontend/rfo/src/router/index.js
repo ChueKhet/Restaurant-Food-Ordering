@@ -39,11 +39,12 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: register
+    component: register,
+    props: true
   },
   {
     path: '/admin_user_list',
-    name: 'admin_user_list',
+    name: 'userList',
     component: admin_user_list,
     props: true
   },

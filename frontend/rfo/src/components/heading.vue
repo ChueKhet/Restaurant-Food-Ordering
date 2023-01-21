@@ -6,7 +6,7 @@
 
       <v-btn text @click = "utl.goToScreen('/menu')" v-show="loginUser && loginUser.role != 0">Menu</v-btn>
       <v-btn text @click = "utl.goToScreen('/ingredients')" v-show="loginUser && loginUser.role != 0">Ingredient</v-btn>
-      <v-btn text @click = "utl.goToScreen('/admin_user_list')" v-show="loginUser && loginUser.role != 0">UserList</v-btn>
+      <v-btn text @click = "utl.goToScreen('/admin_user_list')" v-show="loginUser && loginUser.role != 0">StaffList</v-btn>
       <v-btn text @click = "utl.goToScreen('/register')" v-show="loginUser && loginUser.role != 0">Register</v-btn>
 
       <v-btn text @click = "utl.goToScreen('/sale_headers')" v-show="loginUser">OrderList</v-btn>

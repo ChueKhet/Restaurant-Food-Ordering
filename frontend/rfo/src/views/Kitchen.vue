@@ -28,11 +28,12 @@
               :search="search"
               :items-per-page="5"
               @click:row="(item) => item.orderStatus.toString() != '2' ? fetchOrderDetail(item) : false">
-              <!-- @click:row="(item) => !detailDialog ? fetchOrderDetail(item) : (this.closeFormSnackBar = true)" -->
 
                 <template v-slot:item.orderStatus="{ item }">
-                  <div :class="CssClass[item.orderStatus]">
-                    {{ STATUS[item.orderStatus] }}
+                  <div class="d-flex justify-center">
+                    <div :class="CssClass[item.orderStatus]">
+                      {{ STATUS[item.orderStatus] }}
+                    </div>
                   </div>
                 </template>
             </v-data-table>
@@ -65,17 +66,6 @@
                     :hide-default-footer="true"
                   >
                     <template v-slot:item.updateStatus="{ item }">
-                      <!-- <v-btn
-                        text
-                        x-small
-                        class="width-100"
-                        color="success"
-                        :disabled="item.orderStatus.toString() == '1'"
-                        @click="tempData(item)"
-                      >
-                        {{ item.orderStatus.toString() == "1" ? "Served" : "Ordered" }}
-                      </v-btn> -->
-
                       <v-btn text small :disabled="item.orderStatus.toString() == '1'" @click="tempData(item)">
                         <div :class="item.orderStatus.toString() == '1' ? 'orderStatus3' : 'orderStatus1'">
                           {{ item.orderStatus.toString() == "1" ? "Served" : "Ordered" }}
@@ -156,6 +146,8 @@ export default {
         {
           text: 'Confirm Status',
           value: 'orderStatus',
+          sortable: false, 
+          align: "center",
         },
       ],
 
@@ -163,7 +155,7 @@ export default {
         { text: "Menu", align: "start", value: "menuDesc", sortable: false },
         { text: "Quantity", value: "qty", sortable: false },
         { text: "Remark", value: "remark", sortable: false },
-        { text: "Status", value: "updateStatus", sortable: false },
+        { text: "Status", value: "updateStatus", sortable: false, align: "center", },
       ],
 
       STATUS: ["Order", "Sales", "Served"],
@@ -209,10 +201,10 @@ export default {
         this.allMenuServed = true;
       } else {
         this.allMenuServed = false;
-      }
+      } 
     },
 
-    async tempData(item) {
+    async tempData(item) { 
       this.changeStatus(item);
     },
 
@@ -248,6 +240,8 @@ export default {
           }
         );
 
+        this.slipNo = "";
+        this.tableNo = "";
         this.headerDetailRecords = [];
         this.allMenuServed = false;
       } else {
