@@ -27,9 +27,11 @@ DROP TABLE IF EXISTS `user_data`;
 CREATE TABLE `user_data` (
   `id` int NOT NULL,
   `address` varchar(255) NOT NULL,
-  `created_at` varchar(255) DEFAULT NULL,
+  `created_at` varchar(255) NOT NULL,
   `dob` varchar(255) NOT NULL,
-  `modified_at` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) NOT NULL,
+  `image_path` varchar(200) DEFAULT NULL,
+  `modified_at` varchar(255) NOT NULL,
   `name` varchar(30) NOT NULL,
   `nrc` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
@@ -43,6 +45,7 @@ CREATE TABLE `user_data` (
 
 LOCK TABLES `user_data` WRITE;
 /*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
+INSERT INTO `user_data` VALUES (1,'Bago','20220114','2022-01-01','Female','-','20230118','admin','-','-');
 /*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-22 20:08:46
+-- Dump completed on 2023-01-22 11:53:00

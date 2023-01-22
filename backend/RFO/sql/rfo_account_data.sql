@@ -26,7 +26,12 @@ DROP TABLE IF EXISTS `account_data`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account_data` (
   `id` int NOT NULL,
+  `created_at` varchar(255) NOT NULL,
+  `modified_at` varchar(255) NOT NULL,
+  `parent_id` int NOT NULL,
   `password` varchar(100) NOT NULL,
+  `role` int NOT NULL,
+  `userid` varchar(30) NOT NULL,
   `username` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -38,6 +43,7 @@ CREATE TABLE `account_data` (
 
 LOCK TABLES `account_data` WRITE;
 /*!40000 ALTER TABLE `account_data` DISABLE KEYS */;
+INSERT INTO `account_data` VALUES (1,'20220114','20230120',1,'1234',2,'admin','admin');
 /*!40000 ALTER TABLE `account_data` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-22 20:08:46
+-- Dump completed on 2023-01-22 11:53:01

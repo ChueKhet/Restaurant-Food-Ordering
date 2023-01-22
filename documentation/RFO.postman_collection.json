@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "6275b905-4802-476e-a752-f430f941b018",
+		"name": "RFO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getNrcCodes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/nrc/code",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"nrc",
+						"code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTownshipWithNrcCode",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/nrc/all/township/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"nrc",
+						"all",
+						"township",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userid\":\"EM000009\",\r\n    \"password\":\"1233\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/account/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"account",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "menu_ingredient_all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/menu/ingredient/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"menu",
+						"ingredient",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_menu",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"imagePath\": \"/media/Menu/png/1674051582_istockphoto-1386831709-170667a.png\",\r\n    \"code\": \"15\",\r\n    \"description\": \"Test2\",\r\n    \"price\": 2200,\r\n    \"created_at\": \"20220118\",\r\n    \"userid\": \"EM000001\",\r\n    \"category\": {\r\n        \"id\": 1\r\n    },\r\n    \"ingredientList\": [\r\n        {\r\n            \"code\": \"8987\",\r\n            \"createdAt\": \"20220118\",\r\n            \"description\": \"Ingredient2\",\r\n            \"id\": 404,\r\n            \"modifiedAt\": \"20220118\",\r\n            \"userid\": \"EM000001\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/menu/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"menu",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_menu",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/menu/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"menu",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userData\": {\r\n        \"name\": \"Tester1\",\r\n        \"dob\": \"2023-01-04\",\r\n        \"gender\": \"Male\",\r\n        \"nrc\": \"12/KaMaTa(N)123456\",\r\n        \"phone\": \"09788344556\",\r\n        \"address\": \"Yangon\",\r\n        \"imagePath\": \"/media/User/jpg/1674047987_istockphoto-1379610301-170667a.jpg\"\r\n    },\r\n    \"accountData\": {\r\n        \"username\": \"Test1\",\r\n        \"password\": \"123\",\r\n        \"role\": 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/user/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"user",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"464\",\r\n    \"name\": \"Tester1\",\r\n    \"createdAt\": \"20220114\",\r\n    \"modifiedAt\": \"20220114\",\r\n    \"dob\": \"2023-01-04\",\r\n    \"gender\": \"Male\",\r\n    \"nrc\": \"12/KaMaTa(N)123456\",\r\n    \"phone\": \"09788344556\",\r\n    \"address\": \"Yangon\",\r\n    \"imagePath\": \"/media/User/jpg/1674047987_istockphoto-1379610301-170667a.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/user/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"user",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/sale/headers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"sale",
+						"headers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrderList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/user/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"user",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_menu",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 467,\r\n    \"imagePath\": \"/media/Menu/png/1674051582_istockphoto-1386831709-170667a.png\",\r\n    \"code\": \"15\",\r\n    \"description\": \"Test7\",\r\n    \"price\": 2200,\r\n    \"created_at\": \"20220118\",\r\n    \"userid\": \"EM000001\",\r\n    \"category\": {\r\n        \"id\": 1\r\n    },\r\n    \"ingredientList\": [\r\n        {\r\n            \"code\": \"8987\",\r\n            \"createdAt\": \"20220118\",\r\n            \"description\": \"Ingredient2\",\r\n            \"id\": 404,\r\n            \"modifiedAt\": \"20220118\",\r\n            \"userid\": \"EM000001\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/menu/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"menu",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_menu",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
