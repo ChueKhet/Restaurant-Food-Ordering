@@ -20,7 +20,7 @@
       
       <v-data-table
         :headers="tableHeaders"
-        :items="userList"
+        :items="userAccList"
         :items-per-page="5">
 
           <template v-slot:item.btn="{item}">
@@ -89,44 +89,49 @@ export default {
       tableHeaders: [
         {
           text: 'ID',
-          value: 'id',
+          value: 'user.id',
           sortable: true,
         },
         {
           text: 'Name',
-          value: 'name',
+          value: 'user.name',
+          sortable: true,
+        },
+        {
+          text: 'Employee ID',
+          value: 'acc.userid',
           sortable: true,
         },
         {
           text: 'DOB',
-          value: 'dob',
+          value: 'user.dob',
           sortable: true,
         },
         {
           text: 'NRC',
-          value: 'nrc',
+          value: 'user.nrc',
         },
         {
           text: 'Gender',
-          value: 'gender',
+          value: 'user.gender',
           sortable: true,
         },
         {
           text: 'PhoneNo',
-          value: 'phone',
+          value: 'user.phone',
           sortable: true,
         },
         {
           text: 'Address',
-          value: 'address',
+          value: 'user.address',
         },
         {
           text: 'Created Date',
-          value: 'createdAt',
+          value: 'user.createdAt',
         },
         {
           text: 'Modified Date',
-          value: 'modifiedAt',
+          value: 'user.modifiedAt',
         },
         {
           text: 'Actions',
@@ -134,7 +139,7 @@ export default {
         },
       ],
 
-      userList: [],
+      userAccList: [],
       toEditId: 0,
       name: "",
       dob: "",
@@ -173,7 +178,7 @@ export default {
         const data = await resp.json();
 
         if(data){
-          this.userList = data;
+          this.userAccList = data;
         }
       }
     },  

@@ -1,5 +1,6 @@
 package com.ternion.RFO.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,8 +82,10 @@ public class UserController {
 	}
 	
 	@GetMapping("/all")
-	public List<UserData> listUser() {
-		return userService.getAll();
+	public ResponseEntity<?> listUser() {
+		ArrayList<HashMap<String, Object>> userAccList = userService.getAll();
+		
+		return ResponseEntity.ok().body(userAccList);
 	}
 	
 	@DeleteMapping("/delete")

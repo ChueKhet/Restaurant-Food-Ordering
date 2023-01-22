@@ -179,7 +179,7 @@ export default {
       }
       
       if(this.changeAmount < 0){
-        this.alertbox("error", "Please check changeAmount!!!", 3000);
+        this.alertbox("error", "Insufficient Paid Amount!!!", 3000);
 
         return false;
       }

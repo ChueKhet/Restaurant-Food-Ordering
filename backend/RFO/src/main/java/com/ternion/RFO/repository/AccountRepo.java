@@ -12,4 +12,7 @@ public interface AccountRepo extends JpaRepository<AccountData, Integer> {
 			+ "ELSE (MAX(CAST(SUBSTRING(userid, 3, 6) AS UNSIGNED)) + 1) END AS Max_ID FROM Account_data "
 			+ "WHERE userid <> 'admin'", nativeQuery = true)
 	public int getMaxId();
+	
+	@Query(value = "SELECT * FROM account_data WHERE parent_id=?", nativeQuery = true)
+	public AccountData findByParentId(int parentid);
 }
