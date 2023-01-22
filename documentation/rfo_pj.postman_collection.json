@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "f4581725-c41a-4f19-a7ff-f3e489a35331",
+		"name": "rfo_pj",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23527478"
+	},
+	"item": [
+		{
+			"name": "CreateIngredient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\":\"0090\",\r\n    \"userid\":\"1\",\r\n    \"description\":\"parsley\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/ingredient/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"ingredient",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateIngredient",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 59, \r\n    \"description\": \"salt\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/ingredient/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"ingredient",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteIngredient",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 57\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/ingredient/del",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"ingredient",
+						"del"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllIngredient",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/ingredient/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"ingredient",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllOrderLists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/sale/headers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"sale",
+						"headers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllOrderByHeaderId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/sale/detail?headerId=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"sale",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "headerId",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userid\":\"EM000001\",\r\n    \"tableNo\": 8,\r\n    \"totalAmount\":16000,\r\n    \"detailList\":[{\r\n        \"id\":1,\r\n        \"qty\":2,\r\n        \"menuId\":18,\r\n        \"menuCode\":\"1233\",\r\n        \"menuDesc\":\"steam fish\",\r\n        \"price\":8000,\r\n        \"totalPrice\":16000,\r\n        \"remark\":\"less vegatables\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/sale/order/confirm",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"sale",
+						"order",
+						"confirm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateOrder",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":149,\r\n    \"tableNo\":\"5\",\r\n    \"totalAmount\":31503,\r\n    \"slipNo\":2,\r\n    \"userid\":\"EM000001\",\r\n    \"orderStatus\":0,\r\n    \"createdAt\":\"20230122\",\r\n    \"modifiedAt\":\"20230122\",\r\n    \"detailList\":[\r\n        {\r\n        \"id\":1,\r\n        \"menuId\":1,\r\n        \"menuCode\":\"a\",\r\n        \"menuDesc\":\"sea food\",\r\n        \"qty\":1,\r\n        \"price\":20003,\r\n        \"totalPrice\":20003,\r\n        \"remark\":\"-\",\r\n        \"createdAt\":\"20230122\",\r\n        \"modifiedAt\":\"20230122\",\r\n        \"orderStatus\":0\r\n        },\r\n        {\r\n            \"id\":2,\r\n            \"menuId\":4,\r\n            \"menuCode\":\"1234\",\r\n            \"menuDesc\":\"spicy chicken\",\r\n            \"qty\":1,\r\n            \"price\":3500,\r\n            \"totalPrice\":3500,\r\n            \"remark\":\"-\",\r\n            \"createdAt\":\"20230122\",\r\n            \"modifiedAt\":\"20230122\",\r\n            \"orderStatus\":0\r\n            }\r\n        ]\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/sale/order/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"sale",
+						"order",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllOrder(kitchen)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/kitchen/order/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"kitchen",
+						"order",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateSaleDetailStatus",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":146,\r\n    \"orderStatus\":\"1\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/kitchen/order/status/served",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"kitchen",
+						"order",
+						"status",
+						"served"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateSaleHeaderStatus",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":145,\r\n    \"orderStatus\":\"2\"\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/kitchen/order/status/done",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"kitchen",
+						"order",
+						"status",
+						"done"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/category/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"category",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
