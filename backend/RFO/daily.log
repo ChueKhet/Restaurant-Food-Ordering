@@ -11260,3 +11260,610 @@ This generated password is for development use only. Your security configuration
 2023-01-22 11:14:09.536  INFO 11404 --- [RMI TCP Connection(123)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-01-22 11:14:09.550  INFO 11404 --- [RMI TCP Connection(123)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2023-01-22 11:14:09.575  INFO 11404 --- [RMI TCP Connection(123)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-01-22 11:17:39.643  INFO 7280 --- [restartedMain] com.ternion.RFO.RfoApplication           : Starting RfoApplication using Java 11.0.13 on DESKTOP-OEV4QNV with PID 7280 (D:\java course\Git\FinalProject\RFO_Project\Restaurant-Food-Ordering\backend\RFO\target\classes started by HP in D:\java course\Git\FinalProject\RFO_Project\Restaurant-Food-Ordering\backend\RFO)
+2023-01-22 11:17:39.646  INFO 7280 --- [restartedMain] com.ternion.RFO.RfoApplication           : No active profile set, falling back to 1 default profile: "default"
+2023-01-22 11:17:39.755  INFO 7280 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-01-22 11:17:39.756  INFO 7280 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-01-22 11:17:41.484  INFO 7280 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-01-22 11:17:41.489  INFO 7280 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-01-22 11:17:41.552  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.AccountRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.555  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.CategoryRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.566  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.IngredientRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.569  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.KitchenRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.575  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.MenuRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.578  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.NrcRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.582  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.PaymentRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.584  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.SaleDetailRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.588  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.SaleHeaderRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.591  INFO 7280 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ternion.RFO.repository.UserRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-01-22 11:17:41.593  INFO 7280 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 93 ms. Found 0 JDBC repository interfaces.
+2023-01-22 11:17:41.617  INFO 7280 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-01-22 11:17:41.620  INFO 7280 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-22 11:17:41.757  INFO 7280 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 123 ms. Found 10 JPA repository interfaces.
+2023-01-22 11:17:42.564  INFO 7280 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$7553ea53] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-22 11:17:42.686  INFO 7280 --- [restartedMain] .w.s.a.s.AnnotationActionEndpointMapping : Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2023-01-22 11:17:43.406  INFO 7280 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8085 (http)
+2023-01-22 11:17:43.433  INFO 7280 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-01-22 11:17:43.433  INFO 7280 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-01-22 11:17:43.624  INFO 7280 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-01-22 11:17:43.624  INFO 7280 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3867 ms
+2023-01-22 11:17:43.927 DEBUG 7280 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2023-01-22 11:17:43.966  INFO 7280 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-22 11:17:44.093  INFO 7280 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2023-01-22 11:17:44.559  INFO 7280 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-01-22 11:17:44.813  INFO 7280 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-01-22 11:17:45.554  INFO 7280 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-01-22 11:17:45.602  INFO 7280 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2023-01-22 11:17:47.731  INFO 7280 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-22 11:17:47.756  INFO 7280 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-22 11:17:47.980 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.115 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.227 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.378 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.525 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.535 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.652  WARN 7280 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-22 11:17:48.691 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.703 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.726 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.731 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.755 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.767 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.799 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.809 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.836 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.841 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.845 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.857 TRACE 7280 --- [restartedMain] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'com.ternion.RFO.service.IngredientServiceImpl.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2023-01-22 11:17:48.909 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.957 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.979 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.982 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:48.988 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.008 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.009 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.038 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.058 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.060 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.084 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.111 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.128 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.158 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.160 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.168 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.180 TRACE 7280 --- [restartedMain] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'com.ternion.RFO.service.MenuServiceImpl.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2023-01-22 11:17:49.208 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.216 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.235 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.238 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.252 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.254 DEBUG 7280 --- [restartedMain] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-01-22 11:17:49.276 TRACE 7280 --- [restartedMain] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'com.ternion.RFO.service.SaleServiceImpl.updateStatus' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2023-01-22 11:17:49.278 TRACE 7280 --- [restartedMain] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'com.ternion.RFO.service.SaleServiceImpl.updateOrder' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2023-01-22 11:17:49.363  WARN 7280 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c2f485cc-23e9-4d82-960e-9231c7c38ab3
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-01-22 11:17:49.740 DEBUG 7280 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 35 mappings in 'requestMappingHandlerMapping'
+2023-01-22 11:17:49.891 DEBUG 7280 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-01-22 11:17:49.906  WARN 7280 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/images/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-01-22 11:17:49.907  INFO 7280 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/images/**']
+2023-01-22 11:17:49.909  WARN 7280 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-01-22 11:17:49.909  INFO 7280 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/**']
+2023-01-22 11:17:49.909  WARN 7280 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/css/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-01-22 11:17:49.909  INFO 7280 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/css/**']
+2023-01-22 11:17:50.028  INFO 7280 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2a51d0da, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4544ffd0, org.springframework.security.web.context.SecurityContextPersistenceFilter@166bdcf2, org.springframework.security.web.header.HeaderWriterFilter@711eaa4b, org.springframework.security.web.authentication.logout.LogoutFilter@5d273602, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@e34aea3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@72153568, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4d636df4, org.springframework.security.web.session.SessionManagementFilter@4a2ab408, org.springframework.security.web.access.ExceptionTranslationFilter@7083c22e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7fbbb422]
+2023-01-22 11:17:50.160 DEBUG 7280 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-01-22 11:17:50.245 DEBUG 7280 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-01-22 11:17:50.656  INFO 7280 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-01-22 11:17:50.733  INFO 7280 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8085 (http) with context path ''
+2023-01-22 11:17:50.752  INFO 7280 --- [restartedMain] com.ternion.RFO.RfoApplication           : Started RfoApplication in 12.02 seconds (JVM running for 14.823)
+2023-01-22 11:18:44.656  INFO 7280 --- [http-nio-8085-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-22 11:18:44.657  INFO 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-01-22 11:18:44.658 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2023-01-22 11:18:44.658 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2023-01-22 11:18:44.658 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2023-01-22 11:18:44.660 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@30f22a8f
+2023-01-22 11:18:44.661 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@6ef572d1
+2023-01-22 11:18:44.661 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2023-01-22 11:18:44.661  INFO 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2023-01-22 11:18:44.760 DEBUG 7280 --- [http-nio-8085-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.MenuController#allMenuWithIngredient()
+2023-01-22 11:18:44.807 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/menu/ingredient/all", parameters={}
+2023-01-22 11:18:44.811 DEBUG 7280 --- [http-nio-8085-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.MenuController#allMenuWithIngredient()
+2023-01-22 11:18:44.871 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:44.933 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(778005962<open>)] for JPA transaction
+2023-01-22 11:18:44.933 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-01-22 11:18:44.942 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@688c12fc]
+2023-01-22 11:18:44.942 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2023-01-22 11:18:45.286 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select menudata0_.id as id1_4_, menudata0_.category_id as category9_4_, menudata0_.code as code2_4_, menudata0_.created_at as created_3_4_, menudata0_.description as descript4_4_, menudata0_.image_path as image_pa5_4_, menudata0_.modified_at as modified6_4_, menudata0_.price as price7_4_, menudata0_.userid as userid8_4_ from menu_data menudata0_
+2023-01-22 11:18:45.335 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select categoryda0_.id as id1_1_0_, categoryda0_.code as code2_1_0_, categoryda0_.created_at as created_3_1_0_, categoryda0_.description as descript4_1_0_, categoryda0_.modified_at as modified5_1_0_, categoryda0_.userid as userid6_1_0_ from category_data categoryda0_ where categoryda0_.id=?
+2023-01-22 11:18:45.340 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2023-01-22 11:18:45.385 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select categoryda0_.id as id1_1_0_, categoryda0_.code as code2_1_0_, categoryda0_.created_at as created_3_1_0_, categoryda0_.description as descript4_1_0_, categoryda0_.modified_at as modified5_1_0_, categoryda0_.userid as userid6_1_0_ from category_data categoryda0_ where categoryda0_.id=?
+2023-01-22 11:18:45.386 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2023-01-22 11:18:45.395 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2023-01-22 11:18:45.396 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-01-22 11:18:45.397 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(778005962<open>)]
+2023-01-22 11:18:45.400 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-01-22 11:18:45.401 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.475 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.476 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [468]
+2023-01-22 11:18:45.483 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.484 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.484 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [469]
+2023-01-22 11:18:45.488 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.489 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.490 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [470]
+2023-01-22 11:18:45.493 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.494 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.495 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [471]
+2023-01-22 11:18:45.497 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.498 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.499 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [472]
+2023-01-22 11:18:45.501 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.502 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.502 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [473]
+2023-01-22 11:18:45.504 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.505 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.505 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [474]
+2023-01-22 11:18:45.508 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.509 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.510 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [475]
+2023-01-22 11:18:45.512 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.514 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.514 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [476]
+2023-01-22 11:18:45.516 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.517 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.518 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [477]
+2023-01-22 11:18:45.520 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.521 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.522 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [478]
+2023-01-22 11:18:45.524 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.525 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.526 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [580]
+2023-01-22 11:18:45.529 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:45.530 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:45.530 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [581]
+2023-01-22 11:18:45.560 DEBUG 7280 --- [http-nio-8085-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-01-22 11:18:45.561 DEBUG 7280 --- [http-nio-8085-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [[com.ternion.RFO.entity.MenuData@68bf5598, com.ternion.RFO.entity.MenuData@1c34a95a, com.ternion.RFO (truncated)...]
+2023-01-22 11:18:45.770 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:45.774 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.008 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.009 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674117913_fried%20potato.png", parameters={}
+2023-01-22 11:18:46.013 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.018 DEBUG 7280 --- [http-nio-8085-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.036 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.040 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674117818_burger.png", parameters={}
+2023-01-22 11:18:46.045 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.047 DEBUG 7280 --- [http-nio-8085-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.063 DEBUG 7280 --- [http-nio-8085-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.064 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.076 DEBUG 7280 --- [http-nio-8085-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.077 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.151 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.151 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674117991_fried%20rice.png", parameters={}
+2023-01-22 11:18:46.152 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.153 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.170 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.171 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118030_mote%20hin%20khar.png", parameters={}
+2023-01-22 11:18:46.172 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.173 DEBUG 7280 --- [http-nio-8085-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.178 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.185 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118059_hot%20dog.png", parameters={}
+2023-01-22 11:18:46.186 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.186 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.193 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.194 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118104_pizza.png", parameters={}
+2023-01-22 11:18:46.195 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.196 DEBUG 7280 --- [http-nio-8085-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.196 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.196 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.197 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.197 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.199 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.203 DEBUG 7280 --- [http-nio-8085-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.209 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.209 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118269_grape%20juice.png", parameters={}
+2023-01-22 11:18:46.214 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.215 DEBUG 7280 --- [http-nio-8085-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.218 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.218 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118205_coca%20cola.png", parameters={}
+2023-01-22 11:18:46.220 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.220 DEBUG 7280 --- [http-nio-8085-exec-9] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.225 DEBUG 7280 --- [http-nio-8085-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.226 DEBUG 7280 --- [http-nio-8085-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.226 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.226 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.240 DEBUG 7280 --- [http-nio-8085-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.242 DEBUG 7280 --- [http-nio-8085-exec-9] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.243 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.241 DEBUG 7280 --- [http-nio-8085-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118321_sprite.png", parameters={}
+2023-01-22 11:18:46.244 DEBUG 7280 --- [http-nio-8085-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.244 DEBUG 7280 --- [http-nio-8085-exec-10] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.252 DEBUG 7280 --- [http-nio-8085-exec-10] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.253 DEBUG 7280 --- [http-nio-8085-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.293 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.293 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118360_sunkist.png", parameters={}
+2023-01-22 11:18:46.294 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.294 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.302 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.303 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.315 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.316 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118413_strawberry%20juice.png", parameters={}
+2023-01-22 11:18:46.318 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.318 DEBUG 7280 --- [http-nio-8085-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.335 DEBUG 7280 --- [http-nio-8085-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.336 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.339 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.340 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674311827_logo%20second%20try.png", parameters={}
+2023-01-22 11:18:46.341 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.341 DEBUG 7280 --- [http-nio-8085-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.348 DEBUG 7280 --- [http-nio-8085-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.348 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.382 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.382 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674352024_coffee.png", parameters={}
+2023-01-22 11:18:46.383 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:46.384 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.397 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.398 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:46.450 DEBUG 7280 --- [http-nio-8085-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.CategoryController#getCategoryList()
+2023-01-22 11:18:46.451 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/category/all", parameters={}
+2023-01-22 11:18:46.452 DEBUG 7280 --- [http-nio-8085-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.CategoryController#getCategoryList()
+2023-01-22 11:18:46.453 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.455 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(101044371<open>)] for JPA transaction
+2023-01-22 11:18:46.455 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-01-22 11:18:46.457 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3625c5b1]
+2023-01-22 11:18:46.458 TRACE 7280 --- [http-nio-8085-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2023-01-22 11:18:46.463 DEBUG 7280 --- [http-nio-8085-exec-6] org.hibernate.SQL                        : select categoryda0_.id as id1_1_, categoryda0_.code as code2_1_, categoryda0_.created_at as created_3_1_, categoryda0_.description as descript4_1_, categoryda0_.modified_at as modified5_1_, categoryda0_.userid as userid6_1_ from category_data categoryda0_
+2023-01-22 11:18:46.466 TRACE 7280 --- [http-nio-8085-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2023-01-22 11:18:46.466 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-01-22 11:18:46.466 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(101044371<open>)]
+2023-01-22 11:18:46.468 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-01-22 11:18:46.469 DEBUG 7280 --- [http-nio-8085-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-01-22 11:18:46.469 DEBUG 7280 --- [http-nio-8085-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Writing [[com.ternion.RFO.entity.CategoryData@6264b55f, com.ternion.RFO.entity.CategoryData@4fc46aa8]]
+2023-01-22 11:18:46.471 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:46.472 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:54.588 DEBUG 7280 --- [http-nio-8085-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.AccountController#login(HashMap)
+2023-01-22 11:18:54.590 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/account/login", parameters={}
+2023-01-22 11:18:54.590 DEBUG 7280 --- [http-nio-8085-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.AccountController#login(HashMap)
+2023-01-22 11:18:54.592 DEBUG 7280 --- [http-nio-8085-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:54.665 DEBUG 7280 --- [http-nio-8085-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{password=123, userid=EM000005}]
+2023-01-22 11:18:54.735 TRACE 7280 --- [http-nio-8085-exec-3] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByUserid]: This method is not transactional.
+2023-01-22 11:18:54.762 DEBUG 7280 --- [http-nio-8085-exec-3] org.hibernate.SQL                        : select accountdat0_.id as id1_0_, accountdat0_.created_at as created_2_0_, accountdat0_.modified_at as modified3_0_, accountdat0_.parent_id as parent_i4_0_, accountdat0_.password as password5_0_, accountdat0_.role as role6_0_, accountdat0_.userid as userid7_0_, accountdat0_.username as username8_0_ from account_data accountdat0_ where accountdat0_.userid=?
+2023-01-22 11:18:54.764 TRACE 7280 --- [http-nio-8085-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [EM000005]
+2023-01-22 11:18:54.771 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(261382763<open>)] for JPA transaction
+2023-01-22 11:18:54.771 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-01-22 11:18:54.774 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3407abc3]
+2023-01-22 11:18:54.775 TRACE 7280 --- [http-nio-8085-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2023-01-22 11:18:54.779 DEBUG 7280 --- [http-nio-8085-exec-3] org.hibernate.SQL                        : select userdata0_.id as id1_9_0_, userdata0_.address as address2_9_0_, userdata0_.created_at as created_3_9_0_, userdata0_.dob as dob4_9_0_, userdata0_.gender as gender5_9_0_, userdata0_.image_path as image_pa6_9_0_, userdata0_.modified_at as modified7_9_0_, userdata0_.name as name8_9_0_, userdata0_.nrc as nrc9_9_0_, userdata0_.phone as phone10_9_0_ from user_data userdata0_ where userdata0_.id=?
+2023-01-22 11:18:54.780 TRACE 7280 --- [http-nio-8085-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [416]
+2023-01-22 11:18:54.785 TRACE 7280 --- [http-nio-8085-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2023-01-22 11:18:54.785 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-01-22 11:18:54.785 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(261382763<open>)]
+2023-01-22 11:18:54.787 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-01-22 11:18:54.801 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-01-22 11:18:54.802 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{message=SUCCESS, user=UserData [id=416, name=EM6, dob=2023-01-01, nrc=2/DaMaSa(N)123123, phone=0987 (truncated)...]
+2023-01-22 11:18:54.818 DEBUG 7280 --- [http-nio-8085-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:54.819 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:54.845 DEBUG 7280 --- [http-nio-8085-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.MenuController#allMenuWithIngredient()
+2023-01-22 11:18:54.846 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/menu/ingredient/all", parameters={}
+2023-01-22 11:18:54.847 DEBUG 7280 --- [http-nio-8085-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.MenuController#allMenuWithIngredient()
+2023-01-22 11:18:54.849 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:54.850 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(981166110<open>)] for JPA transaction
+2023-01-22 11:18:54.850 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-01-22 11:18:54.853 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7f79f135]
+2023-01-22 11:18:54.853 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2023-01-22 11:18:54.854 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select menudata0_.id as id1_4_, menudata0_.category_id as category9_4_, menudata0_.code as code2_4_, menudata0_.created_at as created_3_4_, menudata0_.description as descript4_4_, menudata0_.image_path as image_pa5_4_, menudata0_.modified_at as modified6_4_, menudata0_.price as price7_4_, menudata0_.userid as userid8_4_ from menu_data menudata0_
+2023-01-22 11:18:54.864 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select categoryda0_.id as id1_1_0_, categoryda0_.code as code2_1_0_, categoryda0_.created_at as created_3_1_0_, categoryda0_.description as descript4_1_0_, categoryda0_.modified_at as modified5_1_0_, categoryda0_.userid as userid6_1_0_ from category_data categoryda0_ where categoryda0_.id=?
+2023-01-22 11:18:54.865 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2023-01-22 11:18:54.869 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select categoryda0_.id as id1_1_0_, categoryda0_.code as code2_1_0_, categoryda0_.created_at as created_3_1_0_, categoryda0_.description as descript4_1_0_, categoryda0_.modified_at as modified5_1_0_, categoryda0_.userid as userid6_1_0_ from category_data categoryda0_ where categoryda0_.id=?
+2023-01-22 11:18:54.869 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2023-01-22 11:18:54.873 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2023-01-22 11:18:54.873 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-01-22 11:18:54.873 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(981166110<open>)]
+2023-01-22 11:18:54.875 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-01-22 11:18:54.876 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.877 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.877 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [468]
+2023-01-22 11:18:54.879 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.880 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.881 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [469]
+2023-01-22 11:18:54.884 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.885 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.886 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [470]
+2023-01-22 11:18:54.889 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.889 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.890 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [471]
+2023-01-22 11:18:54.893 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.894 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.894 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [472]
+2023-01-22 11:18:54.896 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.897 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.898 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [473]
+2023-01-22 11:18:54.900 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.900 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.901 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [474]
+2023-01-22 11:18:54.903 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.904 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.905 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [475]
+2023-01-22 11:18:54.907 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.908 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.909 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [476]
+2023-01-22 11:18:54.911 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.912 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.912 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [477]
+2023-01-22 11:18:54.915 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.916 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.917 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [478]
+2023-01-22 11:18:54.919 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.920 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.921 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [580]
+2023-01-22 11:18:54.924 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getAllByMenuId]: This method is not transactional.
+2023-01-22 11:18:54.924 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : select i.* from ingredient_data i inner join menu_ingredient mi on mi.ingredient_id = i.id where menu_id = ?
+2023-01-22 11:18:54.925 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [581]
+2023-01-22 11:18:54.929 DEBUG 7280 --- [http-nio-8085-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-01-22 11:18:54.929 DEBUG 7280 --- [http-nio-8085-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing [[com.ternion.RFO.entity.MenuData@1f560e7a, com.ternion.RFO.entity.MenuData@349288b3, com.ternion.RFO (truncated)...]
+2023-01-22 11:18:54.938 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:54.938 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.020 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.021 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674117818_burger.png", parameters={}
+2023-01-22 11:18:55.022 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.022 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.027 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.028 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674117913_fried%20potato.png", parameters={}
+2023-01-22 11:18:55.028 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.029 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.029 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.029 DEBUG 7280 --- [http-nio-8085-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.034 DEBUG 7280 --- [http-nio-8085-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.035 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.065 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.066 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674117991_fried%20rice.png", parameters={}
+2023-01-22 11:18:55.067 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.067 DEBUG 7280 --- [http-nio-8085-exec-9] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.071 DEBUG 7280 --- [http-nio-8085-exec-9] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.071 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.107 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.108 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118030_mote%20hin%20khar.png", parameters={}
+2023-01-22 11:18:55.108 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.109 DEBUG 7280 --- [http-nio-8085-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.112 DEBUG 7280 --- [http-nio-8085-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.112 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.137 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.138 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118059_hot%20dog.png", parameters={}
+2023-01-22 11:18:55.139 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.139 DEBUG 7280 --- [http-nio-8085-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.143 DEBUG 7280 --- [http-nio-8085-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.143 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.148 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.148 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118104_pizza.png", parameters={}
+2023-01-22 11:18:55.149 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.149 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.155 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.156 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.156 DEBUG 7280 --- [http-nio-8085-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.156 DEBUG 7280 --- [http-nio-8085-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118205_coca%20cola.png", parameters={}
+2023-01-22 11:18:55.157 DEBUG 7280 --- [http-nio-8085-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.158 DEBUG 7280 --- [http-nio-8085-exec-10] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.163 DEBUG 7280 --- [http-nio-8085-exec-10] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.164 DEBUG 7280 --- [http-nio-8085-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.178 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.179 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118269_grape%20juice.png", parameters={}
+2023-01-22 11:18:55.180 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.180 DEBUG 7280 --- [http-nio-8085-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.184 DEBUG 7280 --- [http-nio-8085-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.185 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.199 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.200 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118321_sprite.png", parameters={}
+2023-01-22 11:18:55.200 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.200 DEBUG 7280 --- [http-nio-8085-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.205 DEBUG 7280 --- [http-nio-8085-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.206 DEBUG 7280 --- [http-nio-8085-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.217 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.217 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118360_sunkist.png", parameters={}
+2023-01-22 11:18:55.218 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.219 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.224 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.224 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.236 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.237 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674118413_strawberry%20juice.png", parameters={}
+2023-01-22 11:18:55.238 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.238 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.241 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.241 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.256 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.256 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674311827_logo%20second%20try.png", parameters={}
+2023-01-22 11:18:55.257 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.257 DEBUG 7280 --- [http-nio-8085-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.260 DEBUG 7280 --- [http-nio-8085-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.260 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.283 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.284 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/media/Menu/png/1674352024_coffee.png", parameters={}
+2023-01-22 11:18:55.284 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:55.285 DEBUG 7280 --- [http-nio-8085-exec-9] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.288 DEBUG 7280 --- [http-nio-8085-exec-9] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.288 DEBUG 7280 --- [http-nio-8085-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:55.341 DEBUG 7280 --- [http-nio-8085-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.CategoryController#getCategoryList()
+2023-01-22 11:18:55.341 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/category/all", parameters={}
+2023-01-22 11:18:55.342 DEBUG 7280 --- [http-nio-8085-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.CategoryController#getCategoryList()
+2023-01-22 11:18:55.343 DEBUG 7280 --- [http-nio-8085-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.344 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1217167418<open>)] for JPA transaction
+2023-01-22 11:18:55.344 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-01-22 11:18:55.346 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@d8e174f]
+2023-01-22 11:18:55.346 TRACE 7280 --- [http-nio-8085-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2023-01-22 11:18:55.347 DEBUG 7280 --- [http-nio-8085-exec-5] org.hibernate.SQL                        : select categoryda0_.id as id1_1_, categoryda0_.code as code2_1_, categoryda0_.created_at as created_3_1_, categoryda0_.description as descript4_1_, categoryda0_.modified_at as modified5_1_, categoryda0_.userid as userid6_1_ from category_data categoryda0_
+2023-01-22 11:18:55.350 TRACE 7280 --- [http-nio-8085-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2023-01-22 11:18:55.350 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-01-22 11:18:55.350 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1217167418<open>)]
+2023-01-22 11:18:55.352 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-01-22 11:18:55.353 DEBUG 7280 --- [http-nio-8085-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-01-22 11:18:55.353 DEBUG 7280 --- [http-nio-8085-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Writing [[com.ternion.RFO.entity.CategoryData@6da1e800, com.ternion.RFO.entity.CategoryData@2938d350]]
+2023-01-22 11:18:55.354 DEBUG 7280 --- [http-nio-8085-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:55.355 DEBUG 7280 --- [http-nio-8085-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:57.572 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:57.574 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/media/User/jpg/1673972686_istockphoto-1379610301-170667a.jpg", parameters={}
+2023-01-22 11:18:57.575 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:57.575 DEBUG 7280 --- [http-nio-8085-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:57.689 DEBUG 7280 --- [http-nio-8085-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:57.689 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:18:57.729 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:57.729 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/media/User/jpg/1673972686_istockphoto-1379610301-170667a.jpg", parameters={}
+2023-01-22 11:18:57.730 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:18:57.730 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:57.734 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:18:57.735 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:19:01.257 DEBUG 7280 --- [http-nio-8085-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.UserController#listUser()
+2023-01-22 11:19:01.258 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/user/all", parameters={}
+2023-01-22 11:19:01.258 DEBUG 7280 --- [http-nio-8085-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.UserController#listUser()
+2023-01-22 11:19:01.260 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:01.261 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAllByStaff]: This method is not transactional.
+2023-01-22 11:19:01.264 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : SELECT * FROM user_data u INNER JOIN account_data a ON a.parent_id = u.id WHERE a.role = 0
+2023-01-22 11:19:01.273 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:01.274 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:01.274 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [389]
+2023-01-22 11:19:01.277 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:01.278 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:01.278 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [391]
+2023-01-22 11:19:01.280 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:01.282 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:01.282 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [393]
+2023-01-22 11:19:01.286 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:01.287 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:01.288 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [464]
+2023-01-22 11:19:01.290 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:01.291 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:01.292 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [546]
+2023-01-22 11:19:01.294 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:01.295 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:01.296 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [554]
+2023-01-22 11:19:01.299 TRACE 7280 --- [http-nio-8085-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:01.300 DEBUG 7280 --- [http-nio-8085-exec-4] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:01.302 TRACE 7280 --- [http-nio-8085-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [556]
+2023-01-22 11:19:01.305 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-01-22 11:19:01.305 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[{acc=com.ternion.RFO.entity.AccountData@3d7f383a, user=UserData [id=389, name=Mya Mya, dob=2022-12- (truncated)...]
+2023-01-22 11:19:01.307 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:01.308 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:19:02.835 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:19:02.835 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/media/User/jpg/1673972686_istockphoto-1379610301-170667a.jpg", parameters={}
+2023-01-22 11:19:02.836 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:19:02.836 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:02.840 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:02.840 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:19:06.957 DEBUG 7280 --- [http-nio-8085-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.UserController#listUser()
+2023-01-22 11:19:06.958 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/user/all", parameters={}
+2023-01-22 11:19:06.959 DEBUG 7280 --- [http-nio-8085-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.UserController#listUser()
+2023-01-22 11:19:06.960 DEBUG 7280 --- [http-nio-8085-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:06.962 TRACE 7280 --- [http-nio-8085-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAllByStaff]: This method is not transactional.
+2023-01-22 11:19:06.963 DEBUG 7280 --- [http-nio-8085-exec-8] org.hibernate.SQL                        : SELECT * FROM user_data u INNER JOIN account_data a ON a.parent_id = u.id WHERE a.role = 0
+2023-01-22 11:19:06.968 TRACE 7280 --- [http-nio-8085-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:06.969 DEBUG 7280 --- [http-nio-8085-exec-8] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:06.970 TRACE 7280 --- [http-nio-8085-exec-8] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [389]
+2023-01-22 11:19:06.973 TRACE 7280 --- [http-nio-8085-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:06.974 DEBUG 7280 --- [http-nio-8085-exec-8] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:06.975 TRACE 7280 --- [http-nio-8085-exec-8] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [391]
+2023-01-22 11:19:06.981 TRACE 7280 --- [http-nio-8085-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:06.982 DEBUG 7280 --- [http-nio-8085-exec-8] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:06.982 TRACE 7280 --- [http-nio-8085-exec-8] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [393]
+2023-01-22 11:19:06.984 TRACE 7280 --- [http-nio-8085-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:06.985 DEBUG 7280 --- [http-nio-8085-exec-8] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:06.985 TRACE 7280 --- [http-nio-8085-exec-8] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [464]
+2023-01-22 11:19:06.987 TRACE 7280 --- [http-nio-8085-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:06.988 DEBUG 7280 --- [http-nio-8085-exec-8] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:06.989 TRACE 7280 --- [http-nio-8085-exec-8] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [546]
+2023-01-22 11:19:06.991 TRACE 7280 --- [http-nio-8085-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:06.993 DEBUG 7280 --- [http-nio-8085-exec-8] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:06.994 TRACE 7280 --- [http-nio-8085-exec-8] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [554]
+2023-01-22 11:19:06.998 TRACE 7280 --- [http-nio-8085-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:06.998 DEBUG 7280 --- [http-nio-8085-exec-8] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:06.999 TRACE 7280 --- [http-nio-8085-exec-8] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [556]
+2023-01-22 11:19:07.002 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-01-22 11:19:07.002 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[{acc=com.ternion.RFO.entity.AccountData@54d41502, user=UserData [id=389, name=Mya Mya, dob=2022-12- (truncated)...]
+2023-01-22 11:19:07.004 DEBUG 7280 --- [http-nio-8085-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:07.004 DEBUG 7280 --- [http-nio-8085-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:19:12.025 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:19:12.025 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/media/User/jpg/1673972686_istockphoto-1379610301-170667a.jpg", parameters={}
+2023-01-22 11:19:12.026 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:19:12.026 DEBUG 7280 --- [http-nio-8085-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:12.029 DEBUG 7280 --- [http-nio-8085-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:12.029 DEBUG 7280 --- [http-nio-8085-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:19:14.584 DEBUG 7280 --- [http-nio-8085-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.UserController#listUser()
+2023-01-22 11:19:14.585 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/user/all", parameters={}
+2023-01-22 11:19:14.585 DEBUG 7280 --- [http-nio-8085-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.UserController#listUser()
+2023-01-22 11:19:14.588 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:14.589 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAllByStaff]: This method is not transactional.
+2023-01-22 11:19:14.590 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : SELECT * FROM user_data u INNER JOIN account_data a ON a.parent_id = u.id WHERE a.role = 0
+2023-01-22 11:19:14.594 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:14.595 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:14.596 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [389]
+2023-01-22 11:19:14.600 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:14.601 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:14.602 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [391]
+2023-01-22 11:19:14.607 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:14.607 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:14.608 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [393]
+2023-01-22 11:19:14.610 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:14.611 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:14.611 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [464]
+2023-01-22 11:19:14.613 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:14.614 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:14.614 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [546]
+2023-01-22 11:19:14.616 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:14.618 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:14.618 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [554]
+2023-01-22 11:19:14.622 TRACE 7280 --- [http-nio-8085-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:14.623 DEBUG 7280 --- [http-nio-8085-exec-1] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:14.624 TRACE 7280 --- [http-nio-8085-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [556]
+2023-01-22 11:19:14.626 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-01-22 11:19:14.627 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[{acc=com.ternion.RFO.entity.AccountData@319cd3ee, user=UserData [id=389, name=Mya Mya, dob=2022-12- (truncated)...]
+2023-01-22 11:19:14.635 DEBUG 7280 --- [http-nio-8085-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:14.635 DEBUG 7280 --- [http-nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:19:42.159 DEBUG 7280 --- [http-nio-8085-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.UserController#listUser()
+2023-01-22 11:19:42.160 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/user/all", parameters={}
+2023-01-22 11:19:42.160 DEBUG 7280 --- [http-nio-8085-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ternion.RFO.controller.UserController#listUser()
+2023-01-22 11:19:42.161 DEBUG 7280 --- [http-nio-8085-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:42.161 TRACE 7280 --- [http-nio-8085-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAllByStaff]: This method is not transactional.
+2023-01-22 11:19:42.162 DEBUG 7280 --- [http-nio-8085-exec-2] org.hibernate.SQL                        : SELECT * FROM user_data u INNER JOIN account_data a ON a.parent_id = u.id WHERE a.role = 0
+2023-01-22 11:19:42.165 TRACE 7280 --- [http-nio-8085-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:42.167 DEBUG 7280 --- [http-nio-8085-exec-2] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:42.167 TRACE 7280 --- [http-nio-8085-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [389]
+2023-01-22 11:19:42.169 TRACE 7280 --- [http-nio-8085-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:42.170 DEBUG 7280 --- [http-nio-8085-exec-2] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:42.171 TRACE 7280 --- [http-nio-8085-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [391]
+2023-01-22 11:19:42.173 TRACE 7280 --- [http-nio-8085-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:42.174 DEBUG 7280 --- [http-nio-8085-exec-2] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:42.174 TRACE 7280 --- [http-nio-8085-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [393]
+2023-01-22 11:19:42.176 TRACE 7280 --- [http-nio-8085-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:42.177 DEBUG 7280 --- [http-nio-8085-exec-2] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:42.177 TRACE 7280 --- [http-nio-8085-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [464]
+2023-01-22 11:19:42.180 TRACE 7280 --- [http-nio-8085-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:42.181 DEBUG 7280 --- [http-nio-8085-exec-2] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:42.181 TRACE 7280 --- [http-nio-8085-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [546]
+2023-01-22 11:19:42.183 TRACE 7280 --- [http-nio-8085-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:42.185 DEBUG 7280 --- [http-nio-8085-exec-2] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:42.185 TRACE 7280 --- [http-nio-8085-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [554]
+2023-01-22 11:19:42.188 TRACE 7280 --- [http-nio-8085-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByParentId]: This method is not transactional.
+2023-01-22 11:19:42.189 DEBUG 7280 --- [http-nio-8085-exec-2] org.hibernate.SQL                        : SELECT * FROM account_data WHERE parent_id=?
+2023-01-22 11:19:42.189 TRACE 7280 --- [http-nio-8085-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [556]
+2023-01-22 11:19:42.192 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-01-22 11:19:42.192 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[{acc=com.ternion.RFO.entity.AccountData@113f92b6, user=UserData [id=389, name=Mya Mya, dob=2022-12- (truncated)...]
+2023-01-22 11:19:42.194 DEBUG 7280 --- [http-nio-8085-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:42.194 DEBUG 7280 --- [http-nio-8085-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:19:46.458 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:19:46.459 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/media/User/png/1673748132_istockphoto-1386831709-170667a.png", parameters={}
+2023-01-22 11:19:46.459 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:19:46.459 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:46.470 DEBUG 7280 --- [http-nio-8085-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:46.470 DEBUG 7280 --- [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:19:46.492 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:19:46.493 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/media/User/png/1673748132_istockphoto-1386831709-170667a.png", parameters={}
+2023-01-22 11:19:46.494 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-01-22 11:19:46.495 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:46.498 DEBUG 7280 --- [http-nio-8085-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-01-22 11:19:46.498 DEBUG 7280 --- [http-nio-8085-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-01-22 11:21:26.920  INFO 7280 --- [RMI TCP Connection(7)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-01-22 11:21:27.173  INFO 7280 --- [RMI TCP Connection(7)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-01-22 11:21:27.185  INFO 7280 --- [RMI TCP Connection(7)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-01-22 11:21:27.208  INFO 7280 --- [RMI TCP Connection(7)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-22 11:21:27.217  INFO 7280 --- [RMI TCP Connection(7)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-01-22 11:21:27.239  INFO 7280 --- [RMI TCP Connection(7)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

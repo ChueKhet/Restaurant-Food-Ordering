@@ -195,7 +195,7 @@ export default {
       let exportData = {
         userProfile: {}
       };
-      exportData.userProfile = item;
+      exportData.userProfile = item.user;
 
       utils.goToScreenWithData("/profile", "profile", exportData);
     },
